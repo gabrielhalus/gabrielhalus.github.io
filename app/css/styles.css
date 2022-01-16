@@ -1,8 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+
 body {
     min-height: 100vh;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    font-family: helvetica, arial, sans-serif;
-    color: #333;
+    font-family: "poppins", helvetica, arial, sans-serif;
+
+    background-image: url(../images/maintenance-background.svg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+h1 {
+    padding: 15px 25px;
+    color: #000;
+    background-color: #eee;
+    border-radius: 50px;
+    transition: color .3s ease;
 }
