@@ -1,0 +1,86 @@
+:root {
+  // Gradients
+  --gradient-gray--600-500: linear-gradient(90deg, var(--gray--600) 0%, var(--gray--500) 100%);
+
+  // Background
+  --background--dark: #090c13;
+
+  // Shade
+  --shade-background--12p: rgba(121, 126, 137, 0.12);
+  --shade-stroke--12p: rgba(214, 214, 214, 0.12);
+
+  // Primary
+  --primary--100: #f4ebff;
+  --primary--600: #7f56d9;
+
+  // Light Blue
+  --light-blue--400: #36bffa;
+
+  // White
+  --white: #ffffff;
+
+  // Gray
+  --gray--50: #f9fafb;
+  --gray--300: #d0d5dd;
+  --gray--500: #667085;
+  --gray--600: #475467;
+}
+
+// Colors
+.light-blue--400 {
+  color: var(--light-blue--400);
+}
+
+.white {
+  color: var(--white);
+}
+
+.gray--50 {
+  color: var(--gray--50);
+}
+
+.gray--300 {
+  color: var(--gray--300);
+}
+
+.gray--500 {
+  color: var(--gray--500);
+}
+
+// Fonts
+.text--md--semibold {
+  font-family: 'Inter';
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.text--sm--regular {
+  font-family: 'Inter';
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.text--sm--semibold {
+  font-family: 'Inter';
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.caption--regular {
+  font-family: 'Inter';
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+}
+
+// Miscellaneous
+.flex-1 {
+  flex: 1;
+}
+
+.user-select {
+  user-select: none;
+}
