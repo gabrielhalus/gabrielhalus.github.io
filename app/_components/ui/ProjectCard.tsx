@@ -12,7 +12,7 @@ export const ProjectCard = (props: ProjectProps) => {
   return (
     <Link
       href={props.url}
-      className='inline-flex items-center gap-4 hover:bg-accent/50 transition-colors p-1 rounded'
+      className='inline-flex items-center gap-4 hover:bg-accent/50 transition-colors p-2 rounded'
     >
       <span className='bg-accent text-accent-foreground p-3 rounded-sm'>
         <props.Logo size={16} />

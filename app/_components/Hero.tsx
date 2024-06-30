@@ -1,7 +1,7 @@
 import { cn } from '@/lib/utils';
 import { ComponentPropsWithoutRef } from 'react';
 import { Section } from './Section';
-import { Spacing } from './Spacing';
+import { Spacing } from './ui/Spacing';
 
 const Code = ({ className, ...props }: ComponentPropsWithoutRef<'span'>) => {
   return (

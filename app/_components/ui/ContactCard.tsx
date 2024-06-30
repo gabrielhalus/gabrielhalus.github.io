@@ -12,7 +12,10 @@ export type ContactProps = {
 
 export const ContactCard = (props: ContactProps) => {
   return (
-    <Link href={props.url}>
+    <Link
+      className='group'
+      href={props.url}
+    >
       <Card className='p-3 bg-accent/10 flex items-center gap-4'>
         <div className='relative'>
           <img
@@ -32,7 +35,10 @@ export const ContactCard = (props: ContactProps) => {
           </div>
           <p className='text-xs text-muted-foreground'>{props.description}</p>
         </div>
-        <ArrowUpRight size={16} />
+        <ArrowUpRight
+          className='group-hover:translate-x-1 group-hover:-translate-y-1 mr-4 transition-transform'
+          size={16}
+        />
       </Card>
     </Link>
   );

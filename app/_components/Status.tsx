@@ -1,17 +1,17 @@
 import { Card } from '@/components/ui/card';
-import { Newspaper } from 'lucide-react';
-import { ContactCard, ContactProps } from './ContactCard';
-import { ProjectCard, type ProjectProps } from './ProjectCard';
+import { BicepsFlexed, Brain, ToyBrick } from 'lucide-react';
 import { Section } from './Section';
-import { WorkCard, type WorkProps } from './WorkCard';
+import { ContactCard, ContactProps } from './ui/ContactCard';
+import { ProjectCard, type ProjectProps } from './ui/ProjectCard';
+import { WorkCard, type WorkProps } from './ui/WorkCard';
 
 export const Status = () => {
   return (
-    <Section className='flex items-start gap-4 max-lg:flex-col'>
+    <Section className='flex gap-4 max-lg:flex-col items-stretch'>
       <div className='flex-[3] w-full'>
-        <Card className='w-full p-4 flex flex-col gap-2'>
+        <Card className='h-full w-full p-4 flex flex-col gap-2'>
           <p className='text-sm text-muted-foreground'>Projects</p>
-          {SIDE_PROJECTS.map((project, index) => (
+          {PROJECTS.map((project, index) => (
             <ProjectCard
               key={index}
               {...project}
@@ -47,24 +47,24 @@ export const Status = () => {
   );
 };
 
-const SIDE_PROJECTS: ProjectProps[] = [
+const PROJECTS: ProjectProps[] = [
   {
-    Logo: Newspaper,
+    Logo: BicepsFlexed,
+    title: 'Trekha',
+    description: 'A collaborative Pomodoro timer with social features.',
+    url: 'http://trekha.com',
+  },
+  {
+    Logo: Brain,
     title: 'Paperlive',
-    description: 'bla bla bla',
+    description: 'A platform for tracking and analyzing research paper metrics.',
     url: 'http://demo.paperlive.gabrielhalus.com',
   },
   {
-    Logo: Newspaper,
+    Logo: ToyBrick,
     title: "Let's go Lego",
-    description: 'bla bla bla',
-    url: '/',
-  },
-  {
-    Logo: Newspaper,
-    title: 'Paperlive',
-    description: 'bla bla bla',
-    url: '/',
+    description: 'An e-auction website focused on LEGO products.',
+    url: '#',
   },
 ];
 

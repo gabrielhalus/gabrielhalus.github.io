@@ -25,8 +25,8 @@ export const WorkCard = (props: WorkProps) => {
       <div className='mr-auto'>
         <div className='flex items-center gap-2'>
           <p className='text-sm font-medium leading-none'>{props.title}</p>
-          {props.freelance && <Badge variant='outline'>Mission</Badge>}
-          {props.intern && <Badge variant='outline'>Intern</Badge>}
+          {props.freelance && <Badge variant={'outline'}>Mission</Badge>}
+          {props.intern && <Badge variant={'outline'}>Intern</Badge>}
         </div>
         <p className='text-xs text-muted-foreground'>{props.role}</p>
       </div>
