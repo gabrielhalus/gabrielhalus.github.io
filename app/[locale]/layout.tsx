@@ -13,8 +13,8 @@ const AnekTelugu = Anek_Telugu({
 });
 
 export const metadata: Metadata = {
-  title: 'Gabriel Halus · Software Engineer',
-  description: 'Fullstack Developer Working with React, Tailwind, Next.js and TypeScript',
+  title: 'Gabriel Halus',
+  description: 'Passionate French Software Developer crafting digital experiences with code!',
 };
 
 export function generateStaticParams() {
