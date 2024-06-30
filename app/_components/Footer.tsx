@@ -9,7 +9,7 @@ export const Footer = () => {
   return (
     <div className='bg-muted p-8'>
       <Section>
-        <p className='text-sm text-muted-foreground'>{t('footer.copyrights')}</p>
+        <p className='text-sm text-muted-foreground max-sm:w-full max-sm:text-center'>{t('footer.copyrights')}</p>
       </Section>
     </div>
   );

@@ -16,8 +16,8 @@ export const Hero = () => {
             alt="Gabriel's picture"
           />
           <div className='flex-[1] h-full'>
-            <h2 className='font-caption font-semibold text-5xl text-primary'>{t('profile.name')}</h2>
-            <h3 className='font-caption text-3xl'>{t('profile.title')}</h3>
+            <h2 className='font-caption font-semibold text-5xl max-sm:text-4xl text-primary'>{t('profile.name')}</h2>
+            <h3 className='font-caption text-3xl max-sm:text-2xl'>{t('profile.title')}</h3>
           </div>
         </div>
         <Spacing size='xs' />
