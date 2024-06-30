@@ -5,7 +5,7 @@ import { Section } from './Section';
 import { LinkCard } from './ui/LinkCard';
 
 export const Contact = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('home');
 
   return (
     <Section className='flex flex-col gap-4 items-start'>

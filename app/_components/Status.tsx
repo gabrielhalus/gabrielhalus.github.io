@@ -8,7 +8,7 @@ import { ProjectCard, type ProjectProps } from './ui/ProjectCard';
 import { WorkCard, type WorkProps } from './ui/WorkCard';
 
 export const Status = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('home');
 
   return (
     <Section className='flex gap-4 max-lg:flex-col items-stretch'>

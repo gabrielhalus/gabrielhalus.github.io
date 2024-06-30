@@ -8,7 +8,7 @@ import { TranslationsProvider } from '../_components/context/TranslationsProvide
 import { Spacing } from '../_components/ui/Spacing';
 import initTranslations from '../i18n';
 
-const i18nNamespaces = ['home'];
+const i18nNamespaces = ['commons', 'home'];
 
 export default async function Home({ params: { locale } }: Readonly<{ params: { locale: string } }>) {
   const { resources } = await initTranslations(locale, i18nNamespaces);

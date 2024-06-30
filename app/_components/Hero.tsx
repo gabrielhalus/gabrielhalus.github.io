@@ -4,7 +4,7 @@ import { Section } from './Section';
 import { Spacing } from './ui/Spacing';
 
 export const Hero = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('home');
 
   return (
     <Section className='flex items-start max-lg:flex-col'>

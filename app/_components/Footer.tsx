@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Section } from './Section';
 
 export const Footer = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('home');
 
   return (
     <div className='bg-muted p-8'>

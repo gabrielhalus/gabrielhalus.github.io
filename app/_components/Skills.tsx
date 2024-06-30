@@ -9,7 +9,7 @@ import { TailwindIcon } from './icons/TailwindIcon';
 import { Code } from './ui/Code';
 
 export const Skills = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('home');
 
   return (
     <Section className='flex flex-col gap-4 items-start'>
