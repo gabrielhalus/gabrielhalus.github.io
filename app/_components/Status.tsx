@@ -3,7 +3,7 @@ import { BicepsFlexed, Brain, ToyBrick } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Card } from '../../components/ui/card';
 import { Section } from './Section';
-import { ContactCard, ContactProps } from './ui/ContactCard';
+import { LinkCard, LinkCardProps } from './ui/LinkCard';
 import { ProjectCard, type ProjectProps } from './ui/ProjectCard';
 import { WorkCard, type WorkProps } from './ui/WorkCard';
 
@@ -36,10 +36,10 @@ export const Status = () => {
           </div>
         </Card>
         <Card className='p-4 flex-1 flex flex-col gap-2'>
-          <p className='text-sm text-muted-foreground'>{t('contact')}</p>
+          <p className='text-sm text-muted-foreground'>{t('internet_presence')}</p>
           <div className='flex flex-col gap-4'>
             {CONTACTS.map((contact, index) => (
-              <ContactCard
+              <LinkCard
                 key={index}
                 {...contact}
               />
@@ -90,20 +90,20 @@ const WORKS: WorkProps[] = [
   },
 ];
 
-const CONTACTS: ContactProps[] = [
+const CONTACTS: LinkCardProps[] = [
   {
     name: '@gabrielhalus',
     image:
       'https://media.licdn.com/dms/image/D4E03AQH7RFJIkDwp4A/profile-displayphoto-shrink_400_400/0/1713345873825?e=1725494400&v=beta&t=DPg93PUPzg03LsXqek89Y1Z-ldtV1z9KuYnyhg6ajds',
     mediumImage: 'https://img.freepik.com/vecteurs-premium/linkedin-logo_578229-227.jpg',
-    description: '96 relations',
+    description: 'Get in touch.',
     url: 'https://linkedin.com/in/gabrielhalus',
   },
   {
     name: '@gabrielhalus',
     image: 'https://avatars.githubusercontent.com/u/73295384?v=4',
     mediumImage: 'https://cdn.pixabay.com/photo/2022/01/30/13/33/github-6980894_1280.png',
-    description: '12 repos',
+    description: 'See my work.',
     url: 'https://github.com/gabrielhalus',
   },
 ];

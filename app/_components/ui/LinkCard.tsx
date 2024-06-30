@@ -1,19 +1,21 @@
+import { cn } from '@/lib/utils';
 import { ArrowUpRight } from 'lucide-react';
 import Link from 'next/link';
 import { Card } from '../../../components/ui/card';
 
-export type ContactProps = {
+export type LinkCardProps = {
   image: string;
-  mediumImage: string;
+  mediumImage?: string;
   name: string;
   description: string;
   url: string;
+  className?: string;
 };
 
-export const ContactCard = (props: ContactProps) => {
+export const LinkCard = ({ className, ...props }: LinkCardProps) => {
   return (
     <Link
-      className='group'
+      className={cn(className, 'group')}
       href={props.url}
     >
       <Card className='p-3 bg-accent/10 flex items-center gap-4'>
@@ -23,16 +25,16 @@ export const ContactCard = (props: ContactProps) => {
             alt={props.name}
             className='w-10 h-10 rounded-full object-cover'
           />
-          <img
-            src={props.mediumImage}
-            alt={props.name}
-            className='w-4 h-4 absolute -bottom-1 -right-1'
-          />
+          {props.mediumImage && (
+            <img
+              src={props.mediumImage}
+              alt={props.name}
+              className='w-4 h-4 absolute -bottom-1 -right-1'
+            />
+          )}
         </div>
-        <div className='mr-auto'>
-          <div className='flex items-center gap-2'>
-            <p className='text-sm font-medium leading-none'>{props.name}</p>
-          </div>
+        <div className='mr-auto flex flex-col gap-1'>
+          <p className='text-sm font-medium leading-none'>{props.name}</p>
           <p className='text-xs text-muted-foreground'>{props.description}</p>
         </div>
         <ArrowUpRight

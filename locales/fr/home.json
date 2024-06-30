@@ -2,6 +2,9 @@
   "header": {
     "title": "gabrielhalus.com"
   },
+  "footer": {
+    "copyrights": "© 2024 Gabriel Halus. Tout droits réservés."
+  },
   "profile": {
     "name": "Gabriel Halus",
     "title": "Développeur web"
