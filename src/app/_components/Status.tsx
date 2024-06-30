@@ -1,16 +1,20 @@
+'use client';
 import { Card } from '@/components/ui/card';
 import { BicepsFlexed, Brain, ToyBrick } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { Section } from './Section';
 import { ContactCard, ContactProps } from './ui/ContactCard';
 import { ProjectCard, type ProjectProps } from './ui/ProjectCard';
 import { WorkCard, type WorkProps } from './ui/WorkCard';
 
 export const Status = () => {
+  const { t } = useTranslation();
+
   return (
     <Section className='flex gap-4 max-lg:flex-col items-stretch'>
       <div className='flex-[3] w-full'>
         <Card className='h-full w-full p-4 flex flex-col gap-2'>
-          <p className='text-sm text-muted-foreground'>Projects</p>
+          <p className='text-sm text-muted-foreground'>{t('projects')}</p>
           {PROJECTS.map((project, index) => (
             <ProjectCard
               key={index}
@@ -21,7 +25,7 @@ export const Status = () => {
       </div>
       <div className='flex-[2] w-full flex flex-col gap-4'>
         <Card className='p-4 flex-1'>
-          <p className='text-sm text-muted-foreground'>Work</p>
+          <p className='text-sm text-muted-foreground'>{t('work')}</p>
           <div className='flex flex-col gap-4'>
             {WORKS.map((work, index) => (
               <WorkCard
@@ -32,7 +36,7 @@ export const Status = () => {
           </div>
         </Card>
         <Card className='p-4 flex-1 flex flex-col gap-2'>
-          <p className='text-sm text-muted-foreground'>Contact me</p>
+          <p className='text-sm text-muted-foreground'>{t('contact')}</p>
           <div className='flex flex-col gap-4'>
             {CONTACTS.map((contact, index) => (
               <ContactCard

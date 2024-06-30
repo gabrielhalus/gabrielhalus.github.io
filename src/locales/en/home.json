@@ -1,0 +1,17 @@
+{
+  "header": {
+    "title": "gabrielhalus.com"
+  },
+  "profile": {
+    "name": "Gabriel Halus",
+    "title": "Software developer",
+    "description": "My aim is to put my skills and creativity to work on innovative and stimulating projects."
+  },
+  "projects": "Projects",
+  "work": "Work",
+  "contact": "Contact me",
+  "skills": {
+    "badge": "Skills",
+    "title": "I love working on..."
+  }
+}

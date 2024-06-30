@@ -1,5 +1,7 @@
+'use client';
 import { cn } from '@/lib/utils';
 import { ComponentPropsWithoutRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Section } from './Section';
 import { Spacing } from './ui/Spacing';
 
@@ -16,6 +18,8 @@ const Code = ({ className, ...props }: ComponentPropsWithoutRef<'span'>) => {
 };
 
 export const Hero = () => {
+  const { t } = useTranslation();
+
   return (
     <Section className='flex items-start max-lg:flex-col'>
       <div className='flex-[2]'>
@@ -26,12 +30,12 @@ export const Hero = () => {
             alt="Gabriel's picture"
           />
           <div className='flex-[1] h-full'>
-            <h2 className='font-caption font-semibold text-5xl text-primary'>Gabriel Halus</h2>
-            <h3 className='font-caption text-3xl'>Software developer</h3>
+            <h2 className='font-caption font-semibold text-5xl text-primary'>{t('profile.name')}</h2>
+            <h3 className='font-caption text-3xl'>{t('profile.title')}</h3>
           </div>
         </div>
         <Spacing size='xs' />
-        <p className='text-base'>My aim is to put my skills and creativity to work on innovative and stimulating projects.</p>
+        <p className='text-base'>{t('profile.description')}</p>
       </div>
     </Section>
   );
