@@ -3,10 +3,36 @@
     "title": "gabrielhalus.com"
   },
   "footer": {
-    "copyrights": "© 2024 Gabriel Halus. Tout droits réservés."
+    "copyrights": "© 2024 Gabriel Halus. Tous droits réservés."
   },
   "profile": {
     "name": "Gabriel Halus",
-    "title": "Développeur web"
+    "title": "Développeur logiciel",
+    "description": "Mon objectif est de mettre mes compétences et ma créativité au service de projets innovants et stimulants."
+  },
+  "projects": "Projets",
+  "work": "Travail",
+  "internet_presence": "Présence en ligne",
+  "skills": {
+    "badge": "Compétences",
+    "title": "J'aime travailler sur...",
+    "react": {
+      "title": "React",
+      "description": "Mon framework principal est <1>React</1>. J'utilise également <3>Next.js</3> comme framework backend et frontend."
+    },
+    "tailwind": {
+      "title": "TailwindCSS",
+      "description": "Je peux créer des <1>belles</1> applications <3>en quelques secondes</3> en utilisant <5>TailwindCSS</5>."
+    },
+    "docker": {
+      "title": "Docker",
+      "description": "J'utilise <1>Docker</1> pour containeriser les applications, garantissant des environnements <3>cohérents</3>."
+    }
+  },
+  "contact": {
+    "badge": "Contactez-moi",
+    "title": "Je serai heureux de travailler avec vous.",
+    "linkedin-caption": "Contactez-moi.",
+    "mail-caption": "Envoyez-moi un email pour toute demande."
   }
 }
