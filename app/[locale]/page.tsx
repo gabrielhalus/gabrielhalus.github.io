@@ -9,7 +9,7 @@ import initTranslations from '../i18n';
 const i18nNamespaces = ['home'];
 
 export default async function Home({ params: { locale } }: Readonly<{ params: { locale: string } }>) {
-  const { t, resources } = await initTranslations(locale, i18nNamespaces);
+  const { resources } = await initTranslations(locale, i18nNamespaces);
 
   return (
     <TranslationsProvider

@@ -1,7 +1,7 @@
 'use client';
-import { cn } from '@/lib/utils';
 import { ComponentPropsWithoutRef } from 'react';
 import { useTranslation } from 'react-i18next';
+import { cn } from '../../lib/utils';
 import { Section } from './Section';
 import { Spacing } from './ui/Spacing';
 

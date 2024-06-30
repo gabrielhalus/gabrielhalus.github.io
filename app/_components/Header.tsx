@@ -1,8 +1,8 @@
 'use client';
-import { buttonVariants } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
 import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
+import { buttonVariants } from '../../components/ui/button';
+import { cn } from '../../lib/utils';
 import { Section } from './Section';
 import { GithubIcon } from './icons/GithubIcon';
 import { LinkedinIcon } from './icons/LinkedinIcon';

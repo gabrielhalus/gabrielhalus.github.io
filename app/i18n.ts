@@ -1,7 +1,7 @@
 import { i18n as I18nInstance, InitOptions, createInstance } from 'i18next';
 import resourcesToBackend from 'i18next-resources-to-backend';
 import { initReactI18next } from 'react-i18next/initReactI18next';
-import i18nConfig from '../../i18nConfig';
+import i18nConfig from '../i18nConfig';
 
 interface InitTranslationsResult {
   i18n: I18nInstance;

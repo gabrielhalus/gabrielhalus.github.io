@@ -1,6 +1,6 @@
 'use client';
-import { Badge } from '@/components/ui/badge';
 import { useTranslation } from 'react-i18next';
+import { Badge } from '../../components/ui/badge';
 import { Section } from './Section';
 
 export const Skills = () => {

@@ -1,6 +1,6 @@
-import { Card } from '@/components/ui/card';
 import { ArrowUpRight } from 'lucide-react';
 import Link from 'next/link';
+import { Card } from '../../../components/ui/card';
 
 export type ContactProps = {
   image: string;

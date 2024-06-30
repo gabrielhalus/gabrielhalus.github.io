@@ -1,7 +1,7 @@
 'use client';
-import { Card } from '@/components/ui/card';
 import { BicepsFlexed, Brain, ToyBrick } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { Card } from '../../components/ui/card';
 import { Section } from './Section';
 import { ContactCard, ContactProps } from './ui/ContactCard';
 import { ProjectCard, type ProjectProps } from './ui/ProjectCard';

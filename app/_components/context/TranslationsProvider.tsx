@@ -1,8 +1,8 @@
 'use client';
-import initTranslations from '@/app/i18n';
 import { createInstance } from 'i18next';
 import * as React from 'react';
 import { I18nextProvider } from 'react-i18next';
+import initTranslations from '../../i18n';
 
 export type TranslationsProviderProps = {
   children: React.ReactNode;

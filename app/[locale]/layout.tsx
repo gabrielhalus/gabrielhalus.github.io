@@ -1,10 +1,10 @@
-import { cn } from '@/lib/utils';
 import { GeistMono } from 'geist/font/mono';
 import { GeistSans } from 'geist/font/sans';
 import { dir } from 'i18next';
 import type { Metadata } from 'next';
 import { Anek_Telugu } from 'next/font/google';
-import i18nConfig from '../../../i18nConfig';
+import i18nConfig from '../../i18nConfig';
+import { cn } from '../../lib/utils';
 import '../globals.css';
 
 const AnekTelugu = Anek_Telugu({
