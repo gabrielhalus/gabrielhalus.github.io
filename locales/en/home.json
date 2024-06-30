@@ -12,6 +12,18 @@
   "contact": "Contact me",
   "skills": {
     "badge": "Skills",
-    "title": "I love working on..."
+    "title": "I love working on...",
+    "react": {
+      "title": "React",
+      "description": "My main framework is <1>React</1>. I also use <3>Next.js</3> as a backend and frontend framework."
+    },
+    "tailwind": {
+      "title": "TailwindCSS",
+      "description": "I can create <1>beautiful</1> application <3>in seconds</3> using <5>TailwindCSS</5>."
+    },
+    "docker": {
+      "title": "Docker",
+      "description": "I use <1>Docker</1> to containerize applications, ensuring <3>consistent</3> environments."
+    }
   }
 }
