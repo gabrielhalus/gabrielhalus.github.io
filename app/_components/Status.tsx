@@ -1,11 +1,11 @@
 'use client';
-import { BicepsFlexed, Brain, ToyBrick } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Card } from '../../components/ui/card';
 import { Section } from './Section';
 import { LinkCard, LinkCardProps } from './ui/LinkCard';
-import { ProjectCard, type ProjectProps } from './ui/ProjectCard';
+import { ProjectCard } from './ui/ProjectCard';
 import { WorkCard, type WorkProps } from './ui/WorkCard';
+import { PROJECTS } from '@/data/projects';
 
 export const Status = () => {
   const { t } = useTranslation('home');
@@ -50,27 +50,6 @@ export const Status = () => {
     </Section>
   );
 };
-
-const PROJECTS: ProjectProps[] = [
-  {
-    Logo: BicepsFlexed,
-    title: 'Trekha',
-    description: 'A collaborative Pomodoro timer with social features.',
-    url: 'http://trekha.com',
-  },
-  {
-    Logo: Brain,
-    title: 'Paperlive',
-    description: 'A platform for tracking and analyzing research paper metrics.',
-    url: 'http://demo.paperlive.gabrielhalus.com',
-  },
-  {
-    Logo: ToyBrick,
-    title: "Let's go Lego",
-    description: 'An e-auction website focused on LEGO products.',
-    url: '#',
-  },
-];
 
 const WORKS: WorkProps[] = [
   {
