@@ -4,7 +4,8 @@ type Project = {
     Icon: LucideIcon;
     title: string;
     slug: string;
-    description: string;
+    shortDescription: string;
+    longDescription: string;
     image?: string;
     url?: string;
 }

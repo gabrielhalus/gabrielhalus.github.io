@@ -14,7 +14,7 @@ export const ProjectCard = (props: Project) => {
       </span>
       <div className='flex-1'>
         <p className='text-sm font-medium leading-none'>{props.title}</p>
-        <p className='text-sm text-muted-foreground'>{props.description}</p>
+        <p className='text-sm text-muted-foreground'>{props.shortDescription}</p>
       </div>
       <ArrowUpRight
           className='group-hover:translate-x-1 group-hover:-translate-y-1 mr-4 transition-transform'

@@ -17,6 +17,7 @@ export default function Project({ params: { locale, slug }}: { params: { locale:
     return (
         <Section className='flex flex-col gap-4 items-start'>
             <h1>{project.title}</h1>
+            <p>{project.longDescription}</p>
         </Section>
     );
 }
