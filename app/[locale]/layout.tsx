@@ -10,6 +10,7 @@ import { TranslationsProvider } from '../_components/context/TranslationsProvide
 import initTranslations from '../i18n';
 import { Header } from '../_components/Header';
 import { Spacing } from '../_components/ui/Spacing';
+import { Footer } from '../_components/Footer';
 
 const AnekTelugu = Anek_Telugu({
   subsets: ['latin'],
@@ -46,6 +47,8 @@ export default async function RootLayout({ children, params: { locale } }: Reado
           <Header />
           <Spacing size='md' />
           {children}
+          <Spacing size='md' />
+          <Footer />
         </TranslationsProvider>
       </body>
     </html>

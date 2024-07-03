@@ -18,8 +18,6 @@ export default async function Home() {
         <Skills />
         <Spacing size='md' />
         <Contact />
-        <Spacing size='lg' />
-        <Footer />
       </main>
   );
 }
