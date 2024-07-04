@@ -40,17 +40,18 @@ export default function Project({ params: { locale, slug } }: { params: { locale
         )}
 
         <Spacing size='xs' />
-        <div className='flex flex-col gap-2'>
+        <div className='flex flex-col items-start gap-2'>
           <h1 className='text-2xl font-bold'>{project.title}</h1>
           <div>{project.longDescription}</div>
           {(project.url || project.repo) && (
             <Link
-              className='text-blue-500 hover:underline-offset-1'
+              className='text-blue-500 hover:underline'
               href={project.url! || project.repo!}
             >
               {project.url! || project.repo!}
             </Link>
           )}
+          {project.note ?? <p>{project.note}</p>}
         </div>
       </Section>
     </>

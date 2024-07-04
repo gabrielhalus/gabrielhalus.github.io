@@ -23,6 +23,7 @@ export const PROJECTS: Record<'en' | 'fr', Project[]> = {
       image: '/images/paperlive.png',
       url: 'http://demo.paperlive.gabrielhalus.com/',
       repo: 'https://github.com/gabrielhalus/paperlive.git/',
+      note: "Demonstration's login: admin / P@ssword1",
     },
     {
       Icon: ToyBrick,
@@ -55,6 +56,7 @@ export const PROJECTS: Record<'en' | 'fr', Project[]> = {
       image: '/images/paperlive.png',
       url: 'http://demo.paperlive.gabrielhalus.com/',
       repo: 'https://github.com/gabrielhalus/paperlive.git/',
+      note: 'Identifiant de la démonstration : admin / P@ssword1',
     },
     {
       Icon: ToyBrick,

@@ -9,6 +9,7 @@ type Project = {
   image?: string;
   url?: string;
   repo?: string;
+  note?: string;
 };
 
 export default Project;
