@@ -40,20 +40,18 @@ export default function Project({ params: { locale, slug } }: { params: { locale
         )}
 
         <Spacing size='xs' />
-        <div>
+        <div className='flex flex-col gap-2'>
           <h1 className='text-2xl font-bold'>{project.title}</h1>
-          <div>{project.shortDescription}</div>
+          <div>{project.longDescription}</div>
+          {(project.url || project.repo) && (
+            <Link
+              className='text-blue-500 hover:underline-offset-1'
+              href={project.url! || project.repo!}
+            >
+              {project.url! || project.repo!}
+            </Link>
+          )}
         </div>
-        <Spacing size='xs' />
-        {project.url && (
-          <Link
-            className='flex gap-2 text-blue-500 hover:underline-offset-1'
-            href={project.url}
-          >
-            {t('home.demo')}
-            {project.url}
-          </Link>
-        )}
       </Section>
     </>
   );
