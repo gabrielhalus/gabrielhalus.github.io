@@ -28,9 +28,9 @@ export const LanguagesDropdown = () => {
 
     // redirect to the new locale path
     if (currentLocale === i18nConfig.defaultLocale && !i18nConfig.prefixDefault) {
-      router.push('/' + newLocale + currentPathname);
+      router.replace('/' + newLocale + currentPathname);
     } else {
-      router.push(currentPathname.replace(`/${currentLocale}`, `/${newLocale}`));
+      router.replace(currentPathname.replace(`/${currentLocale}`, `/${newLocale}`));
     }
 
     router.refresh();
