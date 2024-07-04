@@ -12,7 +12,7 @@ export default function Project({ params: { locale, slug } }: { params: { locale
   const router = useRouter();
   const { t } = useTranslation();
 
-  const project = find(PROJECTS, function (o: Project) {
+  const project = find(PROJECTS[locale], function (o: Project) {
     return o.slug == slug;
   });
 

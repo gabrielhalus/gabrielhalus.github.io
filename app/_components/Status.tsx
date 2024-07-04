@@ -1,21 +1,23 @@
 'use client';
+import { PROJECTS } from '@/data/projects';
 import { useTranslation } from 'react-i18next';
 import { Card } from '../../components/ui/card';
 import { Section } from './Section';
 import { LinkCard, LinkCardProps } from './ui/LinkCard';
 import { ProjectCard } from './ui/ProjectCard';
 import { WorkCard, type WorkProps } from './ui/WorkCard';
-import { PROJECTS } from '@/data/projects';
 
 export const Status = () => {
-  const { t } = useTranslation('home');
+  const { i18n, t } = useTranslation('home');
+
+  const locale = i18n.language as 'en' | 'fr';
 
   return (
     <Section className='flex gap-4 max-lg:flex-col items-stretch'>
       <div className='flex-[3] w-full'>
         <Card className='h-full w-full p-4 flex flex-col gap-2'>
           <p className='text-sm text-muted-foreground'>{t('projects')}</p>
-          {PROJECTS.map((project, index) => (
+          {PROJECTS[locale]?.map((project, index) => (
             <ProjectCard
               key={index}
               {...project}
