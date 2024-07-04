@@ -11,7 +11,7 @@ export const Hero = () => {
       <div className='flex-[2]'>
         <div className='flex items-center gap-4'>
           <img
-            src='https://avatars.githubusercontent.com/u/73295384?v=4'
+            src='https://media.licdn.com/dms/image/D4E03AQH7RFJIkDwp4A/profile-displayphoto-shrink_400_400/0/1713345873825?e=1725494400&v=beta&t=DPg93PUPzg03LsXqek89Y1Z-ldtV1z9KuYnyhg6ajds'
             className='w-[100px] h-auto max-w-xs rounded-full'
             alt="Gabriel's picture"
           />
