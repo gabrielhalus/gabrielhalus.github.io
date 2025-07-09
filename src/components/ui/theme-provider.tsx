@@ -1,11 +1,14 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState } from "react";
-import { ThemeProvider as NextThemesProvider } from "next-themes";
+import {
+  ThemeProvider as NextThemesProvider,
+  type Attribute,
+} from "next-themes";
+import { createContext, useContext } from "react";
 
 type ThemeProviderProps = {
   children: React.ReactNode;
-  attribute?: string;
+  attribute?: Attribute | Attribute[];
   defaultTheme?: string;
   enableSystem?: boolean;
 };
