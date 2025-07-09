@@ -1,29 +1,9 @@
-"use client";
-
 import { Code, Server, Zap } from "lucide-react";
-import { useEffect, useState } from "react";
-import { Button } from "../ui/button";
+import { ContactButton } from "./hero-section/contact-button";
+import { ProjectsButton } from "./hero-section/projects-button";
+import { Roles } from "./hero-section/roles";
 
 export function HeroSection() {
-  const roles = ["Fullstack Developer", "System Architech", "OSS Enthusiast"];
-
-  const [currentRole, setCurrentRole] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentRole((prev) => (prev + 1) % roles.length);
-    }, 3000);
-
-    return () => clearInterval(interval);
-  }, [roles.length]);
-
-  const scrollTo = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
   return (
     <section
       id="home"
@@ -36,7 +16,7 @@ export function HeroSection() {
 
           <div className="h-8 mb-6 flex items-center justify-center animate-slide-up animate-stagger-1">
             <span className="text-lg text-gray-600 dark:text-gray-400 transition-all duration-500">
-              {roles[currentRole]}
+              <Roles />
             </span>
           </div>
 
@@ -61,17 +41,8 @@ export function HeroSection() {
           </div>
 
           <div className="flex flex-col sm:flex-row gap-3 justify-center animate-slide-up animate-stagger-4">
-            <Button
-              onClick={() => scrollTo("projects")}
-              className="bg-black dark:bg-white text-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-200 button-radius px-6 py-3 transition-all duration-300 hover:scale-105 hover:shadow-lg">
-              View My Work
-            </Button>
-            <Button
-              variant="outline"
-              onClick={() => scrollTo("contact")}
-              className="border-gray-300 dark:border-gray-600 button-radius px-6 py-3 transition-all duration-300 hover:scale-105 hover:shadow-lg">
-              Get In Touch
-            </Button>
+            <ProjectsButton />
+            <ContactButton />
           </div>
         </div>
       </div>

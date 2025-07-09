@@ -27,8 +27,8 @@ export function Footer() {
               &copy; {new Date().getFullYear()} Gabriel Halus. All rights
               reserved.
             </span>
-            <span>&bull;</span>
-            <span>Built with Next.js & Tailwind CSS</span>
+            <span>|</span>
+            <span>Built with Next.js & Tailwind CSS.</span>
           </div>
         </div>
       </div>
