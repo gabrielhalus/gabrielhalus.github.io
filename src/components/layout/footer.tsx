@@ -22,13 +22,15 @@ export function Footer() {
             Fullstack Developer | System Architech | OSS Enthusiast
           </p>
 
-          <div className="flex items-center gap-3 caption">
-            <span>
+          <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 caption text-center sm:flex-nowrap sm:justify-start">
+            <span className="w-full sm:w-auto">
               &copy; {new Date().getFullYear()} Gabriel Halus. All rights
               reserved.
             </span>
-            <span>|</span>
-            <span>Built with Next.js & Tailwind CSS.</span>
+            <span className="hidden sm:inline-block">|</span>
+            <span className="w-full sm:w-auto">
+              Built with Next.js &amp; Tailwind CSS.
+            </span>
           </div>
         </div>
       </div>
