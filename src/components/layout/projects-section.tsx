@@ -188,6 +188,9 @@ export function ProjectsSection() {
                       ? "bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200"
                       : "bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300"
                   }`}>
+                  {project.pinned && (
+                    <Pin className="h-3 w-3 text-purple-500 fill-current" />
+                  )}
                   {project.category}
                 </Badge>
                 {project.anonymized && (
@@ -195,7 +198,6 @@ export function ProjectsSection() {
                     Anonymized
                   </Badge>
                 )}
-                {project.pinned && <Pin className="h-3 w-3 text-purple-500" />}
               </div>
             </div>
           </div>
