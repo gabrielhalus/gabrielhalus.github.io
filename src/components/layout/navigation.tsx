@@ -1,9 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { Github, Linkedin } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { ThemeToggle } from "@/components/layout/navigation/theme-toggle";
+import { Github, Linkedin } from "lucide-react";
+import { useEffect, useState } from "react";
 
 export function Navigation() {
   const [scrolled, setScrolled] = useState(false);
