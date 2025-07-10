@@ -26,7 +26,7 @@ export function HeroSection() {
           </p>
 
           <div className="flex flex-wrap justify-center gap-4 mb-8 animate-slide-up animate-stagger-3">
-            <div className="flex items-center gap-2 px-3 py-2 bg-gray-100 dark:bg-gray-800 rounded-lg transition-card hover:shadow-lg">
+            <div className="flex items-center gap-2 px-3 py-2 bg-gray-100 dark:bg-gray-800 rounded-lg transition-card hover:shadow-lg hover:scale-105">
               <Code className="w-4 h-4 text-purple-500" />
               <span className="text-sm">Frontend & Backend</span>
             </div>
