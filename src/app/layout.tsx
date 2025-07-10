@@ -1,7 +1,6 @@
-import { ThemeProvider } from "@/components/ui/theme-provider";
-import "./globals.css";
-import { Toaster } from "sonner";
 import { Metadata } from "next";
+import { Toaster } from "sonner";
+import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Gabriel Halus - Fullstack Developer & Systems Architect",
@@ -41,10 +40,8 @@ export default function RootLayout({
   return (
     <html lang="fr" suppressHydrationWarning>
       <body>
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
-          {children}
-          <Toaster />
-        </ThemeProvider>
+        {children}
+        <Toaster />
       </body>
     </html>
   );
