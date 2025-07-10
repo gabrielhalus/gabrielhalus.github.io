@@ -23,7 +23,7 @@ const skillCategories = [
   {
     title: "DevOps & Cloud",
     icon: Cloud,
-    skills: ["Docker", "Kubernetes", "AWS", "GitHub Actions"],
+    skills: ["Docker", "GitHub Actions", "AWS"],
   },
   {
     title: "Security & IAM",
@@ -33,7 +33,7 @@ const skillCategories = [
   {
     title: "Build Tools & Runtime",
     icon: Zap,
-    skills: ["Bun", "Node.js", "Vite", "Webpack", "ESBuild"],
+    skills: ["Bun", "Node.js", "Vite", "Webpack", "ESBuild", "Turborepo"],
   },
 ];
 
@@ -46,8 +46,8 @@ export function SkillsSection() {
             Technical Skills
           </h2>
           <p className="text-base text-gray-600 dark:text-gray-400 max-w-lg mx-auto">
-            Comprehensive expertise across modern web technologies, system
-            architecture, and performance optimization.
+            Binary approach to skills - I either know it well enough to build
+            production systems, or I don't list it here. No fluff, just facts.
           </p>
         </div>
 
