@@ -1,3 +1,4 @@
+import { ContactSection } from "@/components/layout/contact-section";
 import { Footer } from "@/components/layout/footer";
 import { HeroSection } from "@/components/layout/hero-section";
 import { SkillsSection } from "@/components/layout/skills-section";
@@ -9,6 +10,7 @@ export default function Home() {
       <HeroSection />
       <SkillsSection />
       <TerminalSection />
+      <ContactSection />
       <Footer />
     </div>
   );
