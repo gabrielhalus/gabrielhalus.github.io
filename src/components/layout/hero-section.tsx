@@ -1,4 +1,4 @@
-import { Code, Server, Zap } from "lucide-react";
+import { ChevronDown, Code, Server, Zap } from "lucide-react";
 import { ContactButton } from "./hero-section/contact-button";
 import { ProjectsButton } from "./hero-section/projects-button";
 import { Roles } from "./hero-section/roles";
@@ -45,6 +45,10 @@ export function HeroSection() {
             <ContactButton />
           </div>
         </div>
+      </div>
+
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce animate-float">
+        <ChevronDown className="h-5 w-5 text-gray-400" />
       </div>
     </section>
   );

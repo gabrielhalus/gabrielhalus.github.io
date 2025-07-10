@@ -69,7 +69,7 @@ export function Navigation() {
               className="w-8 h-8 transition-all duration-300 hover:scale-110"
               asChild>
               <a
-                href="https://github.com/gabriel"
+                href="https://github.com/gabrielhalus"
                 target="_blank"
                 rel="noopener noreferrer">
                 <Github className="h-4 w-4" />
@@ -81,7 +81,7 @@ export function Navigation() {
               className="w-8 h-8 transition-all duration-300 hover:scale-110"
               asChild>
               <a
-                href="https://linkedin.com/in/gabriel"
+                href="https://linkedin.com/in/gabrielhalus"
                 target="_blank"
                 rel="noopener noreferrer">
                 <Linkedin className="h-4 w-4" />
