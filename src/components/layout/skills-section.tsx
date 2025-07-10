@@ -47,7 +47,8 @@ export function SkillsSection() {
           </h2>
           <p className="text-base text-gray-600 dark:text-gray-400 max-w-lg mx-auto">
             Binary approach to skills - I either know it well enough to build
-            production systems, or I don't list it here. No fluff, just facts.
+            production systems, or I don&apos;t list it here. No fluff, just
+            facts.
           </p>
         </div>
 

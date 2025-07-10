@@ -13,7 +13,7 @@ export function ContactSection() {
             Get In Touch
           </h2>
           <p className="text-base text-gray-600 dark:text-gray-400 max-w-lg mx-auto">
-            Let&lsquo;s discuss your next project or explore opportunities to
+            Let&apos;s discuss your next project or explore opportunities to
             collaborate.
           </p>
         </div>
