@@ -1,0 +1,18 @@
+{
+  "name": "@gabrielhalus/eslint-config",
+  "version": "0.0.1",
+  "type": "module",
+  "private": true,
+  "main": "index.js",
+  "exports": {
+    ".": "./eslint.config.js",
+    "./create-config": "./create-config.js"
+  },
+  "dependencies": {
+    "eslint": "^9.28.0"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^4.13.3",
+    "eslint-plugin-format": "^1.0.1"
+  }
+}
