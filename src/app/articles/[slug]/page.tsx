@@ -5,7 +5,7 @@ import { MarkdownRenderer } from "@/components/markdown-renderer";
 export default async function BlogPost({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
   const article = articles.find((article) => article.slug === slug);
