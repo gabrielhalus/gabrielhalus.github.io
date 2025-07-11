@@ -12,7 +12,7 @@ type Article = {
 export const articles: Article[] = [
   {
     title: "Fine-Grained Authorization with ABAC in the BHVR Stack",
-    slug: "fine-grained-authorization-with-abac-in-the-bhvr-stack",
+    slug: "1",
     description:
       "Learn how to implement Attribute-Based Access Control (ABAC) in the BHVR stack (Bun + Hono + Vite + React) for secure, granular permissions across your full-stack application.",
     date: "2025-07-10",
@@ -29,10 +29,10 @@ export const articles: Article[] = [
 
 ### 🆚 ABAC vs. RBAC
 
-| **Model** | **Description** | **Example** |
+| Model | Description | Example |
 | --- | --- | --- |
-| **RBAC** | Role-Based Access Control | Editors can edit all posts |
-| **ABAC** | Attribute-Based Access Control | Editors edit **only their own** posts |
+| RBAC | Role-Based Access Control | Editors can edit all posts |
+| ABAC | Attribute-Based Access Control | Editors edit **only their own** posts |
 
 ABAC is more granular and expressive. It fits real-world rules better, especially in multi-tenant systems or apps with complex permissions.
 
@@ -243,5 +243,164 @@ By separating the **concepts** (ABAC) from the **implementation** (BHVR + Drizzl
     readTime: 10,
     tags: ["ABAC", "BHVR Stack", "Authorization"],
     author: "Gabriel Halus",
+  },
+  {
+    title:
+      "Designing Attribute-Based Access Control (ABAC) in Modern Web Applications",
+    slug: "abac-implementation-modern-webapps",
+    description:
+      "Learn how to design and implement ABAC (Attribute-Based Access Control) in modern web apps using logical user, role, and permission structures—without relying on code snippets.",
+    date: "2025-07-11",
+    readTime: 8,
+    tags: [
+      "ABAC",
+      "Access Control",
+      "Security",
+      "Architecture",
+      "RBAC",
+      "Web Development",
+    ],
+    author: "Gabriel",
+    markdown: `
+## Introduction
+
+Security is not a feature—it’s a foundational pillar of any modern web application. As systems grow in complexity, so do access control requirements. Traditional Role-Based Access Control (RBAC) can quickly become insufficient for applications requiring context-aware decisions. This is where **Attribute-Based Access Control (ABAC)** becomes essential.
+
+ABAC allows fine-grained control by evaluating a combination of attributes related to the user, resource, and environment. In this article, we’ll walk through the core logic of implementing ABAC in a scalable and maintainable way using users, roles, and permissions managed in a relational database.
+
+---
+
+## Core Concepts of ABAC
+
+ABAC decisions are made based on **attributes**, typically categorized as:
+
+- **Subject attributes**: Characteristics of the user (e.g., role, department, clearance level).
+- **Resource attributes**: Properties of the data or object (e.g., resource owner, sensitivity).
+- **Action attributes**: The type of operation (e.g., read, write, delete).
+- **Environment attributes**: External context (e.g., time of day, IP address, device).
+
+The decision to authorize an action is based on evaluating policies defined as combinations of these attributes.
+
+---
+
+## Architectural Overview
+
+ABAC builds on a few foundational data structures that map users to roles and permissions—but extends far beyond this mapping by introducing dynamic conditions.
+
+### 1. User Management
+
+Each user is represented in the system with associated attributes:
+
+- Basic identity fields (email, name)
+- Static attributes (role, department, region)
+- Dynamic attributes (e.g., time of login, current project)
+
+### 2. Roles and Permissions
+
+Roles help group sets of permissions for easier administration. Each permission defines a **scope** of actions allowed on a resource.
+
+A typical design involves:
+
+- A **roles table** with unique names and descriptions.
+- A **permissions table** defining actions and target resources.
+- A **role_permission** join table mapping roles to permissions.
+
+### 3. Policies and Conditions
+
+Policies define rules for evaluating access based on attributes. This is where ABAC deviates from RBAC.
+
+Policies may include conditions like:
+
+- A user can only edit a project if they are the project owner.
+- A regional manager can view reports only from their region.
+- Engineers can deploy only during work hours and only to their assigned environments.
+
+These rules are not hard-coded but stored and evaluated dynamically, often using an internal policy engine or a rules engine.
+
+---
+
+## Access Evaluation Flow
+
+Here’s how access evaluation typically works in an ABAC-enabled system:
+
+1. **User Authenticates**  
+   Identity is verified and user attributes are loaded (e.g., roles, departments, claims).
+
+2. **Request is Made**  
+   The user attempts to perform an action on a resource (e.g., \`DELETE /project/42\`).
+
+3. **Policy Context is Built**  
+   The system gathers:  
+   - Subject attributes: user’s role, department  
+   - Resource attributes: project’s owner, region  
+   - Action attributes: \`delete\`  
+   - Environment attributes: current time, IP
+
+4. **Policy Evaluation**  
+   A policy engine evaluates whether this set of attributes satisfies at least one access policy.
+
+5. **Decision is Returned**  
+   The request is either allowed or denied.
+
+
+---
+
+## Storing Policies and Conditions
+
+There are multiple approaches for storing ABAC policies in a database:
+
+#### Declarative Rules (Recommended)
+
+Policies are expressed as logical expressions and stored as JSON or DSL (Domain-Specific Language) in a policies table. These rules are parsed and evaluated at runtime.
+
+For example:
+
+| Policy Name     | Resource | Action | Condition                                          |
+|------------------|----------|--------|----------------------------------------------------|
+| Own project edit | project  | edit   | \`user.id == resource.owner_id\`                    |
+| HR view salary   | salary   | view   | \`user.department == "HR"\`                         |
+| Regional read    | report   | read   | \`user.region == resource.region && env.time < 20\` |
+
+This makes policies editable without code changes and supports admin-driven customization.
+
+---
+
+## Performance and Reliability Considerations
+
+ABAC evaluations can become expensive if not designed carefully. Here are key considerations:
+
+- **Attribute Caching**: Cache subject and resource attributes that don’t change frequently to avoid repeated lookups.
+- **Index Resource Attributes**: If resource attributes are stored in DB, ensure they are indexed to support fast lookups.
+- **Policy Compilation**: Pre-compile or cache parsed policies to reduce evaluation latency.
+- **Fail-Closed**: Always default to "deny" if policy evaluation fails or is inconclusive.
+- **Audit Logs**: Store decision logs for compliance and debugging.
+
+---
+
+## ABAC vs RBAC: When to Choose What
+
+| Feature           | RBAC                   | ABAC                                     |
+|------------------|------------------------|------------------------------------------|
+| Simplicity       | ✅ Simple               | ❌ More complex to design                |
+| Flexibility      | ❌ Limited              | ✅ High—supports contextual decisions    |
+| Scalability      | ❌ Role explosion       | ✅ Scales with attributes, not roles     |
+| Admin Friendly   | ✅ Easy to manage roles | ❌ Requires a UI for policy management   |
+
+**Best practice**: Use RBAC for base permissions and layer ABAC on top for contextual restrictions.
+
+---
+
+## Final Thoughts
+
+ABAC unlocks highly flexible and secure access control by evaluating the full context of each request. However, it demands careful design of attributes, policies, and evaluation logic.
+
+In a production-grade implementation:
+- Model users, roles, permissions clearly.
+- Separate static RBAC from dynamic ABAC layers.
+- Use a consistent format for policy storage and evaluation.
+- Monitor performance and audit access decisions.
+
+ABAC is not just a security upgrade—it’s an architectural enabler for fine-grained, dynamic authorization in modern web apps.
+`,
   },
 ];
