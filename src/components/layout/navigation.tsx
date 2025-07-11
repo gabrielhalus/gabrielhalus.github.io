@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Github, Linkedin } from "lucide-react";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export function Navigation() {
@@ -32,9 +33,11 @@ export function Navigation() {
       }`}>
       <div className="container mx-auto px-4 py-3">
         <div className="flex items-center justify-between">
-          <div className="text-xl font-bold text-black dark:text-white transition-all duration-300 hover:scale-110">
+          <Link
+            href="/"
+            className="text-xl font-bold text-black dark:text-white transition-all duration-300 hover:scale-110">
             Gabriel
-          </div>
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-6">
