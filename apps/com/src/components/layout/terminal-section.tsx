@@ -1,9 +1,10 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
-import { Terminal, Play, Square } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Play, Square, Terminal } from "lucide-react";
+import { useCallback, useEffect, useState } from "react";
+
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const commands = [
   {
@@ -34,7 +35,8 @@ export function TerminalSection() {
   const [output, setOutput] = useState("");
 
   const runCommand = useCallback(async () => {
-    if (isRunning) return;
+    if (isRunning)
+      return;
 
     setIsRunning(true);
     setOutput("");
@@ -43,7 +45,7 @@ export function TerminalSection() {
 
     // Simulate typing the command
     for (let i = 0; i <= command.command.length; i++) {
-      await new Promise((resolve) => setTimeout(resolve, 50));
+      await new Promise(resolve => setTimeout(resolve, 50));
       setOutput(
         `$ ${command.command.substring(0, i)}${
           i < command.command.length ? "_" : ""
@@ -51,7 +53,7 @@ export function TerminalSection() {
       );
     }
 
-    await new Promise((resolve) => setTimeout(resolve, 500));
+    await new Promise(resolve => setTimeout(resolve, 500));
 
     // Show the output
     setOutput(`$ ${command.command}\n${command.output}`);
@@ -60,7 +62,7 @@ export function TerminalSection() {
 
     // Auto-advance to next command
     setTimeout(() => {
-      setCurrentCommand((prev) => (prev + 1) % commands.length);
+      setCurrentCommand(prev => (prev + 1) % commands.length);
     }, 2000);
   }, [currentCommand, isRunning]);
 
@@ -108,12 +110,15 @@ export function TerminalSection() {
                     variant="ghost"
                     onClick={runCommand}
                     disabled={isRunning}
-                    className="text-green-400 hover:text-green-300 hover:bg-green-400/10 h-6 w-6 p-0 transition-all duration-300 hover:scale-110">
-                    {isRunning ? (
-                      <Square className="h-3 w-3" />
-                    ) : (
-                      <Play className="h-3 w-3" />
-                    )}
+                    className="text-green-400 hover:text-green-300 hover:bg-green-400/10 h-6 w-6 p-0 transition-all duration-300 hover:scale-110"
+                  >
+                    {isRunning
+                      ? (
+                          <Square className="h-3 w-3" />
+                        )
+                      : (
+                          <Play className="h-3 w-3" />
+                        )}
                   </Button>
                 </div>
               </div>

@@ -1,16 +1,19 @@
 "use client";
 
-import { cn } from "@/lib/utils";
-import { OtherString, Prettify } from "@/types/utils";
 import {
   Github,
   Globe,
   Newspaper,
   Package,
-  ShoppingBag,
   Pin,
   Server,
+  ShoppingBag,
 } from "lucide-react";
+
+import type { OtherString, Prettify } from "@/types/utils";
+
+import { cn } from "@/lib/utils";
+
 import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
 import {
@@ -113,8 +116,10 @@ const projects: Project[] = [
 export function ProjectsSection() {
   // Sort projects: pinned first, then maintain original order within each group
   const sortedProjects = [...projects].sort((a, b) => {
-    if (a.pinned && !b.pinned) return -1;
-    if (!a.pinned && b.pinned) return 1;
+    if (a.pinned && !b.pinned)
+      return -1;
+    if (!a.pinned && b.pinned)
+      return 1;
     return 0; // Maintain original order within pinned/unpinned groups
   });
 
@@ -152,7 +157,8 @@ export function ProjectsSection() {
         index + 1
       } hover:scale-105 ${
         project.pinned ? "ring-2 ring-purple-500/20" : ""
-      } mb-6`}>
+      } mb-6`}
+    >
       <CardHeader>
         <div className="flex items-start justify-between mb-3">
           <div className="flex items-center gap-3">
@@ -161,16 +167,17 @@ export function ProjectsSection() {
                 project.anonymized
                   ? "bg-purple-100 dark:bg-purple-900"
                   : project.pinned
-                  ? "bg-purple-100 dark:bg-purple-900"
-                  : "bg-gray-100 dark:bg-gray-700"
-              }`}>
+                    ? "bg-purple-100 dark:bg-purple-900"
+                    : "bg-gray-100 dark:bg-gray-700"
+              }`}
+            >
               <project.icon
                 className={`h-6 w-6 ${
                   project.anonymized
                     ? "text-purple-600 dark:text-purple-400"
                     : project.pinned
-                    ? "text-purple-600 dark:text-purple-400"
-                    : "text-purple-500"
+                      ? "text-purple-600 dark:text-purple-400"
+                      : "text-purple-500"
                 }`}
               />
             </div>
@@ -185,9 +192,10 @@ export function ProjectsSection() {
                     project.anonymized
                       ? "bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200"
                       : project.pinned
-                      ? "bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200"
-                      : "bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300"
-                  }`}>
+                        ? "bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200"
+                        : "bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300"
+                  }`}
+                >
                   {project.pinned && (
                     <Pin className="h-3 w-3 text-purple-500 fill-current" />
                   )}
@@ -218,7 +226,8 @@ export function ProjectsSection() {
             {project.features.map((feature, featureIndex) => (
               <div
                 key={featureIndex}
-                className="flex items-center gap-1 text-gray-600 dark:text-gray-400">
+                className="flex items-center gap-1 text-gray-600 dark:text-gray-400"
+              >
                 <div
                   className={`w-1 h-1 rounded-full ${
                     project.anonymized ? "bg-purple-400" : "bg-purple-500"
@@ -244,7 +253,8 @@ export function ProjectsSection() {
                   project.anonymized
                     ? "bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300"
                     : "bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300"
-                }`}>
+                }`}
+              >
                 {tech}
               </Badge>
             ))}
@@ -255,77 +265,87 @@ export function ProjectsSection() {
                   project.anonymized
                     ? "bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300"
                     : "bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300"
-                }`}>
-                +{project.tech.length - 4}
+                }`}
+              >
+                +
+                {project.tech.length - 4}
               </Badge>
             )}
           </div>
         </div>
 
         {/* Demo and Live Links */}
-        {!project.anonymized &&
-          (project.github || project.demo || project.live) && (
-            <div className="flex gap-2 pt-2">
-              {project.github && (
-                <Button
-                  variant="outline"
-                  size="sm"
-                  asChild
-                  className="flex-1 text-xs button-radius border-gray-200 dark:border-gray-600 transition-all duration-300 hover:scale-105">
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer">
-                    <Github className="h-3 w-3 mr-1" />
-                    Code
-                  </a>
-                </Button>
-              )}
-              {project.demo && (
-                <Button
-                  variant="outline"
-                  size="sm"
-                  asChild
-                  className={cn(
-                    "text-xs button-radius transition-all duration-300 hover:scale-105",
-                    project.github ? "flex-1" : "flex-1",
-                    "bg-black dark:bg-white text-white dark:text-black hover:bg-gray-800 hover:text-white dark:hover:bg-gray-200 hover:dark:text-black",
-                  )}>
-                  <a
-                    href={project.demo}
-                    target="_blank"
-                    rel="noopener noreferrer">
-                    <Globe className="h-3 w-3 mr-1" />
-                    Demo
-                  </a>
-                </Button>
-              )}
-              {project.live && (
-                <Button
-                  variant="outline"
-                  size="sm"
-                  asChild
-                  className={cn(
-                    "text-xs button-radius transition-all duration-300 hover:scale-105",
-                    project.github ? "flex-1" : "flex-1",
-                    "bg-black dark:bg-white text-white dark:text-black hover:bg-gray-800 hover:text-white dark:hover:bg-gray-200 hover:dark:text-black",
-                  )}>
-                  <a
-                    href={project.live}
-                    target="_blank"
-                    rel="noopener noreferrer">
-                    <Globe className="h-3 w-3 mr-1" />
-                    Live
-                  </a>
-                </Button>
-              )}
-            </div>
-          )}
+        {!project.anonymized
+          && (project.github || project.demo || project.live) && (
+          <div className="flex gap-2 pt-2">
+            {project.github && (
+              <Button
+                variant="outline"
+                size="sm"
+                asChild
+                className="flex-1 text-xs button-radius border-gray-200 dark:border-gray-600 transition-all duration-300 hover:scale-105"
+              >
+                <a
+                  href={project.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Github className="h-3 w-3 mr-1" />
+                  Code
+                </a>
+              </Button>
+            )}
+            {project.demo && (
+              <Button
+                variant="outline"
+                size="sm"
+                asChild
+                className={cn(
+                  "text-xs button-radius transition-all duration-300 hover:scale-105",
+                  project.github ? "flex-1" : "flex-1",
+                  "bg-black dark:bg-white text-white dark:text-black hover:bg-gray-800 hover:text-white dark:hover:bg-gray-200 hover:dark:text-black",
+                )}
+              >
+                <a
+                  href={project.demo}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Globe className="h-3 w-3 mr-1" />
+                  Demo
+                </a>
+              </Button>
+            )}
+            {project.live && (
+              <Button
+                variant="outline"
+                size="sm"
+                asChild
+                className={cn(
+                  "text-xs button-radius transition-all duration-300 hover:scale-105",
+                  project.github ? "flex-1" : "flex-1",
+                  "bg-black dark:bg-white text-white dark:text-black hover:bg-gray-800 hover:text-white dark:hover:bg-gray-200 hover:dark:text-black",
+                )}
+              >
+                <a
+                  href={project.live}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Globe className="h-3 w-3 mr-1" />
+                  Live
+                </a>
+              </Button>
+            )}
+          </div>
+        )}
 
         {/* Anonymization Notice */}
         {project.anonymized && (
           <div className="text-xs text-purple-600 dark:text-purple-400 bg-purple-50 dark:bg-purple-950 p-2 rounded-lg">
-            <strong>Note:</strong> Project details have been anonymized due to
+            <strong>Note:</strong>
+            {" "}
+            Project details have been anonymized due to
             confidentiality agreements. Technical implementation and results
             remain accurate.
           </div>

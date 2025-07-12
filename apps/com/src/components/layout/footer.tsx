@@ -1,4 +1,4 @@
-import { Heart, Code, Coffee } from "lucide-react";
+import { Code, Coffee, Heart } from "lucide-react";
 
 export function Footer() {
   return (
@@ -24,7 +24,11 @@ export function Footer() {
 
           <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 caption text-center sm:flex-nowrap sm:justify-start">
             <span className="w-full sm:w-auto">
-              &copy; {new Date().getFullYear()} Gabriel Halus. All rights
+              &copy;
+              {" "}
+              {new Date().getFullYear()}
+              {" "}
+              Gabriel Halus. All rights
               reserved.
             </span>
             <span className="hidden sm:inline-block">|</span>

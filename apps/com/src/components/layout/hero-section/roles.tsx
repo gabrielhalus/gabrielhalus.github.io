@@ -9,7 +9,7 @@ export function Roles() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentRole((prev) => (prev + 1) % roles.length);
+      setCurrentRole(prev => (prev + 1) % roles.length);
     }, 3000);
 
     return () => clearInterval(interval);

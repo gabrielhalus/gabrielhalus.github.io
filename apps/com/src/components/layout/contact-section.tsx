@@ -1,8 +1,9 @@
 "use client";
 
+import { Github, Linkedin, Mail, MessageCircle } from "lucide-react";
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Github, Linkedin, Mail, MessageCircle } from "lucide-react";
 
 export function ContactSection() {
   return (
@@ -24,7 +25,8 @@ export function ContactSection() {
             <a
               href="mailto:gabriel@example.com"
               className="block"
-              tabIndex={-1}>
+              tabIndex={-1}
+            >
               <Card className="card-shadow card-radius bg-white dark:bg-gray-800 border-0 transition-card hover:shadow-lg cursor-pointer animate-slide-up animate-stagger-1 hover:scale-105 h-full">
                 <CardContent className="p-4 text-center">
                   <div className="p-3 bg-purple-100 dark:bg-purple-900 rounded-lg w-fit mx-auto mb-3 transition-all duration-300 hover:scale-110">
@@ -37,7 +39,8 @@ export function ContactSection() {
                     size="sm"
                     className="mt-2 text-xs h-7 pointer-events-none opacity-70"
                     tabIndex={-1}
-                    aria-hidden="true">
+                    aria-hidden="true"
+                  >
                     Send Email
                   </Button>
                 </CardContent>
@@ -49,7 +52,8 @@ export function ContactSection() {
               target="_blank"
               rel="noopener noreferrer"
               className="block"
-              tabIndex={-1}>
+              tabIndex={-1}
+            >
               <Card className="card-shadow card-radius bg-white dark:bg-gray-800 border-0 transition-card hover:shadow-lg cursor-pointer animate-slide-up animate-stagger-3 hover:scale-105 h-full">
                 <CardContent className="p-4 text-center">
                   <div className="p-3 bg-purple-100 dark:bg-purple-900 rounded-lg w-fit mx-auto mb-3 transition-all duration-300 hover:scale-110">
@@ -62,7 +66,8 @@ export function ContactSection() {
                     size="sm"
                     className="mt-2 text-xs h-7 pointer-events-none opacity-70"
                     tabIndex={-1}
-                    aria-hidden="true">
+                    aria-hidden="true"
+                  >
                     Start Chat
                   </Button>
                 </CardContent>
@@ -76,11 +81,13 @@ export function ContactSection() {
             <div className="flex justify-center gap-3">
               <Button
                 className="bg-black dark:bg-white text-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-200 button-radius px-6 py-3 transition-all duration-300 hover:scale-105 hover:shadow-lg"
-                asChild>
+                asChild
+              >
                 <a
                   href="https://github.com/gabrielhalus"
                   target="_blank"
-                  rel="noopener noreferrer">
+                  rel="noopener noreferrer"
+                >
                   <Github className="h-4 w-4 mr-2" />
                   GitHub
                 </a>
@@ -88,11 +95,13 @@ export function ContactSection() {
               <Button
                 variant="outline"
                 className="border-gray-300 dark:border-gray-600 button-radius px-6 py-3 transition-all duration-300 hover:scale-105 hover:shadow-lg"
-                asChild>
+                asChild
+              >
                 <a
                   href="https://linkedin.com/in/gabrielhalus"
                   target="_blank"
-                  rel="noopener noreferrer">
+                  rel="noopener noreferrer"
+                >
                   <Linkedin className="h-4 w-4 mr-2" />
                   LinkedIn
                 </a>

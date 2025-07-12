@@ -1,4 +1,5 @@
 import { ChevronDown, Code, Server, Zap } from "lucide-react";
+
 import { ContactButton } from "./hero-section/contact-button";
 import { ProjectsButton } from "./hero-section/projects-button";
 import { Roles } from "./hero-section/roles";
@@ -7,7 +8,8 @@ export function HeroSection() {
   return (
     <section
       id="home"
-      className="min-h-screen flex flex-col items-center justify-center relative pt-16 pb-20">
+      className="min-h-screen flex flex-col items-center justify-center relative pt-16 pb-20"
+    >
       <div className="container mx-auto px-4 text-center">
         <div className="max-w-2xl mx-auto animate-fade-in">
           <h1 className="text-6xl font-bold mb-4 text-black dark:text-white animate-slide-up">

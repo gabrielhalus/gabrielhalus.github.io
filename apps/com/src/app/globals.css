@@ -95,8 +95,13 @@
   }
 
   body {
-    font-family: "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Text",
-      system-ui, sans-serif;
+    font-family:
+      "Inter",
+      -apple-system,
+      BlinkMacSystemFont,
+      "SF Pro Text",
+      system-ui,
+      sans-serif;
     background-color: var(--background);
     color: var(--primary);
     font-size: var(--font-body);
@@ -176,7 +181,9 @@
   }
 
   .animate-typing {
-    animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+    animation:
+      typing 3.5s steps(40, end),
+      blink-caret 0.75s step-end infinite;
   }
 
   .animate-stagger-1 {

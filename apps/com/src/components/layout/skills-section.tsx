@@ -1,8 +1,9 @@
 "use client";
 
-import { Code, Database, Server, Cloud, Shield, Zap } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Cloud, Code, Database, Server, Shield, Zap } from "lucide-react";
+
 import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const skillCategories = [
   {
@@ -58,7 +59,8 @@ export function SkillsSection() {
               key={index}
               className={`card-shadow card-radius bg-white dark:bg-gray-800 border-0 transition-card hover:shadow-lg animate-fade-in animate-stagger-${
                 (index % 6) + 1
-              } hover:scale-105`}>
+              } hover:scale-105`}
+            >
               <CardHeader className="pb-3">
                 <div className="flex items-center gap-2">
                   <div className="p-2 bg-gray-100 dark:bg-gray-700 rounded-lg transition-all duration-300 hover:bg-purple-100 dark:hover:bg-purple-900">
@@ -76,7 +78,8 @@ export function SkillsSection() {
                     <Badge
                       key={skillIndex}
                       variant="secondary"
-                      className="text-xs bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 border-0">
+                      className="text-xs bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 border-0"
+                    >
                       {skill}
                     </Badge>
                   ))}
