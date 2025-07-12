@@ -1,7 +1,7 @@
 # Install dependencies
 FROM oven/bun:1.1 AS deps
 WORKDIR /app
-COPY bun.lock package.json ./
+COPY ../../bun.lock ./package.json ./
 RUN bun install --frozen-lockfile
 
 # Build app
