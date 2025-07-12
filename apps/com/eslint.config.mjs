@@ -16,7 +16,6 @@ export default createConfig(
   {
     rules: {
       "antfu/top-level-function": "off",
-      "@tanstack/query/exhaustive-deps": "error",
       "unicorn/filename-case": [
         "error",
         {

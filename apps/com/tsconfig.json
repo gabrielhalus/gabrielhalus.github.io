@@ -7,7 +7,7 @@
       "@/*": [
         "./*"
       ],
-      "@bunstack/shared/": [
+      "@gabrielhalus/shared/": [
         "../../../packages/shared/src/*"
       ]
     },
