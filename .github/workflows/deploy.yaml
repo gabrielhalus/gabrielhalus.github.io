@@ -17,8 +17,7 @@ jobs:
 
       - name: Build Docker image
         run: |
-          cd apps/com
-          docker build -t gabrielhalus.github.com.com .
+          docker build -f apps/com/Dockerfile -t gabrielhalus.github.com.com .
 
       - name: Save image to archive
         run: |
