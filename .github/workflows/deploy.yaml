@@ -1,12 +1,12 @@
 name: Deploy COM App
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - '.github/**'
-      - 'apps/com/**'
+  # push:
+  #   branches:
+  #     - main
+  #   paths:
+  #     - '.github/**'
+  #     - 'apps/com/**'
   workflow_dispatch:
 
 permissions:
