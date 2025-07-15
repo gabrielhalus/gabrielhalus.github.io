@@ -17,11 +17,11 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -f apps/com/Dockerfile -t gabrielhalus.github.com.com .
+          docker build -f apps/com/Dockerfile -t www.gabrielhalus.com .
 
       - name: Save image to archive
         run: |
-          docker save gabrielhalus.github.com.com | gzip > image.tar.gz
+          docker save www.gabrielhalus.com | gzip > image.tar.gz
 
       - name: Set up SSH
         run: |
@@ -38,7 +38,7 @@ jobs:
         run: |
           ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -p 22 ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} <<'EOF'
             docker load < /tmp/image.tar.gz
-            docker stop gabrielhalus.github.com.com || true
-            docker rm gabrielhalus.github.com.com || true
-            docker run -d --name gabrielhalus.github.com.com -p 3000:3000 gabrielhalus.github.com.com
+            docker stop www.gabrielhalus.com || true
+            docker rm www.gabrielhalus.com || true
+            docker run -d --name www.gabrielhalus.com -p 3000:3000 www.gabrielhalus.com
           EOF
