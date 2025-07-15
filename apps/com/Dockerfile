@@ -1,38 +1,62 @@
-# Install dependencies
-FROM oven/bun:1.2 AS deps
-WORKDIR /app
-COPY ../../bun.lock ../../package.json ./
-COPY package.json ./apps/com/package.json
-RUN bun install
+# ---- Base image with Bun and Node.js ----
+FROM oven/bun:1.2.18 AS base
 
-# Build app with Bun (install Node.js for Next.js SWC)
-FROM oven/bun:1.2 AS builder
-WORKDIR /app
-COPY ../../bun.lock ../../package.json ./
-COPY package.json ./apps/com/package.json
-COPY . .
+# Add Node.js (needed for Next.js internal tools)
+RUN apt-get update && \
+    apt-get install -y curl ca-certificates gnupg && \
+    curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
+    apt-get install -y nodejs && \
+    node -v && npm -v
 
-# Install Node.js for Next.js SWC compilation
-RUN apt-get update && apt-get install -y curl
-RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
-RUN apt-get install -y nodejs
-
-# Reinstall dependencies to get correct native binaries for the current platform
-RUN bun install
-
-ENV NEXT_TELEMETRY_DISABLED=1
-RUN bun run build
-
-# Production image
-FROM oven/bun:1.2 AS runner
+# ---- Dependencies layer ----
+FROM base AS deps
 WORKDIR /app
 
-COPY --from=builder /app/apps/com/.next ./.next
-COPY --from=builder /app/apps/com/public ./public
-COPY --from=builder /app/package.json ./package.json
-COPY --from=builder /app/node_modules ./node_modules
+# Copy root monorepo files (to install deps for all packages)
+COPY bun.lock package.json turbo.json ./
+COPY packages ./packages
+COPY apps/com/package.json ./apps/com/package.json
 
-ENV NODE_ENV=production
-ENV NEXT_TELEMETRY_DISABLED=1
+RUN bun install --frozen-lockfile
+
+# ---- Build layer ----
+FROM base AS builder
+WORKDIR /app
+
+# Copy everything
+COPY --from=deps /app /app
+
+# Copy source for the app
+COPY apps/com ./apps/com
+
+# Disable Next telemetry
+ENV NEXT_TELEMETRY_DISABLED 1
+
+# Build the Next.js app
+WORKDIR /app/apps/com
+RUN bunx next build
+
+# ---- Final runtime image ----
+FROM base AS runner
+WORKDIR /app
+
+# Set production env
+ENV NODE_ENV production
+ENV NEXT_TELEMETRY_DISABLED 1
+ENV PORT 3000
+ENV HOSTNAME "0.0.0.0"
+
+# Create non-root user
+RUN adduser --system --uid 1001 nextjs
+
+# Copy the standalone server output and static files
+COPY --from=builder --chown=nextjs:bun /app/apps/com/.next/standalone ./
+COPY --from=builder --chown=nextjs:bun /app/apps/com/.next/static ./apps/com/.next/static
+COPY --from=builder --chown=nextjs:bun /app/apps/com/public ./apps/com/public
+
+USER nextjs
+
 EXPOSE 3000
-CMD ["bun", "start"]
+
+# Launch the Next.js standalone server
+CMD ["node", "apps/com/server.js"]
