@@ -1,9 +1,11 @@
-name: Deploy to VPS
+name: Deploy COM App
 
 on:
   push:
     branches:
       - main
+    paths:
+      - 'apps/com/**'
 
 jobs:
   deploy:
@@ -17,11 +19,11 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -f apps/com/Dockerfile -t www.gabrielhalus.com .
+          docker build -f apps/com/Dockerfile -t gabrielhalus-com .
 
       - name: Save image to archive
         run: |
-          docker save www.gabrielhalus.com | gzip > image.tar.gz
+          docker save gabrielhalus-com | gzip > image.tar.gz
 
       - name: Set up SSH
         run: |
@@ -38,7 +40,7 @@ jobs:
         run: |
           ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -p 22 ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} <<'EOF'
             docker load < /tmp/image.tar.gz
-            docker stop www.gabrielhalus.com || true
-            docker rm www.gabrielhalus.com || true
-            docker run -d --name www.gabrielhalus.com -p 3000:3000 www.gabrielhalus.com
+            docker stop gabrielhalus-com || true
+            docker rm gabrielhalus-com || true
+            docker run -d --name gabrielhalus-com -p 3000:3000 gabrielhalus-com
           EOF
