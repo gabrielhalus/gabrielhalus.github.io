@@ -12,6 +12,7 @@ import {
 
 import type { OtherString, Prettify } from "@/types/utils";
 
+import { trackEvent } from "@/lib/umami";
 import { cn } from "@/lib/utils";
 
 import { Badge } from "../ui/badge";
@@ -304,6 +305,12 @@ export function ProjectsSection() {
                   href={project.github}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() =>
+                    trackEvent("project_link_click", {
+                      project: project.title,
+                      link_type: "github",
+                      location: "projects_section",
+                    })}
                 >
                   <Github className="h-3 w-3 mr-1" />
                   Code
@@ -325,6 +332,12 @@ export function ProjectsSection() {
                   href={project.demo}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() =>
+                    trackEvent("project_link_click", {
+                      project: project.title,
+                      link_type: "demo",
+                      location: "projects_section",
+                    })}
                 >
                   <Globe className="h-3 w-3 mr-1" />
                   Demo
@@ -346,6 +359,12 @@ export function ProjectsSection() {
                   href={project.live}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() =>
+                    trackEvent("project_link_click", {
+                      project: project.title,
+                      link_type: "live",
+                      location: "projects_section",
+                    })}
                 >
                   <Globe className="h-3 w-3 mr-1" />
                   Live

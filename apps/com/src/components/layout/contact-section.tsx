@@ -4,6 +4,7 @@ import { Github, Linkedin, Mail, MessageCircle } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { trackEvent } from "@/lib/umami";
 
 export function ContactSection() {
   return (
@@ -26,6 +27,12 @@ export function ContactSection() {
               href="mailto:gabriel@example.com"
               className="block"
               tabIndex={-1}
+              onClick={() =>
+                trackEvent("contact_click", {
+                  method: "email",
+                  location: "contact_section",
+                })
+              }
             >
               <Card className="card-shadow card-radius bg-white dark:bg-gray-800 border-0 transition-card hover:shadow-lg cursor-pointer animate-slide-up animate-stagger-1 hover:scale-105 h-full">
                 <CardContent className="p-4 text-center">
@@ -53,6 +60,12 @@ export function ContactSection() {
               rel="noopener noreferrer"
               className="block"
               tabIndex={-1}
+              onClick={() =>
+                trackEvent("contact_click", {
+                  method: "whatsapp",
+                  location: "contact_section",
+                })
+              }
             >
               <Card className="card-shadow card-radius bg-white dark:bg-gray-800 border-0 transition-card hover:shadow-lg cursor-pointer animate-slide-up animate-stagger-3 hover:scale-105 h-full">
                 <CardContent className="p-4 text-center">
@@ -87,6 +100,12 @@ export function ContactSection() {
                   href="https://github.com/gabrielhalus"
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() =>
+                    trackEvent("external_link_click", {
+                      link: "github",
+                      location: "contact_section",
+                    })
+                  }
                 >
                   <Github className="h-4 w-4 mr-2" />
                   GitHub
@@ -101,6 +120,12 @@ export function ContactSection() {
                   href="https://linkedin.com/in/gabrielhalus"
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() =>
+                    trackEvent("external_link_click", {
+                      link: "linkedin",
+                      location: "contact_section",
+                    })
+                  }
                 >
                   <Linkedin className="h-4 w-4 mr-2" />
                   LinkedIn

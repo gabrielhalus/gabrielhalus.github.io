@@ -4,6 +4,7 @@ import { Github, Linkedin } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
+import { trackEvent } from "@/lib/umami";
 
 export function Navigation() {
   const [scrolled, setScrolled] = useState(false);
@@ -18,6 +19,10 @@ export function Navigation() {
   }, []);
 
   const scrollToSection = (sectionId: string) => {
+    trackEvent("navigation_click", {
+      section: sectionId,
+      location: "navigation",
+    });
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
@@ -77,6 +82,12 @@ export function Navigation() {
                 href="https://github.com/gabrielhalus"
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() =>
+                  trackEvent("external_link_click", {
+                    link: "github",
+                    location: "navigation",
+                  })
+                }
               >
                 <Github className="h-4 w-4" />
               </a>
@@ -91,6 +102,12 @@ export function Navigation() {
                 href="https://linkedin.com/in/gabrielhalus"
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() =>
+                  trackEvent("external_link_click", {
+                    link: "linkedin",
+                    location: "navigation",
+                  })
+                }
               >
                 <Linkedin className="h-4 w-4" />
               </a>
