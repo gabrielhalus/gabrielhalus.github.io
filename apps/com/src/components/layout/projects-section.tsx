@@ -48,6 +48,21 @@ type Project = Prettify<
 
 const projects: Project[] = [
   {
+    title: "EARL La Drevenne – Farm & Product Showcase",
+    description:
+    "Showcase site for EARL La Drevenne, a family-run farm in Saint-Gervais (Isère) specializing in raised pork and porcelets. The platform highlights product offerings, facilitates customer engagement, and provides secure access with analytics for real usage insights.",
+    tech: ["React", "Supabase", "Turborepo", "Umami"],
+    icon: ShoppingBag,
+    category: "Fullstack",
+    features: [
+      "Pricing management",
+      "Privacy-focused analytics",
+      "Responsive, accessible UI",
+    ],
+    live: "https://www.drevenne.com",
+    pinned: true,
+  },
+  {
     title: "Digital goods marketplace",
     description:
       "Developed a real-time e-commerce platform for digital goods with <10min delivery SLAs, account verification, and fraud prevention. Designed for high traffic and rapid fulfillment workflows.",
