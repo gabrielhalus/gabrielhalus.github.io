@@ -1,9 +1,12 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
+import { useTranslations } from "next-intl";
+
 import { trackEvent } from "@/lib/umami";
 
 export function ContactButton() {
+  const t = useTranslations("hero");
+
   const handleClick = () => {
     trackEvent("button_click", {
       button: "contact",
@@ -15,12 +18,11 @@ export function ContactButton() {
   };
 
   return (
-    <Button
-      variant="outline"
+    <button
       onClick={handleClick}
-      className="border-gray-300 dark:border-gray-600 button-radius px-6 py-3 transition-all duration-300 hover:scale-105 hover:shadow-lg"
+      className="btn-ghost cursor-pointer"
     >
-      Get In Touch
-    </Button>
+      {t("getInTouch")}
+    </button>
   );
 }

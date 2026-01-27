@@ -1,0 +1,87 @@
+{
+  "metadata": {
+    "title": "Gabriel Halus - Fullstack Developer & Systems Architect",
+    "description": "Fullstack developer specializing in TypeScript, React, Next.js, Rust, and modern web technologies."
+  },
+  "nav": {
+    "home": "Home",
+    "projects": "Projects",
+    "skills": "Skills",
+    "contact": "Contact"
+  },
+  "hero": {
+    "available": "Available for new projects",
+    "description": "Crafting performant and reliable software with expertise in TypeScript, React, Node.js, and Rust. Turning complex challenges into elegant solutions.",
+    "viewWork": "View My Work",
+    "getInTouch": "Get In Touch",
+    "yearsExp": "Years of Experience",
+    "projectsDelivered": "Projects Delivered",
+    "coffeeConsumed": "Coffee Consumed",
+    "scroll": "Scroll"
+  },
+  "roles": {
+    "fullstack": "Fullstack Developer",
+    "architect": "Systems Architect",
+    "oss": "OSS Enthusiast"
+  },
+  "clients": {
+    "title": "They trusted me"
+  },
+  "projects": {
+    "overline": "Selected Work",
+    "title": "Featured Projects",
+    "description": "A curated selection showcasing expertise in full-stack development, system architecture, and performance optimization.",
+    "featured": "Featured",
+    "code": "Code",
+    "visit": "Visit",
+    "demo": "Demo",
+    "anonymizedNotice": "Project details anonymized due to NDA",
+    "scrollHint": "Drag or scroll horizontally to explore more projects"
+  },
+  "skills": {
+    "overline": "Expertise",
+    "title": "Technical Skills",
+    "description": "Binary approach to skills - production-ready or not listed. No fluff, just facts.",
+    "learning": "Always learning, always building. Currently exploring",
+    "webassembly": "WebAssembly",
+    "edge": "Edge Computing",
+    "and": "and"
+  },
+  "terminal": {
+    "overline": "Automation",
+    "title": "CLI & DevOps",
+    "description": "Streamlined workflows with powerful command-line tools and automation scripts.",
+    "development": "Development",
+    "deployment": "Deployment",
+    "devItems": [
+      "Custom build systems with Bun & Vite",
+      "Automated testing suites",
+      "Database migration tools",
+      "API documentation generators"
+    ],
+    "deployItems": [
+      "Docker containerization",
+      "Kubernetes orchestration",
+      "CI/CD pipeline automation",
+      "Server monitoring scripts"
+    ]
+  },
+  "testimonials": {
+    "overline": "Testimonials",
+    "title": "What people say",
+    "description": "Feedback from colleagues and clients I've had the pleasure to work with."
+  },
+  "contact": {
+    "overline": "Contact",
+    "title": "Let's build",
+    "titleHighlight": "something great",
+    "description": "Whether you have a project in mind or just want to explore opportunities, I'd love to hear from you.",
+    "email": "Email",
+    "quickChat": "Quick Chat",
+    "available": "Available 9-5 CET",
+    "responseTime": "Usually responds within 24 hours"
+  },
+  "footer": {
+    "tagline": "Designed & built with care"
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "metadata": {
+    "title": "Gabriel Halus - Développeur Fullstack & Architecte Systèmes",
+    "description": "Développeur fullstack spécialisé en TypeScript, React, Next.js, Rust et technologies web modernes."
+  },
+  "nav": {
+    "home": "Accueil",
+    "projects": "Projets",
+    "skills": "Compétences",
+    "contact": "Contact"
+  },
+  "hero": {
+    "available": "Disponible pour de nouveaux projets",
+    "description": "Création de logiciels performants et fiables avec une expertise en TypeScript, React, Node.js et Rust. Transformer des défis complexes en solutions élégantes.",
+    "viewWork": "Voir mes projets",
+    "getInTouch": "Me contacter",
+    "yearsExp": "Années d'expérience",
+    "projectsDelivered": "Projets livrés",
+    "coffeeConsumed": "Cafés consommés",
+    "scroll": "Défiler"
+  },
+  "roles": {
+    "fullstack": "Développeur Fullstack",
+    "architect": "Architecte Systèmes",
+    "oss": "Passionné OSS"
+  },
+  "clients": {
+    "title": "Ils m'ont fait confiance"
+  },
+  "projects": {
+    "overline": "Travaux sélectionnés",
+    "title": "Projets phares",
+    "description": "Une sélection mettant en valeur mon expertise en développement full-stack, architecture système et optimisation des performances.",
+    "featured": "À la une",
+    "code": "Code",
+    "visit": "Visiter",
+    "demo": "Démo",
+    "anonymizedNotice": "Détails du projet anonymisés en raison d'un NDA",
+    "scrollHint": "Glissez ou faites défiler horizontalement pour explorer plus de projets"
+  },
+  "skills": {
+    "overline": "Expertise",
+    "title": "Compétences techniques",
+    "description": "Approche binaire des compétences - prêt pour la production ou non listé. Pas de superflu, que des faits.",
+    "learning": "Toujours en apprentissage, toujours en construction. Actuellement j'explore",
+    "webassembly": "WebAssembly",
+    "edge": "Edge Computing",
+    "and": "et"
+  },
+  "terminal": {
+    "overline": "Automatisation",
+    "title": "CLI & DevOps",
+    "description": "Workflows optimisés avec des outils en ligne de commande puissants et des scripts d'automatisation.",
+    "development": "Développement",
+    "deployment": "Déploiement",
+    "devItems": [
+      "Systèmes de build avec Bun & Vite",
+      "Suites de tests automatisés",
+      "Outils de migration de base de données",
+      "Générateurs de documentation API"
+    ],
+    "deployItems": [
+      "Conteneurisation Docker",
+      "Orchestration Kubernetes",
+      "Automatisation CI/CD",
+      "Scripts de monitoring serveur"
+    ]
+  },
+  "testimonials": {
+    "overline": "Témoignages",
+    "title": "Ce qu'ils disent",
+    "description": "Retours de collègues et clients avec qui j'ai eu le plaisir de travailler."
+  },
+  "contact": {
+    "overline": "Contact",
+    "title": "Construisons",
+    "titleHighlight": "quelque chose de grand",
+    "description": "Que vous ayez un projet en tête ou que vous souhaitiez simplement explorer des opportunités, j'adorerais vous entendre.",
+    "email": "Email",
+    "quickChat": "Discussion rapide",
+    "available": "Disponible 9h-17h CET",
+    "responseTime": "Répond généralement sous 24 heures"
+  },
+  "footer": {
+    "tagline": "Conçu & développé avec soin"
+  }
+}

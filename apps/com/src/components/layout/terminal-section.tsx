@@ -1,69 +1,59 @@
 "use client";
 
 import { Play, Square, Terminal } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useCallback, useEffect, useState } from "react";
-
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const commands = [
   {
     command: "npm create next-app@latest",
-    output:
-      "Creating a new Next.js app with TypeScript and Tailwind CSS...\n✓ Project initialized successfully",
+    output: "Creating a new Next.js app...\n✓ Project initialized successfully",
   },
   {
     command: "docker-compose up -d",
-    output:
-      "Starting services...\n✓ PostgreSQL container started\n✓ Redis container started\n✓ Application ready on port 3000",
+    output: "Starting services...\n✓ PostgreSQL started\n✓ Redis started\n✓ App ready",
   },
   {
     command: "cargo build --release",
-    output:
-      "Compiling Rust application...\n✓ Optimized build completed\n✓ Binary size: 2.4MB",
+    output: "Compiling Rust application...\n✓ Optimized build completed",
   },
   {
     command: "kubectl apply -f deployment.yaml",
-    output:
-      "Deploying to Kubernetes cluster...\n✓ Pods: 3/3 ready\n✓ Service exposed on port 80",
+    output: "Deploying to cluster...\n✓ Pods: 3/3 ready",
   },
 ];
 
 export function TerminalSection() {
+  const t = useTranslations("terminal");
+  const devItems = t.raw("devItems") as string[];
+  const deployItems = t.raw("deployItems") as string[];
+
   const [currentCommand, setCurrentCommand] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
   const [output, setOutput] = useState("");
 
   const runCommand = useCallback(async () => {
-    if (isRunning)
-      return;
+    if (isRunning) return;
 
     setIsRunning(true);
     setOutput("");
 
     const command = commands[currentCommand];
 
-    // Simulate typing the command
     for (let i = 0; i <= command.command.length; i++) {
-      await new Promise(resolve => setTimeout(resolve, 50));
+      await new Promise(resolve => setTimeout(resolve, 40));
       setOutput(
-        `$ ${command.command.substring(0, i)}${
-          i < command.command.length ? "_" : ""
-        }`,
+        `$ ${command.command.substring(0, i)}${i < command.command.length ? "█" : ""}`
       );
     }
 
-    await new Promise(resolve => setTimeout(resolve, 500));
-
-    // Show the output
+    await new Promise(resolve => setTimeout(resolve, 400));
     setOutput(`$ ${command.command}\n${command.output}`);
-
     setIsRunning(false);
 
-    // Auto-advance to next command
     setTimeout(() => {
       setCurrentCommand(prev => (prev + 1) % commands.length);
-    }, 2000);
+    }, 2500);
   }, [currentCommand, isRunning]);
 
   useEffect(() => {
@@ -71,92 +61,83 @@ export function TerminalSection() {
       if (!isRunning) {
         runCommand();
       }
-    }, 4000);
+    }, 5000);
 
     return () => clearInterval(interval);
   }, [currentCommand, isRunning, runCommand]);
 
   return (
-    <section className="py-16">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-2xl font-bold mb-3 text-black dark:text-white">
-            CLI Tools & Automation
-          </h2>
-          <p className="text-base text-gray-600 dark:text-gray-400 max-w-lg mx-auto">
-            Streamlined development workflows with powerful command-line tools
-            and automation scripts.
+    <section className="section-padding">
+      <div className="container-wide">
+        {/* Header */}
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16">
+          <div>
+            <span className="overline mb-4 block">{t("overline")}</span>
+            <h2 className="text-[var(--primary)]">{t("title")}</h2>
+          </div>
+          <p className="text-[var(--secondary)] max-w-md text-lg">
+            {t("description")}
           </p>
         </div>
 
-        <div className="max-w-3xl mx-auto">
-          <Card className="bg-black border-0 text-green-400 font-mono card-radius animate-slide-up hover:shadow-2xl transition-all duration-500">
-            <CardHeader className="pb-2">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <Terminal className="h-4 w-4 animate-pulse-glow" />
-                  <CardTitle className="text-green-400 text-sm">
-                    gabriel@dev-machine:~
-                  </CardTitle>
+        {/* Terminal */}
+        <div className="max-w-4xl mx-auto">
+          <div className="rounded-[var(--radius-card)] border border-[var(--border-subtle)] bg-[var(--card-background)] overflow-hidden shadow-[var(--shadow-md)]">
+            {/* Terminal header */}
+            <div className="flex items-center justify-between px-4 py-3 bg-[var(--highlight)] border-b border-[var(--border-subtle)]">
+              <div className="flex items-center gap-3">
+                <div className="flex gap-1.5">
+                  <div className="w-3 h-3 rounded-full bg-[#ff5f57]/80" />
+                  <div className="w-3 h-3 rounded-full bg-[#febc2e]/80" />
+                  <div className="w-3 h-3 rounded-full bg-[#28c840]/80" />
                 </div>
-                <div className="flex items-center gap-2">
-                  <div className="flex gap-1">
-                    <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
-                    <div className="w-2 h-2 bg-yellow-500 rounded-full animate-pulse animate-stagger-1"></div>
-                    <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse animate-stagger-2"></div>
-                  </div>
-                  <Button
-                    size="sm"
-                    variant="ghost"
-                    onClick={runCommand}
-                    disabled={isRunning}
-                    className="text-green-400 hover:text-green-300 hover:bg-green-400/10 h-6 w-6 p-0 transition-all duration-300 hover:scale-110"
-                  >
-                    {isRunning
-                      ? (
-                          <Square className="h-3 w-3" />
-                        )
-                      : (
-                          <Play className="h-3 w-3" />
-                        )}
-                  </Button>
+                <div className="flex items-center gap-2 text-[var(--secondary)] text-sm font-mono">
+                  <Terminal className="w-4 h-4" />
+                  gabriel@dev ~ bash
                 </div>
               </div>
-            </CardHeader>
+              <button
+                onClick={runCommand}
+                disabled={isRunning}
+                className="p-1.5 text-[var(--secondary)] hover:text-[var(--primary)] transition-colors disabled:opacity-50 cursor-pointer"
+              >
+                {isRunning ? <Square className="w-4 h-4" /> : <Play className="w-4 h-4" />}
+              </button>
+            </div>
 
-            <CardContent className="space-y-3">
-              <div className="bg-black/50 p-3 rounded-lg min-h-[120px] transition-all duration-300">
-                <pre className="text-xs leading-relaxed whitespace-pre-wrap">
-                  {output || "$ Ready to execute commands..."}
-                </pre>
-              </div>
+            {/* Terminal content */}
+            <div className="p-6 font-mono text-sm bg-[var(--background)]">
+              <pre className="text-[var(--accent-purple)] leading-relaxed whitespace-pre-wrap min-h-[100px]">
+                {output || <span className="typing-cursor text-[var(--secondary)]">$ Ready...</span>}
+              </pre>
+            </div>
+          </div>
+        </div>
 
-              <div className="grid md:grid-cols-2 gap-3 animate-fade-in">
-                <div className="space-y-1 animate-slide-in-left">
-                  <h4 className="text-white font-medium text-sm">
-                    Development Tools
-                  </h4>
-                  <ul className="text-xs space-y-1 text-gray-300">
-                    <li>• Custom build systems with Bun & Vite</li>
-                    <li>• Automated testing suites</li>
-                    <li>• Database migration tools</li>
-                    <li>• API documentation generators</li>
-                  </ul>
-                </div>
-                <div className="space-y-1 animate-slide-in-right">
-                  <h4 className="text-white font-medium text-sm">
-                    Deployment & Ops
-                  </h4>
-                  <ul className="text-xs space-y-1 text-gray-300">
-                    <li>• Docker containerization</li>
-                    <li>• Kubernetes orchestration</li>
-                    <li>• CI/CD pipeline automation</li>
-                    <li>• Server monitoring scripts</li>
-                  </ul>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+        {/* Tools grid */}
+        <div className="grid md:grid-cols-2 gap-8 mt-12 max-w-4xl mx-auto">
+          <div className="space-y-4">
+            <h4 className="text-[var(--primary)] font-medium">{t("development")}</h4>
+            <ul className="space-y-2">
+              {devItems.map((item) => (
+                <li key={item} className="flex items-center gap-3 text-[var(--secondary)] text-sm">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent-purple)]" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="space-y-4">
+            <h4 className="text-[var(--primary)] font-medium">{t("deployment")}</h4>
+            <ul className="space-y-2">
+              {deployItems.map((item) => (
+                <li key={item} className="flex items-center gap-3 text-[var(--secondary)] text-sm">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent-purple)]" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
     </section>

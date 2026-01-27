@@ -1,92 +1,116 @@
 "use client";
 
 import { Cloud, Code, Database, Server, Shield, Zap } from "lucide-react";
-
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { useTranslations } from "next-intl";
 
 const skillCategories = [
   {
-    title: "Frontend Frameworks",
+    title: "Frontend",
     icon: Code,
     skills: ["React", "Next.js", "Tailwind CSS", "Three.js"],
+    featured: true,
   },
   {
-    title: "Backend Languages",
+    title: "Backend",
     icon: Server,
     skills: ["TypeScript", "Rust", "Java", "Go"],
+    featured: true,
   },
   {
-    title: "Databases & Caches",
+    title: "Databases",
     icon: Database,
     skills: ["MongoDB", "PostgreSQL", "MySQL", "Redis", "Elasticsearch"],
+    featured: false,
   },
   {
-    title: "DevOps & Cloud",
+    title: "DevOps",
     icon: Cloud,
     skills: ["Docker", "GitHub Actions", "AWS"],
+    featured: false,
   },
   {
-    title: "Security & IAM",
+    title: "Security",
     icon: Shield,
     skills: ["OAuth 2.0", "JWT", "ABAC", "RBAC", "Cryptography"],
+    featured: false,
   },
   {
-    title: "Build Tools & Runtime",
+    title: "Tooling",
     icon: Zap,
     skills: ["Bun", "Node.js", "Vite", "Webpack", "ESBuild", "Turborepo"],
+    featured: false,
   },
 ];
 
 export function SkillsSection() {
+  const t = useTranslations("skills");
+
   return (
-    <section id="skills" className="py-16 bg-gray-50 dark:bg-gray-900">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-2xl font-bold mb-3 text-black dark:text-white">
-            Technical Skills
-          </h2>
-          <p className="text-base text-gray-600 dark:text-gray-400 max-w-lg mx-auto">
-            Binary approach to skills - I either know it well enough to build
-            production systems, or I don&apos;t list it here. No fluff, just
-            facts.
+    <section id="skills" className="section-padding bg-[var(--background-secondary)]">
+      <div className="container-wide">
+        {/* Header */}
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16">
+          <div>
+            <span className="overline mb-4 block">{t("overline")}</span>
+            <h2 className="text-[var(--primary)]">{t("title")}</h2>
+          </div>
+          <p className="text-[var(--secondary)] max-w-md text-lg">
+            {t("description")}
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl mx-auto">
-          {skillCategories.map((category, index) => (
-            <Card
-              key={index}
-              className={`card-shadow card-radius bg-white dark:bg-gray-800 border-0 transition-card hover:shadow-lg animate-fade-in animate-stagger-${
-                (index % 6) + 1
-              } hover:scale-105`}
-            >
-              <CardHeader className="pb-3">
-                <div className="flex items-center gap-2">
-                  <div className="p-2 bg-gray-100 dark:bg-gray-700 rounded-lg transition-all duration-300 hover:bg-purple-100 dark:hover:bg-purple-900">
-                    <category.icon className="h-4 w-4 text-purple-500" />
-                  </div>
-                  <CardTitle className="text-base font-medium">
-                    {category.title}
-                  </CardTitle>
-                </div>
-              </CardHeader>
+        {/* Bento Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          {skillCategories.map((category, index) => {
+            const isLarge = category.featured;
+            const gridClass = isLarge
+              ? "lg:col-span-2 lg:row-span-2"
+              : "";
 
-              <CardContent>
-                <div className="flex flex-wrap gap-2">
-                  {category.skills.map((skill, skillIndex) => (
-                    <Badge
-                      key={skillIndex}
-                      variant="secondary"
-                      className="text-xs bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 border-0"
-                    >
-                      {skill}
-                    </Badge>
-                  ))}
+            return (
+              <div
+                key={category.title}
+                className={`${gridClass} p-6 group rounded-[var(--radius-card)] border border-[var(--border-subtle)] bg-[var(--card-background)]/50 backdrop-blur-sm hover:bg-[var(--card-background)] hover:border-[var(--accent-purple)]/20 hover:shadow-[var(--shadow-md)] transition-all duration-300 min-h-[160px]`}
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                {/* Content */}
+                <div className="h-full flex flex-col">
+                  {/* Icon and title */}
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="p-2 rounded-xl bg-[var(--highlight)] group-hover:bg-[var(--accent-purple)]/10 transition-colors">
+                      <category.icon className="w-5 h-5 text-[var(--secondary)] group-hover:text-[var(--accent-purple)] transition-colors" />
+                    </div>
+                    <h3 className={`font-medium text-[var(--primary)] ${isLarge ? "text-xl" : "text-lg"}`}>
+                      {category.title}
+                    </h3>
+                  </div>
+
+                  {/* Skills */}
+                  <div className="flex flex-wrap gap-2 mt-auto">
+                    {category.skills.map((skill) => (
+                      <span
+                        key={skill}
+                        className={`text-[var(--secondary)] bg-[var(--highlight)]/80 group-hover:bg-[var(--highlight)] px-3 py-1.5 rounded-lg transition-colors ${
+                          isLarge ? "text-sm" : "text-xs"
+                        }`}
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </CardContent>
-            </Card>
-          ))}
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Additional note */}
+        <div className="mt-12 text-center">
+          <p className="text-sm text-[var(--secondary)]">
+            {t("learning")}{" "}
+            <span className="text-[var(--accent-purple)] font-medium">{t("webassembly")}</span> {t("and")}{" "}
+            <span className="text-[var(--accent-purple)] font-medium">{t("edge")}</span>.
+          </p>
         </div>
       </div>
     </section>

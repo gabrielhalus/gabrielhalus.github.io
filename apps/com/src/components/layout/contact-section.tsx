@@ -1,137 +1,123 @@
 "use client";
 
-import { Github, Linkedin, Mail, MessageCircle } from "lucide-react";
+import { ArrowUpRight, Github, Linkedin, Mail, MessageCircle } from "lucide-react";
+import { useTranslations } from "next-intl";
 
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { trackEvent } from "@/lib/umami";
 
 export function ContactSection() {
-  return (
-    <section id="contact" className="py-16 bg-gray-50 dark:bg-gray-900">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-2xl font-bold mb-3 text-black dark:text-white">
-            Get In Touch
-          </h2>
-          <p className="text-base text-gray-600 dark:text-gray-400 max-w-lg mx-auto">
-            Let&lsquo;s discuss your next project or explore opportunities to
-            collaborate.
-          </p>
-        </div>
+  const t = useTranslations("contact");
 
-        <div className="max-w-2xl mx-auto">
-          {/* Contact Methods Grid */}
-          <div className="grid md:grid-cols-2 gap-4 mb-8">
+  return (
+    <section id="contact" className="section-padding bg-[var(--background-secondary)]">
+      <div className="container-wide">
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
+          {/* Left side - Text */}
+          <div>
+            <span className="overline mb-4 block">{t("overline")}</span>
+            <h2 className="text-[var(--primary)] mb-6">
+              {t("title")}<br />
+              <span className="italic text-[var(--secondary)]">{t("titleHighlight")}</span>
+            </h2>
+            <p className="text-[var(--secondary)] text-lg max-w-md mb-8">
+              {t("description")}
+            </p>
+
+            {/* Social links */}
+            <div className="flex gap-4">
+              <a
+                href="https://github.com/gabrielhalus"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() =>
+                  trackEvent("external_link_click", {
+                    link: "github",
+                    location: "contact_section",
+                  })
+                }
+                className="group flex items-center gap-2 btn-ghost"
+              >
+                <Github className="w-4 h-4" />
+                GitHub
+                <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+              </a>
+              <a
+                href="https://linkedin.com/in/gabrielhalus"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() =>
+                  trackEvent("external_link_click", {
+                    link: "linkedin",
+                    location: "contact_section",
+                  })
+                }
+                className="group flex items-center gap-2 btn-ghost"
+              >
+                <Linkedin className="w-4 h-4" />
+                LinkedIn
+                <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+              </a>
+            </div>
+          </div>
+
+          {/* Right side - Contact cards */}
+          <div className="space-y-4">
+            {/* Email card */}
             <a
-              href="mailto:gabriel@example.com"
-              className="block"
-              tabIndex={-1}
+              href="mailto:gabrielhalus@gmail.com"
               onClick={() =>
                 trackEvent("contact_click", {
                   method: "email",
                   location: "contact_section",
                 })
               }
+              className="group block card-elevated p-6 hover-glow"
             >
-              <Card className="card-shadow card-radius bg-white dark:bg-gray-800 border-0 transition-card hover:shadow-lg cursor-pointer animate-slide-up animate-stagger-1 hover:scale-105 h-full">
-                <CardContent className="p-4 text-center">
-                  <div className="p-3 bg-purple-100 dark:bg-purple-900 rounded-lg w-fit mx-auto mb-3 transition-all duration-300 hover:scale-110">
-                    <Mail className="h-5 w-5 text-purple-500" />
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-4">
+                  <div className="p-3 rounded-2xl bg-[var(--accent-purple)]/10 group-hover:bg-[var(--accent-purple)]/20 transition-colors">
+                    <Mail className="w-6 h-6 text-[var(--accent-purple)]" />
                   </div>
-                  <h3 className="font-medium text-sm mb-1">Email</h3>
-                  <p className="caption">gabrielhalus@gmail.com</p>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="mt-2 text-xs h-7 pointer-events-none opacity-70"
-                    tabIndex={-1}
-                    aria-hidden="true"
-                  >
-                    Send Email
-                  </Button>
-                </CardContent>
-              </Card>
+                  <div>
+                    <h3 className="font-medium text-[var(--primary)] mb-1">{t("email")}</h3>
+                    <p className="text-[var(--secondary)] text-sm">gabrielhalus@gmail.com</p>
+                  </div>
+                </div>
+                <ArrowUpRight className="w-5 h-5 text-[var(--secondary)] group-hover:text-[var(--primary)] transition-colors" />
+              </div>
             </a>
 
+            {/* WhatsApp card */}
             <a
               href="https://wa.me/789038887?text=Hello%20Gabriel,%20I%20would%20like%20to%20discuss%20a%20project%20with%20you."
               target="_blank"
               rel="noopener noreferrer"
-              className="block"
-              tabIndex={-1}
               onClick={() =>
                 trackEvent("contact_click", {
                   method: "whatsapp",
                   location: "contact_section",
                 })
               }
+              className="group block card-elevated p-6 hover-glow"
             >
-              <Card className="card-shadow card-radius bg-white dark:bg-gray-800 border-0 transition-card hover:shadow-lg cursor-pointer animate-slide-up animate-stagger-3 hover:scale-105 h-full">
-                <CardContent className="p-4 text-center">
-                  <div className="p-3 bg-purple-100 dark:bg-purple-900 rounded-lg w-fit mx-auto mb-3 transition-all duration-300 hover:scale-110">
-                    <MessageCircle className="h-5 w-5 text-purple-500" />
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-4">
+                  <div className="p-3 rounded-2xl bg-[var(--accent-purple)]/10 group-hover:bg-[var(--accent-purple)]/20 transition-colors">
+                    <MessageCircle className="w-6 h-6 text-[var(--accent-purple)]" />
                   </div>
-                  <h3 className="font-medium text-sm mb-1">Quick Chat</h3>
-                  <p className="caption">Available 9-5 CET</p>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="mt-2 text-xs h-7 pointer-events-none opacity-70"
-                    tabIndex={-1}
-                    aria-hidden="true"
-                  >
-                    Start Chat
-                  </Button>
-                </CardContent>
-              </Card>
+                  <div>
+                    <h3 className="font-medium text-[var(--primary)] mb-1">{t("quickChat")}</h3>
+                    <p className="text-[var(--secondary)] text-sm">{t("available")}</p>
+                  </div>
+                </div>
+                <ArrowUpRight className="w-5 h-5 text-[var(--secondary)] group-hover:text-[var(--primary)] transition-colors" />
+              </div>
             </a>
-          </div>
 
-          {/* Social Links */}
-          <div className="mt-8 text-center">
-            <p className="caption mb-4">Or connect with me on</p>
-            <div className="flex justify-center gap-3">
-              <Button
-                className="bg-black dark:bg-white text-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-200 button-radius px-6 py-3 transition-all duration-300 hover:scale-105 hover:shadow-lg"
-                asChild
-              >
-                <a
-                  href="https://github.com/gabrielhalus"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() =>
-                    trackEvent("external_link_click", {
-                      link: "github",
-                      location: "contact_section",
-                    })
-                  }
-                >
-                  <Github className="h-4 w-4 mr-2" />
-                  GitHub
-                </a>
-              </Button>
-              <Button
-                variant="outline"
-                className="border-gray-300 dark:border-gray-600 button-radius px-6 py-3 transition-all duration-300 hover:scale-105 hover:shadow-lg"
-                asChild
-              >
-                <a
-                  href="https://linkedin.com/in/gabrielhalus"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() =>
-                    trackEvent("external_link_click", {
-                      link: "linkedin",
-                      location: "contact_section",
-                    })
-                  }
-                >
-                  <Linkedin className="h-4 w-4 mr-2" />
-                  LinkedIn
-                </a>
-              </Button>
-            </div>
+            {/* Response time note */}
+            <p className="text-xs text-[var(--secondary)] text-center pt-4">
+              {t("responseTime")}
+            </p>
           </div>
         </div>
       </div>

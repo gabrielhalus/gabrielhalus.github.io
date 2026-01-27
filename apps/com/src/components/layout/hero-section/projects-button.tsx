@@ -1,11 +1,13 @@
 "use client";
 
-import React from "react";
+import { ArrowRight } from "lucide-react";
+import { useTranslations } from "next-intl";
 
-import { Button } from "@/components/ui/button";
 import { trackEvent } from "@/lib/umami";
 
 export function ProjectsButton() {
+  const t = useTranslations("hero");
+
   const handleClick = () => {
     trackEvent("button_click", {
       button: "projects",
@@ -17,11 +19,12 @@ export function ProjectsButton() {
   };
 
   return (
-    <Button
+    <button
       onClick={handleClick}
-      className="bg-black dark:bg-white text-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-200 button-radius px-6 py-3 transition-all duration-300 hover:scale-105 hover:shadow-lg"
+      className="group btn-primary inline-flex items-center gap-3 cursor-pointer"
     >
-      View My Work
-    </Button>
+      {t("viewWork")}
+      <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+    </button>
   );
 }
