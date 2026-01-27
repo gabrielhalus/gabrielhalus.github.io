@@ -16,7 +16,8 @@ export function ContactSection() {
           <div>
             <span className="overline mb-4 block">{t("overline")}</span>
             <h2 className="text-[var(--primary)] mb-6">
-              {t("title")}<br />
+              {t("title")}
+              <br />
               <span className="italic text-[var(--secondary)]">{t("titleHighlight")}</span>
             </h2>
             <p className="text-[var(--secondary)] text-lg max-w-md mb-8">
@@ -33,8 +34,7 @@ export function ContactSection() {
                   trackEvent("external_link_click", {
                     link: "github",
                     location: "contact_section",
-                  })
-                }
+                  })}
                 className="group flex items-center gap-2 btn-ghost"
               >
                 <Github className="w-4 h-4" />
@@ -49,8 +49,7 @@ export function ContactSection() {
                   trackEvent("external_link_click", {
                     link: "linkedin",
                     location: "contact_section",
-                  })
-                }
+                  })}
                 className="group flex items-center gap-2 btn-ghost"
               >
                 <Linkedin className="w-4 h-4" />
@@ -69,8 +68,7 @@ export function ContactSection() {
                 trackEvent("contact_click", {
                   method: "email",
                   location: "contact_section",
-                })
-              }
+                })}
               className="group block card-elevated p-6 hover-glow"
             >
               <div className="flex items-center justify-between">
@@ -89,15 +87,14 @@ export function ContactSection() {
 
             {/* WhatsApp card */}
             <a
-              href="https://wa.me/789038887?text=Hello%20Gabriel,%20I%20would%20like%20to%20discuss%20a%20project%20with%20you."
+              href="https://wa.me/789038887"
               target="_blank"
               rel="noopener noreferrer"
               onClick={() =>
                 trackEvent("contact_click", {
                   method: "whatsapp",
                   location: "contact_section",
-                })
-              }
+                })}
               className="group block card-elevated p-6 hover-glow"
             >
               <div className="flex items-center justify-between">
