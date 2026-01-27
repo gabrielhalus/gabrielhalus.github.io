@@ -1,8 +1,9 @@
 import { setRequestLocale } from "next-intl/server";
 
 import type { Locale } from "@/i18n/config";
-import { getClients, getProjects, getTestimonials } from "@/lib/content";
+import { getBlogPosts, getClients, getProjects, getTestimonials } from "@/lib/content";
 
+import { BlogSection } from "@/components/layout/blog-section";
 import { ClientsSection } from "@/components/layout/clients-section";
 import { ContactSection } from "@/components/layout/contact-section";
 import { Footer } from "@/components/layout/footer";
@@ -25,6 +26,7 @@ export default async function Home({
   const projects = getProjects(locale);
   const testimonials = getTestimonials(locale);
   const clients = getClients();
+  const blogPosts = getBlogPosts(locale);
 
   return (
     <div className="min-h-screen bg-[var(--background)]">
@@ -36,6 +38,7 @@ export default async function Home({
         <SkillsSection />
         <TerminalSection />
         <TestimonialsSection testimonials={testimonials} />
+        <BlogSection posts={blogPosts} />
         <ContactSection />
       </main>
       <Footer />

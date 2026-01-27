@@ -40,6 +40,19 @@ export interface Client {
   order: number;
 }
 
+export interface BlogPost {
+  slug: string;
+  title: string;
+  excerpt: string;
+  content: string;
+  date: string;
+  readingTime: string;
+  category: string;
+  tags: string[];
+  pinned?: boolean;
+  order: number;
+}
+
 // Generic markdown loader
 function getMarkdownFiles(directory: string): string[] {
   if (!fs.existsSync(directory)) {
@@ -57,6 +70,20 @@ function parseMarkdownFile<T>(filePath: string): T & { slug: string } {
     slug,
     ...data,
   } as T & { slug: string };
+}
+
+function parseMarkdownFileWithContent<T>(
+  filePath: string
+): T & { slug: string; content: string } {
+  const fileContents = fs.readFileSync(filePath, "utf8");
+  const { data, content } = matter(fileContents);
+  const slug = path.basename(filePath, ".md");
+
+  return {
+    slug,
+    content,
+    ...data,
+  } as T & { slug: string; content: string };
 }
 
 // Projects
@@ -100,4 +127,35 @@ export function getClients(): Client[] {
   );
 
   return clients.sort((a, b) => a.order - b.order);
+}
+
+// Blog posts
+export function getBlogPosts(locale: Locale): BlogPost[] {
+  const blogDir = path.join(contentDirectory, "blog", locale);
+  const files = getMarkdownFiles(blogDir);
+
+  const posts = files.map((file) =>
+    parseMarkdownFileWithContent<Omit<BlogPost, "slug" | "content">>(
+      path.join(blogDir, file)
+    )
+  );
+
+  return posts.sort((a, b) => {
+    // Pinned first, then by date (newest first)
+    if (a.pinned && !b.pinned) return -1;
+    if (!a.pinned && b.pinned) return 1;
+    return new Date(b.date).getTime() - new Date(a.date).getTime();
+  });
+}
+
+export function getBlogPost(locale: Locale, slug: string): BlogPost | null {
+  const filePath = path.join(contentDirectory, "blog", locale, `${slug}.md`);
+
+  if (!fs.existsSync(filePath)) {
+    return null;
+  }
+
+  return parseMarkdownFileWithContent<Omit<BlogPost, "slug" | "content">>(
+    filePath
+  );
 }

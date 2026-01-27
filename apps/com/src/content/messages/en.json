@@ -7,6 +7,7 @@
     "home": "Home",
     "projects": "Projects",
     "skills": "Skills",
+    "blog": "Blog",
     "contact": "Contact"
   },
   "hero": {
@@ -83,5 +84,26 @@
   },
   "footer": {
     "tagline": "Designed & built with care"
+  },
+  "blog": {
+    "overline": "Insights",
+    "title": "From the Blog",
+    "viewAll": "View all articles",
+    "viewAllPosts": "Explore all articles",
+    "postsCount": "{count} articles published",
+    "pinned": "Pinned",
+    "pageTitle": "Blog",
+    "pageDescription": "Thoughts on software engineering, developer tools, and building products that matter.",
+    "backHome": "Back to home",
+    "backToBlog": "Back to blog",
+    "allPosts": "All",
+    "pinnedArticles": "Pinned Articles",
+    "latestArticles": "Latest Articles",
+    "allArticles": "All Articles",
+    "noPosts": "No articles yet",
+    "noPostsDescription": "Check back soon for new content.",
+    "share": "Share",
+    "previousArticle": "Previous",
+    "nextArticle": "Next"
   }
 }

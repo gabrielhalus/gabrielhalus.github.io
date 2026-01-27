@@ -9,7 +9,7 @@ import { localeNames } from "@/i18n/config";
 import { usePathname, useRouter } from "@/i18n/routing";
 import { trackEvent } from "@/lib/umami";
 
-const navLinkIds = ["home", "projects", "skills", "contact"] as const;
+const navLinkIds = ["home", "projects", "skills", "blog", "contact"] as const;
 
 export function Navigation() {
   const t = useTranslations("nav");

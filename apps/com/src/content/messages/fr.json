@@ -7,6 +7,7 @@
     "home": "Accueil",
     "projects": "Projets",
     "skills": "Compétences",
+    "blog": "Blog",
     "contact": "Contact"
   },
   "hero": {
@@ -83,5 +84,26 @@
   },
   "footer": {
     "tagline": "Conçu & développé avec soin"
+  },
+  "blog": {
+    "overline": "Réflexions",
+    "title": "Du Blog",
+    "viewAll": "Voir tous les articles",
+    "viewAllPosts": "Explorer tous les articles",
+    "postsCount": "{count} articles publiés",
+    "pinned": "Épinglé",
+    "pageTitle": "Blog",
+    "pageDescription": "Réflexions sur l'ingénierie logicielle, les outils de développement et la création de produits qui comptent.",
+    "backHome": "Retour à l'accueil",
+    "backToBlog": "Retour au blog",
+    "allPosts": "Tous",
+    "pinnedArticles": "Articles épinglés",
+    "latestArticles": "Derniers articles",
+    "allArticles": "Tous les articles",
+    "noPosts": "Aucun article pour le moment",
+    "noPostsDescription": "Revenez bientôt pour du nouveau contenu.",
+    "share": "Partager",
+    "previousArticle": "Précédent",
+    "nextArticle": "Suivant"
   }
 }
