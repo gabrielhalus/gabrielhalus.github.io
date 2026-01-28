@@ -1,6 +1,6 @@
 "use client";
 
-import { Github, Globe, Linkedin, Menu, X } from "lucide-react";
+import { Globe, Menu, X } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 
@@ -72,7 +72,7 @@ export function Navigation() {
     <>
       {/* Floating pill navigation (after scroll) */}
       <nav
-        className={`fixed top-6 left-1/2 -translate-x-1/2 z-50 transition-all duration-500 ${
+        className={`fixed top-6 left-1/2 -translate-x-1/2 z-40 transition-all duration-500 ${
           scrolled
             ? "opacity-100 translate-y-0"
             : "opacity-0 -translate-y-4 pointer-events-none"
@@ -105,34 +105,6 @@ export function Navigation() {
             >
               {otherLocale.toUpperCase()}
             </button>
-            <a
-              href="https://github.com/gabrielhalus"
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() =>
-                trackEvent("external_link_click", {
-                  link: "github",
-                  location: "navigation",
-                })
-              }
-              className="p-2 text-[var(--secondary)] hover:text-[var(--primary)] transition-colors rounded-full hover:bg-[var(--highlight)]"
-            >
-              <Github className="w-4 h-4" />
-            </a>
-            <a
-              href="https://linkedin.com/in/gabrielhalus"
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() =>
-                trackEvent("external_link_click", {
-                  link: "linkedin",
-                  location: "navigation",
-                })
-              }
-              className="p-2 text-[var(--secondary)] hover:text-[var(--primary)] transition-colors rounded-full hover:bg-[var(--highlight)]"
-            >
-              <Linkedin className="w-4 h-4" />
-            </a>
           </div>
 
           {/* Mobile menu button in pill */}
@@ -155,7 +127,7 @@ export function Navigation() {
           scrolled ? "opacity-0 pointer-events-none" : "opacity-100"
         }`}
       >
-        <div className="container-wide py-6 flex items-center justify-between">
+        <div className="container-wide py-10 flex items-center justify-between">
           <div className="font-display text-2xl text-[var(--primary)]">G.</div>
 
           {/* Desktop links */}
@@ -171,7 +143,7 @@ export function Navigation() {
             ))}
           </div>
 
-          {/* Language switcher & Social icons */}
+          {/* Language switcher & Mobile menu button */}
           <div className="flex items-center gap-3">
             <button
               onClick={() => switchLocale(otherLocale)}
@@ -181,34 +153,6 @@ export function Navigation() {
               <Globe className="w-4 h-4" />
               <span className="hidden sm:inline">{otherLocale.toUpperCase()}</span>
             </button>
-            <a
-              href="https://github.com/gabrielhalus"
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() =>
-                trackEvent("external_link_click", {
-                  link: "github",
-                  location: "navigation",
-                })
-              }
-              className="text-[var(--secondary)] hover:text-[var(--primary)] transition-colors"
-            >
-              <Github className="w-5 h-5" />
-            </a>
-            <a
-              href="https://linkedin.com/in/gabrielhalus"
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() =>
-                trackEvent("external_link_click", {
-                  link: "linkedin",
-                  location: "navigation",
-                })
-              }
-              className="text-[var(--secondary)] hover:text-[var(--primary)] transition-colors"
-            >
-              <Linkedin className="w-5 h-5" />
-            </a>
 
             {/* Mobile menu button */}
             <button
@@ -223,7 +167,7 @@ export function Navigation() {
 
       {/* Mobile menu overlay */}
       <div
-        className={`fixed inset-0 z-40 bg-[var(--background)] transition-all duration-500 md:hidden ${
+        className={`fixed inset-0 z-50 bg-[var(--background)] transition-all duration-500 md:hidden ${
           mobileMenuOpen
             ? "opacity-100 pointer-events-auto"
             : "opacity-0 pointer-events-none"
@@ -252,25 +196,6 @@ export function Navigation() {
             <Globe className="w-5 h-5" />
             <span>{localeNames[otherLocale]}</span>
           </button>
-
-          <div className="flex items-center gap-6 mt-4">
-            <a
-              href="https://github.com/gabrielhalus"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[var(--secondary)] hover:text-[var(--primary)] transition-colors"
-            >
-              <Github className="w-6 h-6" />
-            </a>
-            <a
-              href="https://linkedin.com/in/gabrielhalus"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[var(--secondary)] hover:text-[var(--primary)] transition-colors"
-            >
-              <Linkedin className="w-6 h-6" />
-            </a>
-          </div>
 
           <button
             onClick={() => setMobileMenuOpen(false)}

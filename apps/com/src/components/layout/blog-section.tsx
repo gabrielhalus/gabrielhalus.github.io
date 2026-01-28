@@ -61,65 +61,79 @@ export function BlogSection({ posts }: BlogSectionProps) {
                 })}
               className="block h-full"
             >
-              <div className="relative h-full min-h-[400px] lg:min-h-[520px] card-elevated p-8 lg:p-10 flex flex-col overflow-hidden transition-all duration-500 hover:shadow-[var(--shadow-glow)]">
-                {/* Decorative corner accent */}
-                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-[var(--accent-purple)]/10 to-transparent" />
-
-                {/* Category & pinned badge */}
-                <div className="flex items-center gap-3 mb-auto">
-                  {featuredPost.pinned && (
-                    <span className="pill pill-accent text-xs">
-                      <Pin className="w-3 h-3" />
-                      {t("pinned")}
-                    </span>
-                  )}
-                  <span className="pill text-xs">{featuredPost.category}</span>
-                </div>
-
-                {/* Content */}
-                <div className="mt-auto">
-                  {/* Meta */}
-                  <div className="flex items-center gap-4 mb-4 text-xs text-[var(--secondary)]">
-                    <span className="flex items-center gap-1.5">
-                      <Calendar className="w-3.5 h-3.5" />
-                      {new Date(featuredPost.date).toLocaleDateString("en-US", {
-                        month: "short",
-                        day: "numeric",
-                        year: "numeric",
-                      })}
-                    </span>
-                    <span className="flex items-center gap-1.5">
-                      <Clock className="w-3.5 h-3.5" />
-                      {featuredPost.readingTime}
-                    </span>
+              <div className="relative h-full min-h-[400px] lg:min-h-[520px] card-elevated overflow-hidden transition-all duration-500 hover:shadow-[var(--shadow-glow)] flex flex-col">
+                {/* Hero Image */}
+                {featuredPost.image && (
+                  <div className="relative h-48 lg:h-56 overflow-hidden">
+                    <img
+                      src={featuredPost.image}
+                      alt={featuredPost.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/20" />
                   </div>
+                )}
 
-                  {/* Title */}
-                  <h3 className="font-display text-3xl lg:text-4xl text-[var(--primary)] mb-4 leading-tight group-hover:text-[var(--accent-purple)] transition-colors duration-300">
-                    {featuredPost.title}
-                  </h3>
+                <div className="p-8 lg:p-10 flex flex-col flex-1 relative">
+                  {/* Decorative corner accent */}
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-[var(--accent-purple)]/10 to-transparent" />
 
-                  {/* Excerpt */}
-                  <p className="text-[var(--secondary)] text-base leading-relaxed line-clamp-3 mb-6">
-                    {featuredPost.excerpt}
-                  </p>
-
-                  {/* Tags */}
-                  <div className="flex flex-wrap gap-2">
-                    {featuredPost.tags.slice(0, 4).map(tag => (
-                      <span
-                        key={tag}
-                        className="text-xs text-[var(--secondary)] bg-[var(--highlight)] px-2.5 py-1 rounded-md"
-                      >
-                        {tag}
+                  {/* Category & pinned badge */}
+                  <div className="flex items-center gap-3 mb-auto">
+                    {featuredPost.pinned && (
+                      <span className="pill pill-accent text-xs">
+                        <Pin className="w-3 h-3" />
+                        {t("pinned")}
                       </span>
-                    ))}
+                    )}
+                    <span className="pill text-xs">{featuredPost.category}</span>
                   </div>
-                </div>
 
-                {/* Read indicator */}
-                <div className="absolute bottom-8 right-8 lg:bottom-10 lg:right-10 w-12 h-12 rounded-full bg-[var(--highlight)] flex items-center justify-center group-hover:bg-[var(--accent-purple)] group-hover:scale-110 transition-all duration-300">
-                  <ArrowRight className="w-5 h-5 text-[var(--primary)] group-hover:text-white transition-colors -rotate-45" />
+                  {/* Content */}
+                  <div className="mt-auto">
+                    {/* Meta */}
+                    <div className="flex items-center gap-4 mb-4 text-xs text-[var(--secondary)]">
+                      <span className="flex items-center gap-1.5">
+                        <Calendar className="w-3.5 h-3.5" />
+                        {new Date(featuredPost.date).toLocaleDateString("en-US", {
+                          month: "short",
+                          day: "numeric",
+                          year: "numeric",
+                        })}
+                      </span>
+                      <span className="flex items-center gap-1.5">
+                        <Clock className="w-3.5 h-3.5" />
+                        {featuredPost.readingTime}
+                      </span>
+                    </div>
+
+                    {/* Title */}
+                    <h3 className="font-display text-3xl lg:text-4xl text-[var(--primary)] mb-4 leading-tight group-hover:text-[var(--accent-purple)] transition-colors duration-300">
+                      {featuredPost.title}
+                    </h3>
+
+                    {/* Excerpt */}
+                    <p className="text-[var(--secondary)] text-base leading-relaxed line-clamp-3 mb-6">
+                      {featuredPost.excerpt}
+                    </p>
+
+                    {/* Tags */}
+                    <div className="flex flex-wrap gap-2">
+                      {featuredPost.tags.slice(0, 4).map(tag => (
+                        <span
+                          key={tag}
+                          className="text-xs text-[var(--secondary)] bg-[var(--highlight)] px-2.5 py-1 rounded-md"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Read indicator */}
+                  <div className="absolute bottom-8 right-8 lg:bottom-10 lg:right-10 w-12 h-12 rounded-full bg-[var(--highlight)] flex items-center justify-center group-hover:bg-[var(--accent-purple)] group-hover:scale-110 transition-all duration-300">
+                    <ArrowRight className="w-5 h-5 text-[var(--primary)] group-hover:text-white transition-colors -rotate-45" />
+                  </div>
                 </div>
               </div>
             </Link>
@@ -139,13 +153,24 @@ export function BlogSection({ posts }: BlogSectionProps) {
                   className="block h-full"
                 >
                   <div
-                    className="h-full card-elevated p-6 flex flex-col transition-all duration-300 hover:shadow-[var(--shadow-glow)] relative overflow-hidden"
+                    className="h-full card-elevated flex flex-col transition-all duration-300 hover:shadow-[var(--shadow-glow)] relative overflow-hidden"
                     style={{ animationDelay: `${(index + 1) * 0.1}s` }}
                   >
                     {/* Subtle gradient on hover */}
                     <div className="absolute inset-0 bg-gradient-to-br from-[var(--accent-purple)]/0 to-[var(--accent-purple)]/0 group-hover:from-[var(--accent-purple)]/[0.02] group-hover:to-transparent transition-all duration-500" />
 
-                    <div className="relative z-10">
+                    {/* Thumbnail Image */}
+                    {post.image && (
+                      <div className="relative h-32 overflow-hidden">
+                        <img
+                          src={post.image}
+                          alt={post.title}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        />
+                      </div>
+                    )}
+
+                    <div className="relative z-10 p-6 flex flex-col flex-1">
                       {/* Category & pinned */}
                       <div className="flex items-center gap-2 mb-3">
                         {post.pinned && (

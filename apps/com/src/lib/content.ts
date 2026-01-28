@@ -49,6 +49,7 @@ export interface BlogPost {
   readingTime: string;
   category: string;
   tags: string[];
+  image?: string;
   pinned?: boolean;
   order: number;
 }
