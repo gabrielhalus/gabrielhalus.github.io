@@ -2,6 +2,7 @@
 
 import { ArrowRight, Calendar, Clock, Pin, Sparkles } from "lucide-react";
 import { useTranslations } from "next-intl";
+import Image from "next/image";
 import Link from "next/link";
 
 import type { BlogPost } from "@/lib/content";
@@ -64,11 +65,12 @@ export function BlogSection({ posts }: BlogSectionProps) {
               <div className="relative h-full min-h-[400px] lg:min-h-[520px] card-elevated overflow-hidden transition-all duration-500 hover:shadow-[var(--shadow-glow)] flex flex-col">
                 {/* Hero Image */}
                 {featuredPost.image && (
-                  <div className="relative h-48 lg:h-56 overflow-hidden">
-                    <img
+                  <div className="relative h-48 lg:h-56 overflow-hidden w-full">
+                    <Image
                       src={featuredPost.image}
                       alt={featuredPost.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                     <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/20" />
                   </div>
@@ -161,11 +163,12 @@ export function BlogSection({ posts }: BlogSectionProps) {
 
                     {/* Thumbnail Image */}
                     {post.image && (
-                      <div className="relative h-32 overflow-hidden">
-                        <img
+                      <div className="relative h-32 overflow-hidden w-full">
+                        <Image
                           src={post.image}
                           alt={post.title}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                          fill
+                          className="object-cover group-hover:scale-105 transition-transform duration-500"
                         />
                       </div>
                     )}

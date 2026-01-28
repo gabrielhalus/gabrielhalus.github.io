@@ -9,6 +9,7 @@ tags:
   - Node.js
   - JavaScript
   - Performance
+image: "/blog/nodejs-to-bun/cover.svg"
 pinned: true
 order: 2
 ---

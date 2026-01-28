@@ -6,6 +6,7 @@ import {
 } from "lucide-react";
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Markdown from "react-markdown";
@@ -147,10 +148,12 @@ export default async function BlogPostPage({
         {post.image && (
           <div className="mb-12 container-narrow">
             <div className="relative w-full h-96 overflow-hidden rounded-2xl shadow-lg">
-              <img
+              <Image
                 src={post.image}
                 alt={post.title}
-                className="w-full h-full object-cover"
+                fill
+                className="object-cover"
+                priority
               />
               <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/10" />
             </div>
