@@ -65,7 +65,7 @@ export function BlogSection({ posts }: BlogSectionProps) {
               <div className="relative h-full min-h-[400px] lg:min-h-[520px] card-elevated overflow-hidden transition-all duration-500 hover:shadow-[var(--shadow-glow)] flex flex-col">
                 {/* Hero Image */}
                 {featuredPost.image && (
-                  <div className="relative h-48 lg:h-56 overflow-hidden w-full">
+                  <div className="relative h-48 lg:h-56 overflow-hidden w-full mb-6">
                     <Image
                       src={featuredPost.image}
                       alt={featuredPost.title}
@@ -163,7 +163,7 @@ export function BlogSection({ posts }: BlogSectionProps) {
 
                     {/* Thumbnail Image */}
                     {post.image && (
-                      <div className="relative h-32 overflow-hidden w-full">
+                      <div className="relative h-32 overflow-hidden w-full mb-4">
                         <Image
                           src={post.image}
                           alt={post.title}

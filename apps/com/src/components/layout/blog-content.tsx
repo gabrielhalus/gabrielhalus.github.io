@@ -131,7 +131,7 @@ export function BlogContent({
                 <article className="h-full card-elevated transition-all duration-300 hover:shadow-[var(--shadow-glow)] relative overflow-hidden flex flex-col">
                   {/* Thumbnail Image */}
                   {post.image && (
-                    <div className="relative h-40 overflow-hidden w-full">
+                    <div className="relative h-40 overflow-hidden w-full mb-6">
                       <Image
                         src={post.image}
                         alt={post.title}
@@ -212,7 +212,7 @@ export function BlogContent({
               >
                 {/* Thumbnail Image */}
                 {post.image && (
-                  <div className="relative h-32 overflow-hidden w-full">
+                  <div className="relative h-32 overflow-hidden w-full mb-4">
                     <Image
                       src={post.image}
                       alt={post.title}
