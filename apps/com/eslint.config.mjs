@@ -7,6 +7,7 @@ export default await createConfig(
     ignores: [
       "src/routeTree.gen.ts",
       "src/components/ui",
+      "src/content",
       ".next/**",
       "out/**",
       "dist/**",

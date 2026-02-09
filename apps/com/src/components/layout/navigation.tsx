@@ -2,12 +2,14 @@
 
 import { Globe, Menu, X } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 
 import type { Locale } from "@/i18n/config";
+
 import { localeNames } from "@/i18n/config";
 import { usePathname, useRouter } from "@/i18n/routing";
 import { trackEvent } from "@/lib/umami";
+import { cn } from "@/lib/utils";
 
 const navLinkIds = ["home", "projects", "skills", "blog", "contact"] as const;
 
@@ -20,8 +22,9 @@ export function Navigation() {
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [sectionToScroll, setSectionToScroll] = useState<string | null>(null);
 
-  const navLinks = navLinkIds.map((id) => ({
+  const navLinks = navLinkIds.map(id => ({
     id,
     label: t(id),
   }));
@@ -30,7 +33,7 @@ export function Navigation() {
     const handleScroll = () => {
       setScrolled(window.scrollY > 100);
 
-      const sections = navLinkIds.map((id) => document.getElementById(id));
+      const sections = navLinkIds.map(id => document.getElementById(id));
       const scrollPosition = window.scrollY + 200;
 
       for (let i = sections.length - 1; i >= 0; i--) {
@@ -46,14 +49,30 @@ export function Navigation() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollToSection = (sectionId: string) => {
+  useLayoutEffect(() => {
+    if (sectionToScroll && pathname === "/") {
+      const element = document.getElementById(sectionToScroll);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+      setSectionToScroll(null);
+    }
+  }, [sectionToScroll, pathname]);
+
+  const handleSectionNavigation = (sectionId: string) => {
     trackEvent("navigation_click", {
       section: sectionId,
       location: "navigation",
     });
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+
+    if (pathname === "/") {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    } else {
+      setSectionToScroll(sectionId);
+      router.push("/");
     }
     setMobileMenuOpen(false);
   };
@@ -72,24 +91,21 @@ export function Navigation() {
     <>
       {/* Floating pill navigation (after scroll) */}
       <nav
-        className={`fixed top-6 left-1/2 -translate-x-1/2 z-40 transition-all duration-500 ${
-          scrolled
-            ? "opacity-100 translate-y-0"
-            : "opacity-0 -translate-y-4 pointer-events-none"
-        }`}
+        className={cn("fixed top-6 left-1/2 -translate-x-1/2 z-40 transition-all duration-500", scrolled
+          ? "opacity-100 translate-y-0"
+          : "opacity-0 -translate-y-4 pointer-events-none")}
       >
         <div className="card-glass px-2 py-2 flex items-center gap-1">
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-1">
-            {navLinks.map((link) => (
+            {navLinks.map(link => (
               <button
+                type="button"
                 key={link.id}
-                onClick={() => scrollToSection(link.id)}
-                className={`px-4 py-2 text-sm font-medium rounded-full transition-all duration-300 cursor-pointer ${
-                  activeSection === link.id
-                    ? "bg-[var(--primary)] text-[var(--background)]"
-                    : "text-[var(--secondary)] hover:text-[var(--primary)] hover:bg-[var(--highlight)]"
-                }`}
+                onClick={() => handleSectionNavigation(link.id)}
+                className={cn("px-4 py-2 text-sm font-medium rounded-full transition-all duration-300 cursor-pointer", activeSection === link.id
+                  ? "bg-[var(--primary)] text-[var(--background)]"
+                  : "text-[var(--secondary)] hover:text-[var(--primary)] hover:bg-[var(--highlight)]")}
               >
                 {link.label}
               </button>
@@ -99,6 +115,7 @@ export function Navigation() {
           {/* Language & Social links in pill */}
           <div className="hidden md:flex items-center gap-1 ml-2 pl-2 border-l border-[var(--border-subtle)]">
             <button
+              type="button"
               onClick={() => switchLocale(otherLocale)}
               className="p-2 text-[var(--secondary)] hover:text-[var(--primary)] transition-colors rounded-full hover:bg-[var(--highlight)] cursor-pointer text-xs font-medium uppercase"
               title={localeNames[otherLocale]}
@@ -109,33 +126,33 @@ export function Navigation() {
 
           {/* Mobile menu button in pill */}
           <button
+            type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="md:hidden p-2 text-[var(--secondary)] hover:text-[var(--primary)] transition-colors cursor-pointer"
           >
-            {mobileMenuOpen ? (
-              <X className="w-5 h-5" />
-            ) : (
-              <Menu className="w-5 h-5" />
-            )}
+            {mobileMenuOpen
+              ? (
+                  <X className="w-5 h-5" />
+                )
+              : (
+                  <Menu className="w-5 h-5" />
+                )}
           </button>
         </div>
       </nav>
 
       {/* Initial navigation (before scroll) */}
-      <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled ? "opacity-0 pointer-events-none" : "opacity-100"
-        }`}
-      >
+      <nav className={cn("fixed top-0 left-0 right-0 z-50 py-6 transition-all duration-500", scrolled ? "opacity-0 pointer-events-none" : "opacity-100")}>
         <div className="container-wide py-10 flex items-center justify-between">
           <div className="font-display text-2xl text-[var(--primary)]">G.</div>
 
           {/* Desktop links */}
           <div className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
+            {navLinks.map(link => (
               <button
+                type="button"
                 key={link.id}
-                onClick={() => scrollToSection(link.id)}
+                onClick={() => handleSectionNavigation(link.id)}
                 className="text-sm text-[var(--secondary)] hover:text-[var(--primary)] transition-colors cursor-pointer"
               >
                 {link.label}
@@ -146,6 +163,7 @@ export function Navigation() {
           {/* Language switcher & Mobile menu button */}
           <div className="flex items-center gap-3">
             <button
+              type="button"
               onClick={() => switchLocale(otherLocale)}
               className="flex items-center gap-1.5 text-[var(--secondary)] hover:text-[var(--primary)] transition-colors cursor-pointer text-sm"
               title={localeNames[otherLocale]}
@@ -156,6 +174,7 @@ export function Navigation() {
 
             {/* Mobile menu button */}
             <button
+              type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="md:hidden p-2 -mr-2 text-[var(--secondary)] hover:text-[var(--primary)] transition-colors cursor-pointer"
             >
@@ -167,17 +186,16 @@ export function Navigation() {
 
       {/* Mobile menu overlay */}
       <div
-        className={`fixed inset-0 z-50 bg-[var(--background)] transition-all duration-500 md:hidden ${
-          mobileMenuOpen
-            ? "opacity-100 pointer-events-auto"
-            : "opacity-0 pointer-events-none"
-        }`}
+        className={cn("fixed inset-0 z-50 bg-[var(--background)] transition-all duration-500 md:hidden", mobileMenuOpen
+          ? "opacity-100 pointer-events-auto"
+          : "opacity-0 pointer-events-none")}
       >
         <div className="flex flex-col items-center justify-center h-full gap-8">
           {navLinks.map((link, index) => (
             <button
+              type="button"
               key={link.id}
-              onClick={() => scrollToSection(link.id)}
+              onClick={() => handleSectionNavigation(link.id)}
               className="font-display text-4xl text-[var(--primary)] hover:text-[var(--accent-purple)] transition-colors cursor-pointer"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
@@ -187,6 +205,7 @@ export function Navigation() {
 
           {/* Language switcher */}
           <button
+            type="button"
             onClick={() => {
               switchLocale(otherLocale);
               setMobileMenuOpen(false);
@@ -198,6 +217,7 @@ export function Navigation() {
           </button>
 
           <button
+            type="button"
             onClick={() => setMobileMenuOpen(false)}
             className="absolute top-6 right-6 p-2 text-[var(--secondary)] hover:text-[var(--primary)] transition-colors cursor-pointer"
           >

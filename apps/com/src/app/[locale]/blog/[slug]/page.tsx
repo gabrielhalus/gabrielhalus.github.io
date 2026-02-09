@@ -1,10 +1,11 @@
+import type { Metadata } from "next";
+
 import {
   ArrowLeft,
   ArrowRight,
   Calendar,
   Clock,
 } from "lucide-react";
-import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import Image from "next/image";
 import Link from "next/link";
@@ -13,11 +14,11 @@ import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
 import type { Locale } from "@/i18n/config";
-import { getBlogPost, getBlogPosts } from "@/lib/content";
 
 import { Footer } from "@/components/layout/footer";
 import { Navigation } from "@/components/layout/navigation";
 import { ShareButton } from "@/components/ui/share-button";
+import { getBlogPost, getBlogPosts } from "@/lib/content";
 
 export async function generateStaticParams() {
   const locales = ["en", "fr"] as const;
@@ -75,10 +76,10 @@ export default async function BlogPostPage({
 
   // Get adjacent posts for navigation
   const allPosts = getBlogPosts(locale);
-  const currentIndex = allPosts.findIndex((p) => p.slug === slug);
+  const currentIndex = allPosts.findIndex(p => p.slug === slug);
   const prevPost = currentIndex > 0 ? allPosts[currentIndex - 1] : null;
-  const nextPost =
-    currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : null;
+  const nextPost
+    = currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : null;
 
   return (
     <div className="min-h-screen bg-[var(--background)]">
@@ -133,7 +134,7 @@ export default async function BlogPostPage({
 
           {/* Tags */}
           <div className="flex flex-wrap gap-2 mt-6 mb-4">
-            {post.tags.map((tag) => (
+            {post.tags.map(tag => (
               <span
                 key={tag}
                 className="text-xs text-[var(--secondary)] bg-[var(--highlight)] px-3 py-1.5 rounded-md"
@@ -241,10 +242,12 @@ export default async function BlogPostPage({
                 hr: () => <hr className="divider my-10" />,
                 img: ({ src, alt }) => (
                   <figure className="my-8">
-                    <img
+                    <Image
                       src={src}
                       alt={alt}
-                      className="w-full rounded-xl shadow-lg"
+                      fill
+                      className="ow-full rounded-xl shadow-lg"
+                      priority
                     />
                     {alt && (
                       <figcaption className="text-center text-sm text-[var(--secondary)] mt-3">
@@ -279,35 +282,37 @@ export default async function BlogPostPage({
         <div className="container-narrow">
           <nav className="mt-12 pt-8 border-t border-[var(--border-subtle)]">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {prevPost ? (
-              <Link href={`/blog/${prevPost.slug}`} className="group">
-                <div className="card-flat p-6 h-full hover:bg-[var(--accent-purple)]/5 transition-colors">
-                  <span className="text-xs text-[var(--secondary)] flex items-center gap-2 mb-3">
-                    <ArrowLeft className="w-3 h-3" />
-                    {t("previousArticle")}
-                  </span>
-                  <p className="font-medium text-[var(--primary)] group-hover:text-[var(--accent-purple)] transition-colors line-clamp-2">
-                    {prevPost.title}
-                  </p>
-                </div>
-              </Link>
-            ) : (
-              <div />
-            )}
+              {prevPost
+                ? (
+                    <Link href={`/blog/${prevPost.slug}`} className="group">
+                      <div className="card-flat p-6 h-full hover:bg-[var(--accent-purple)]/5 transition-colors">
+                        <span className="text-xs text-[var(--secondary)] flex items-center gap-2 mb-3">
+                          <ArrowLeft className="w-3 h-3" />
+                          {t("previousArticle")}
+                        </span>
+                        <p className="font-medium text-[var(--primary)] group-hover:text-[var(--accent-purple)] transition-colors line-clamp-2">
+                          {prevPost.title}
+                        </p>
+                      </div>
+                    </Link>
+                  )
+                : (
+                    <div />
+                  )}
 
-            {nextPost && (
-              <Link href={`/blog/${nextPost.slug}`} className="group">
-                <div className="card-flat p-6 h-full hover:bg-[var(--accent-purple)]/5 transition-colors text-right">
-                  <span className="text-xs text-[var(--secondary)] flex items-center justify-end gap-2 mb-3">
-                    {t("nextArticle")}
-                    <ArrowRight className="w-3 h-3" />
-                  </span>
-                  <p className="font-medium text-[var(--primary)] group-hover:text-[var(--accent-purple)] transition-colors line-clamp-2">
-                    {nextPost.title}
-                  </p>
-                </div>
-              </Link>
-            )}
+              {nextPost && (
+                <Link href={`/blog/${nextPost.slug}`} className="group">
+                  <div className="card-flat p-6 h-full hover:bg-[var(--accent-purple)]/5 transition-colors text-right">
+                    <span className="text-xs text-[var(--secondary)] flex items-center justify-end gap-2 mb-3">
+                      {t("nextArticle")}
+                      <ArrowRight className="w-3 h-3" />
+                    </span>
+                    <p className="font-medium text-[var(--primary)] group-hover:text-[var(--accent-purple)] transition-colors line-clamp-2">
+                      {nextPost.title}
+                    </p>
+                  </div>
+                </Link>
+              )}
             </div>
           </nav>
         </div>
