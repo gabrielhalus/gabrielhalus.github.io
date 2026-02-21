@@ -24,15 +24,14 @@ export function ContactSection() {
           {/* Contact Methods Grid */}
           <div className="grid md:grid-cols-2 gap-4 mb-8">
             <a
-              href="mailto:gabriel@example.com"
+              href="mailto:gabrielhalus@gmail.com"
               className="block"
               tabIndex={-1}
               onClick={() =>
                 trackEvent("contact_click", {
                   method: "email",
                   location: "contact_section",
-                })
-              }
+                })}
             >
               <Card className="card-shadow card-radius bg-white dark:bg-gray-800 border-0 transition-card hover:shadow-lg cursor-pointer animate-slide-up animate-stagger-1 hover:scale-105 h-full">
                 <CardContent className="p-4 text-center">
@@ -64,8 +63,7 @@ export function ContactSection() {
                 trackEvent("contact_click", {
                   method: "whatsapp",
                   location: "contact_section",
-                })
-              }
+                })}
             >
               <Card className="card-shadow card-radius bg-white dark:bg-gray-800 border-0 transition-card hover:shadow-lg cursor-pointer animate-slide-up animate-stagger-3 hover:scale-105 h-full">
                 <CardContent className="p-4 text-center">
@@ -104,8 +102,7 @@ export function ContactSection() {
                     trackEvent("external_link_click", {
                       link: "github",
                       location: "contact_section",
-                    })
-                  }
+                    })}
                 >
                   <Github className="h-4 w-4 mr-2" />
                   GitHub
@@ -124,8 +121,7 @@ export function ContactSection() {
                     trackEvent("external_link_click", {
                       link: "linkedin",
                       location: "contact_section",
-                    })
-                  }
+                    })}
                 >
                   <Linkedin className="h-4 w-4 mr-2" />
                   LinkedIn
