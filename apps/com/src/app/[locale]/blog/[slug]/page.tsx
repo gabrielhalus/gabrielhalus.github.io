@@ -240,13 +240,14 @@ export default async function BlogPostPage({
                   </pre>
                 ),
                 hr: () => <hr className="divider my-10" />,
-                img: ({ src, alt }) => (
+                img: ({ src, alt }) =>
+                  typeof src === "string" ? (
                   <figure className="my-8">
                     <Image
                       src={src}
-                      alt={alt}
+                      alt={alt ?? ""}
                       fill
-                      className="ow-full rounded-xl shadow-lg"
+                      className="w-full rounded-xl shadow-lg"
                       priority
                     />
                     {alt && (
@@ -255,7 +256,7 @@ export default async function BlogPostPage({
                       </figcaption>
                     )}
                   </figure>
-                ),
+                ) : null,
                 table: ({ children }) => (
                   <div className="overflow-x-auto my-6">
                     <table className="w-full border-collapse">{children}</table>
