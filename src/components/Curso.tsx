@@ -66,7 +66,9 @@ export const cursoSvg = ({
   const glitch = effect === 'glitch'
   const showAntenna = withAntenna && !small
   const expr: CursoExpression = small ? 'travail' : expression
-  const height = Math.round((size * 106) / (trans ? 114 : 100))
+  // Glitch : cadre élargi pour ne pas couper la bande décalée de 9 unités
+  const width = trans ? 114 : glitch ? 106 : 100
+  const height = Math.round((size * 106) / width)
   const eye = small ? { x: 45, y: 40, s: 40, r: 9 } : { x: 50, y: 44, s: 30, r: 8 }
 
   const ids = { a: `${uid}a`, b: `${uid}b`, c: `${uid}c` }
@@ -137,7 +139,7 @@ export const cursoSvg = ({
       xmlns="http://www.w3.org/2000/svg"
       width={size}
       height={height}
-      viewBox={trans ? '-4 2 114 106' : '10 2 100 106'}
+      viewBox={trans ? '-4 2 114 106' : glitch ? '10 2 106 106' : '10 2 100 106'}
       className={cn('shrink-0', className)}
       {...(label ? { role: 'img', 'aria-label': label } : { 'aria-hidden': true })}
     >

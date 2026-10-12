@@ -1127,22 +1127,19 @@ export interface Home {
     primaryLabel?: string | null;
     secondaryLabel?: string | null;
     /**
-     * Une ligne par étape ; « Statut » s’affiche en citron à droite.
+     * Vous avec un client, en atelier ou en cuisine ; lumière naturelle, cadrage serré.
      */
-    terminal?:
-      | {
-          text: string;
-          status?: string | null;
-          id?: string | null;
-        }[]
-      | null;
-    terminalPath?: string | null;
-    terminalDone?: string | null;
-    chips?: string[] | null;
+    photo?: (number | null) | Media;
+    photoPlaceholder?: string | null;
+    tagline?: string | null;
+    benefitsTitle?: string | null;
+    benefits?: string[] | null;
+    cursoSays?: string | null;
     featuredOffer?: (number | null) | Offer;
   };
   clients?: {
     title?: string | null;
+    subtitle?: string | null;
     items?:
       | {
           name: string;
@@ -1343,22 +1340,19 @@ export interface HomeSelect<T extends boolean = true> {
         lead?: T;
         primaryLabel?: T;
         secondaryLabel?: T;
-        terminal?:
-          | T
-          | {
-              text?: T;
-              status?: T;
-              id?: T;
-            };
-        terminalPath?: T;
-        terminalDone?: T;
-        chips?: T;
+        photo?: T;
+        photoPlaceholder?: T;
+        tagline?: T;
+        benefitsTitle?: T;
+        benefits?: T;
+        cursoSays?: T;
         featuredOffer?: T;
       };
   clients?:
     | T
     | {
         title?: T;
+        subtitle?: T;
         items?:
           | T
           | {

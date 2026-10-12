@@ -32,23 +32,39 @@ export const Home: GlobalConfig = {
               ],
             },
             {
-              name: 'terminal',
-              type: 'array',
-              label: 'Lignes du terminal',
-              admin: { description: 'Une ligne par étape ; « Statut » s’affiche en citron à droite.' },
+              type: 'collapsible',
+              label: 'Bloc photo (à droite)',
               fields: [
+                {
+                  name: 'photo',
+                  type: 'upload',
+                  relationTo: 'media',
+                  label: 'Photo',
+                  admin: { description: 'Vous avec un client, en atelier ou en cuisine ; lumière naturelle, cadrage serré.' },
+                },
+                {
+                  name: 'photoPlaceholder',
+                  type: 'text',
+                  label: 'Texte affiché sans photo',
+                  defaultValue: '[Photo : Gabriel avec un client, dans son atelier ou en cuisine — lumière naturelle, cadrage serré]',
+                },
+                { name: 'tagline', type: 'text', label: 'Pastille en haut à droite', defaultValue: 'Un seul interlocuteur, du début à la fin' },
                 {
                   type: 'row',
                   fields: [
-                    { name: 'text', type: 'text', label: 'Texte', required: true },
-                    { name: 'status', type: 'text', label: 'Statut' },
+                    { name: 'benefitsTitle', type: 'text', label: 'Titre de la carte', defaultValue: 'Ce que vous y gagnez' },
+                    {
+                      name: 'benefits',
+                      type: 'text',
+                      hasMany: true,
+                      label: 'Bénéfices (coches)',
+                      defaultValue: ['Fini les ressaisies', 'Des outils qui se parlent', 'Du temps rendu à votre métier'],
+                    },
                   ],
                 },
+                { name: 'cursoSays', type: 'text', label: 'Bulle de Curso', defaultValue: 'Pendant que vous dormez, Curso s’occupe des relances.' },
               ],
             },
-            { name: 'terminalPath', type: 'text', label: 'Chemin affiché', defaultValue: '~/projets/client' },
-            { name: 'terminalDone', type: 'text', label: 'Ligne finale', defaultValue: 'déployé — prêt pour vos utilisateurs' },
-            { name: 'chips', type: 'text', hasMany: true, label: 'Pastilles (savoir-faire)' },
             {
               name: 'featuredOffer',
               type: 'relationship',
@@ -63,6 +79,7 @@ export const Home: GlobalConfig = {
           description: 'Bandeau défilant sous le héros. Masqué tant qu’aucun client n’est saisi.',
           fields: [
             { name: 'title', type: 'text', label: 'Intitulé', defaultValue: 'Ils me font confiance' },
+            { name: 'subtitle', type: 'text', label: 'Sous-titre', defaultValue: 'Artisans, traiteurs, PME et indépendants' },
             {
               name: 'items',
               type: 'array',

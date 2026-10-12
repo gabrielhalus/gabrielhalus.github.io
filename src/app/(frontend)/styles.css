@@ -40,6 +40,10 @@
   --color-accent-ink: #3d4410;
   --color-accent-glyph: #cfe83f;
 
+  /* Sable : fond du bloc photo du héros, en attendant la photo */
+  --color-sand: #efe6da;
+  --color-sand-ink: #6b5f52;
+
   /* Tons métier (un par page d'offre) */
   --color-mint: #b3f3d4;
   --color-mint-ink: #0c3d24;
@@ -255,9 +259,12 @@
   .curso-float, .curso-eye, .curso-glitch, .curso-normal { animation: none !important; }
 }
 
-/* Bandeau clients : deux copies identiques, la piste glisse de la moitié de sa largeur */
+/* Bandeau clients : deux copies identiques séparées par 12 px, la piste glisse d'une copie */
 @keyframes marquee {
-  to { transform: translateX(-50%); }
+  to { transform: translateX(calc(-50% - 6px)); }
 }
-.marquee-track { animation: marquee 40s linear infinite; }
-.marquee:hover .marquee-track { animation-play-state: paused; }
+.marquee-track { animation: marquee 32s linear infinite; }
+.marquee-track:hover { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; }
+}
