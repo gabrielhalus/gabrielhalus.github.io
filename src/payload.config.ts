@@ -21,6 +21,7 @@ import { Home } from './globals/Home'
 import { Legal } from './globals/Legal'
 import { Settings } from './globals/Settings'
 import { migrations } from './migrations'
+import { seed } from './seed/seed'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -52,6 +53,14 @@ export default buildConfig({
     prodMigrations: migrations,
   }),
   sharp,
+  // Base vierge (Réglages jamais enregistrés) : contenu des maquettes. SEED_ON_INIT=false pour désactiver.
+  onInit: async (payload) => {
+    if (process.env.SEED_ON_INIT === 'false') return
+    const settings = await payload.findGlobal({ slug: 'settings', depth: 0 })
+    if (settings.updatedAt) return
+    payload.logger.info('Base vide : remplissage avec le contenu des maquettes…')
+    await seed(payload)
+  },
   plugins: [
     seoPlugin({
       collections: ['projects', 'offers', 'guides'],

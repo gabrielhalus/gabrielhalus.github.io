@@ -55,7 +55,8 @@ Traefik joint le service `payload` sur le port 3000 (domaine à déclarer dans D
 `POSTGRES_PASSWORD`, `PAYLOAD_SECRET`, et éventuellement `POSTGRES_USER`, `POSTGRES_DB`, `CONTACT_NOTIFICATION_EMAIL`.
 Les médias vont dans le volume `media`, la base dans `pgdata`.
 
-Les migrations de `src/migrations` s'appliquent au démarrage. Après une modification du schéma :
+Les migrations de `src/migrations` s'appliquent au démarrage. Sur une base vierge (Réglages jamais enregistrés),
+le contenu des maquettes est ensuite chargé automatiquement, une seule fois (`SEED_ON_INIT=false` pour l'empêcher). Après une modification du schéma :
 `pnpm payload migrate:create nom_du_changement` (en local, le mode dev synchronise la base tout seul).
 Le site public est rendu à la demande : la base n'est pas joignable pendant le build de l'image.
 
