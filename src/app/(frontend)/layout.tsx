@@ -41,7 +41,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           Aller au contenu
         </a>
         <Header offersHref={live[0] ? offerPath(live[0].slug) : '/#offres'} offerPaths={live.map((o) => offerPath(o.slug))} />
-        <main id="contenu" className="mx-auto flex max-w-[1416px] flex-col gap-3 px-3">
+        <main id="contenu" className="mx-auto box-content flex max-w-[1416px] flex-col gap-3 px-3">
           {children}
         </main>
         <Footer />
