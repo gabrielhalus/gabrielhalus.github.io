@@ -33,36 +33,54 @@ export const Home: GlobalConfig = {
             },
             {
               type: 'collapsible',
-              label: 'Bloc photo (à droite)',
+              label: 'Bloc Curso (à droite)',
+              admin: { description: 'Le portrait de la pastille vient de Réglages du site › Identité.' },
               fields: [
-                {
-                  name: 'photo',
-                  type: 'upload',
-                  relationTo: 'media',
-                  label: 'Photo',
-                  admin: { description: 'Vous avec un client, en atelier ou en cuisine ; lumière naturelle, cadrage serré.' },
-                },
-                {
-                  name: 'photoPlaceholder',
-                  type: 'text',
-                  label: 'Texte affiché sans photo',
-                  defaultValue: '[Photo : Gabriel avec un client, dans son atelier ou en cuisine — lumière naturelle, cadrage serré]',
-                },
                 { name: 'tagline', type: 'text', label: 'Pastille en haut à droite', defaultValue: 'Un seul interlocuteur, du début à la fin' },
+                { name: 'tasksTitle', type: 'text', label: 'Titre de la liste', defaultValue: 'Cette nuit, Curso s’est occupé de :' },
                 {
-                  type: 'row',
+                  name: 'tasks',
+                  type: 'array',
+                  label: 'Tâches',
+                  maxRows: 4,
+                  labels: { singular: 'Tâche', plural: 'Tâches' },
                   fields: [
-                    { name: 'benefitsTitle', type: 'text', label: 'Titre de la carte', defaultValue: 'Ce que vous y gagnez' },
                     {
-                      name: 'benefits',
-                      type: 'text',
-                      hasMany: true,
-                      label: 'Bénéfices (coches)',
-                      defaultValue: ['Fini les ressaisies', 'Des outils qui se parlent', 'Du temps rendu à votre métier'],
+                      type: 'row',
+                      fields: [
+                        {
+                          name: 'icon',
+                          type: 'select',
+                          label: 'Icône',
+                          defaultValue: 'document',
+                          options: [
+                            { label: 'Document', value: 'document' },
+                            { label: 'Cloche', value: 'bell' },
+                            { label: 'Calendrier', value: 'calendar' },
+                          ],
+                        },
+                        { name: 'title', type: 'text', label: 'Titre', required: true },
+                        { name: 'detail', type: 'text', label: 'Détail' },
+                      ],
+                    },
+                    {
+                      type: 'row',
+                      fields: [
+                        { name: 'badge', type: 'text', label: 'Étiquette', admin: { description: 'Ex. « Envoyé », « J−7 ».' } },
+                        {
+                          name: 'badgeTone',
+                          type: 'select',
+                          label: 'Style de l’étiquette',
+                          defaultValue: 'done',
+                          options: [
+                            { label: 'Fait (vert, avec coche)', value: 'done' },
+                            { label: 'À venir (bleu-gris)', value: 'pending' },
+                          ],
+                        },
+                      ],
                     },
                   ],
                 },
-                { name: 'cursoSays', type: 'text', label: 'Bulle de Curso', defaultValue: 'Pendant que vous dormez, Curso s’occupe des relances.' },
               ],
             },
             {

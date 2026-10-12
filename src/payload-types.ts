@@ -1126,15 +1126,21 @@ export interface Home {
     lead?: string | null;
     primaryLabel?: string | null;
     secondaryLabel?: string | null;
-    /**
-     * Vous avec un client, en atelier ou en cuisine ; lumière naturelle, cadrage serré.
-     */
-    photo?: (number | null) | Media;
-    photoPlaceholder?: string | null;
     tagline?: string | null;
-    benefitsTitle?: string | null;
-    benefits?: string[] | null;
-    cursoSays?: string | null;
+    tasksTitle?: string | null;
+    tasks?:
+      | {
+          icon?: ('document' | 'bell' | 'calendar') | null;
+          title: string;
+          detail?: string | null;
+          /**
+           * Ex. « Envoyé », « J−7 ».
+           */
+          badge?: string | null;
+          badgeTone?: ('done' | 'pending') | null;
+          id?: string | null;
+        }[]
+      | null;
     featuredOffer?: (number | null) | Offer;
   };
   clients?: {
@@ -1340,12 +1346,18 @@ export interface HomeSelect<T extends boolean = true> {
         lead?: T;
         primaryLabel?: T;
         secondaryLabel?: T;
-        photo?: T;
-        photoPlaceholder?: T;
         tagline?: T;
-        benefitsTitle?: T;
-        benefits?: T;
-        cursoSays?: T;
+        tasksTitle?: T;
+        tasks?:
+          | T
+          | {
+              icon?: T;
+              title?: T;
+              detail?: T;
+              badge?: T;
+              badgeTone?: T;
+              id?: T;
+            };
         featuredOffer?: T;
       };
   clients?:

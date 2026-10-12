@@ -59,3 +59,17 @@ export const Close = ({ size = 20, className }: IconProps) => (
     <path d="m5 5 10 10M15 5 5 15" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
   </svg>
 )
+
+export const Document = ({ size = 20, className }: IconProps) => (
+  <svg width={size} height={size} viewBox="0 0 20 20" fill="none" aria-hidden="true" className={className}>
+    <path d="M5 2.5h6.5L15 6v11.5H5z" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
+    <path d="M8 10h4.5M8 13.5h4.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+  </svg>
+)
+
+export const Bell = ({ size = 20, className }: IconProps) => (
+  <svg width={size} height={size} viewBox="0 0 20 20" fill="none" aria-hidden="true" className={className}>
+    <path d="M5 13.5V9a5 5 0 0 1 10 0v4.5l1.5 2h-13z" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
+    <path d="M8.5 17.5h3" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+  </svg>
+)

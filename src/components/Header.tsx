@@ -27,7 +27,7 @@ export const Header = ({ offersHref, offerPaths }: { offersHref: string; offerPa
   const current = pathname === '/' ? 'home' : pathname.startsWith('/contact') ? 'contact' : offerPaths.includes(pathname) ? 'offers' : null
 
   return (
-    <header className="p-3">
+    <header className="px-3 py-4">
       <div className="mx-auto max-w-[1416px] rounded-[28px] border border-line bg-white py-2 pr-2 pl-[18px] md:rounded-full">
         <div className="flex items-center justify-between gap-3">
           <Link href="/" aria-label="Gabriel Halus — accueil" className="group flex items-center gap-2.5 text-ink no-underline">

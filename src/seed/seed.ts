@@ -236,11 +236,13 @@ export async function seed(payload: Payload) {
         lead: 'Développeur freelance. Applications web, automatisations et intégrations sur mesure — du premier appel à la mise en production, avec une seule personne en face de vous.',
         primaryLabel: 'Réserver un appel',
         secondaryLabel: 'Voir les projets',
-        photoPlaceholder: '[Photo : Gabriel avec un client, dans son atelier ou en cuisine — lumière naturelle, cadrage serré]',
         tagline: 'Un seul interlocuteur, du début à la fin',
-        benefitsTitle: 'Ce que vous y gagnez',
-        benefits: ['Fini les ressaisies', 'Des outils qui se parlent', 'Du temps rendu à votre métier'],
-        cursoSays: 'Pendant que vous dormez, Curso s’occupe des relances.',
+        tasksTitle: 'Cette nuit, Curso s’est occupé de :',
+        tasks: [
+          { icon: 'document', title: 'Devis · Mariage Dupont', detail: '120 couverts, envoyé au client', badge: 'Envoyé', badgeTone: 'done' },
+          { icon: 'bell', title: 'Relance d’acompte', detail: 'Programmée automatiquement', badge: 'J−7', badgeTone: 'pending' },
+          { icon: 'calendar', title: 'Planning de samedi', detail: 'Fiches et liste de courses', badge: 'Prêt', badgeTone: 'done' },
+        ],
         featuredOffer: traiteurs.id,
       },
       clients: {

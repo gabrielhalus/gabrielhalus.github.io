@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 import { ClientsMarquee } from '@/components/ClientsMarquee'
 import { Curso } from '@/components/Curso'
-import { ArrowRight, ArrowUpRight, Check } from '@/components/icons'
+import { ArrowRight, ArrowUpRight, Bell, Calendar, Check, Document } from '@/components/icons'
 import { Media } from '@/components/Media'
 import { ProjectCard } from '@/components/ProjectCard'
 import { ArrowDot, AvailabilityBadge, Block, ButtonLink, Eyebrow, SectionHeading, Tag } from '@/components/ui'
@@ -19,6 +19,8 @@ const serviceVariants = {
   light: { card: 'border border-line bg-surface-2', glyph: 'text-glyph', text: 'text-body' },
   dark: { card: 'bg-ink text-white', glyph: 'text-night-glyph', text: 'text-on-dark' },
 } as const
+
+const TASK_ICONS = { document: Document, bell: Bell, calendar: Calendar }
 
 export default async function HomePage() {
   const payload = await getPayloadClient()
@@ -58,59 +60,69 @@ export default async function HomePage() {
           </div>
         </div>
 
-        <div className="relative isolate box-border flex min-h-[620px] flex-col justify-between gap-4 overflow-hidden rounded-block bg-sand p-5">
-          {hero?.photo && typeof hero.photo === 'object' ? (
-            <Media resource={hero.photo} size="large" sizes="(min-width: 1200px) 700px, 100vw" priority className="-z-10" />
-          ) : (
-            <div aria-hidden="true" className="absolute inset-0 -z-10 flex items-center justify-center px-16 py-[140px] text-center font-mono text-[13px] leading-[1.6] text-sand-ink">
-              {hero?.photoPlaceholder}
+        <div className="relative box-border flex min-h-[620px] flex-col justify-between gap-5 overflow-hidden rounded-block bg-accent p-5">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div className="flex items-center gap-3 rounded-full bg-white py-1.5 pr-[18px] pl-1.5 shadow-pop">
+              <span className="relative flex size-12 shrink-0 items-center justify-center overflow-hidden rounded-full border-2 border-white bg-slate text-center font-mono text-[9px] leading-[1.2] text-slate-ink shadow-[0_0_0_2px_var(--color-ink)]">
+                {settings.portrait ? <Media resource={settings.portrait} sizes="48px" /> : <span aria-hidden="true">[ta<br />photo]</span>}
+              </span>
+              <span className="flex flex-col gap-0.5">
+                <span className="text-[15px] font-semibold">{settings.siteName}</span>
+                <span className="text-[13px] text-muted">{[`${settings.role ?? 'Développeur'} indépendant`, settings.city ?? '[Ville]'].join(' · ')}</span>
+              </span>
             </div>
-          )}
-
-          <div className="flex flex-wrap items-start justify-between gap-3">
-            <div className="flex flex-col gap-0.5 rounded-tile bg-white px-[18px] py-3 shadow-pop">
-              <span className="text-[15px] font-semibold">{settings.siteName}</span>
-              <span className="text-[13px] text-muted">{[`${settings.role ?? 'Développeur'} indépendant`, settings.city ?? '[Ville]'].join(' · ')}</span>
-            </div>
-            {hero?.tagline && <span className="rounded-full bg-white/80 px-3.5 py-2.5 text-[13px] font-medium">{hero.tagline}</span>}
+            {hero?.tagline && <span className="rounded-full bg-white/50 px-3.5 py-2.5 text-[13px] font-medium">{hero.tagline}</span>}
           </div>
 
-          {hero?.benefits && hero.benefits.length > 0 && (
-            <div className="box-border flex w-[min(310px,100%)] flex-col gap-3.5 self-end rounded-[22px] bg-white p-[22px] shadow-pop">
-              <span className="text-[17px] font-bold tracking-[-0.02em]">{hero.benefitsTitle}</span>
-              <ul className="m-0 flex list-none flex-col gap-2.5 p-0 text-[15px] leading-[1.35]">
-                {hero.benefits.map((b) => (
-                  <li key={b} className="flex items-center gap-2.5">
-                    <span aria-hidden="true" className="flex size-6 shrink-0 items-center justify-center rounded-full bg-accent">
-                      <Check size={12} className="text-ink" />
-                    </span>
-                    {b}
-                  </li>
-                ))}
-              </ul>
+          <div className="flex flex-wrap items-center justify-center gap-x-7 gap-y-5">
+            <div className="flex flex-col items-center gap-1">
+              <Curso size={220} effect="transparence" animated className="max-w-[60vw]" />
+              <span aria-hidden="true" className="h-2.5 w-[120px] rounded-full bg-ink/15" />
             </div>
-          )}
-
-          <div className="flex flex-col gap-3">
-            {hero?.cursoSays && (
-              <div className="flex items-end gap-3">
-                <Curso size={84} expression="content" animated />
-                <p className="m-0 mb-[18px] max-w-[280px] rounded-[18px_18px_18px_6px] bg-ink px-4 py-3 text-[15px] leading-[1.4] text-white">{hero.cursoSays}</p>
+            {hero?.tasks && hero.tasks.length > 0 && (
+              <div className="flex max-w-[360px] flex-[1_1_280px] flex-col gap-2.5">
+                {hero.tasksTitle && <p className="m-0 mb-1 ml-1 text-[15px] font-semibold">{hero.tasksTitle}</p>}
+                <ul className="m-0 flex list-none flex-col gap-2.5 p-0">
+                  {hero.tasks.map((task) => {
+                    const TaskIcon = TASK_ICONS[task.icon ?? 'document']
+                    const done = task.badgeTone !== 'pending'
+                    return (
+                      <li key={task.id} className="flex items-center gap-3 rounded-[18px] bg-white px-3.5 py-3 shadow-pop">
+                        <span aria-hidden="true" className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-surface-2">
+                          <TaskIcon />
+                        </span>
+                        <span className="flex min-w-0 flex-1 flex-col gap-0.5">
+                          <span className="text-[15px] font-semibold">{task.title}</span>
+                          {task.detail && <span className="text-[13px] text-muted">{task.detail}</span>}
+                        </span>
+                        {task.badge && (
+                          <span className={cn('inline-flex shrink-0 items-center gap-1.5 rounded-lg px-[9px] py-1.5 text-xs font-semibold', done ? 'bg-mint text-mint-ink' : 'bg-slate text-slate-ink')}>
+                            {done && <Check size={14} />}
+                            {task.badge}
+                          </span>
+                        )}
+                      </li>
+                    )
+                  })}
+                </ul>
               </div>
             )}
-            {featuredOffer && (
-              <Link
-                href={offerPath(featuredOffer.slug)}
-                className="flex items-center justify-between gap-4 rounded-tile bg-accent py-4 pr-4 pl-5 text-ink no-underline hover:bg-accent-deep"
-              >
-                <span className="flex flex-col gap-0.5">
-                  <span className="text-[13px] font-medium">Offre métier · {featuredOffer.name}</span>
-                  {featuredOffer.promise && <span className="text-lg font-bold tracking-[-0.02em]">{featuredOffer.promise}</span>}
-                </span>
-                <ArrowDot up className="size-10 bg-ink text-accent" />
-              </Link>
-            )}
           </div>
+
+          {featuredOffer ? (
+            <Link
+              href={offerPath(featuredOffer.slug)}
+              className="flex items-center justify-between gap-4 rounded-tile bg-ink py-4 pr-4 pl-5 text-white no-underline hover:bg-ink-soft"
+            >
+              <span className="flex flex-col gap-0.5">
+                <span className="text-[13px] font-medium text-subtle">Offre métier · {featuredOffer.name}</span>
+                {featuredOffer.promise && <span className="text-lg font-bold tracking-[-0.02em]">{featuredOffer.promise}</span>}
+              </span>
+              <ArrowDot up className="size-10 bg-accent text-ink" />
+            </Link>
+          ) : (
+            <span />
+          )}
         </div>
       </section>
 
