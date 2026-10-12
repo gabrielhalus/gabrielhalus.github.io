@@ -140,7 +140,8 @@ export const cursoSvg = ({
       width={size}
       height={height}
       viewBox={trans ? '-4 2 114 106' : glitch ? '10 2 106 106' : '10 2 100 106'}
-      className={cn('shrink-0', className)}
+      // overflow-visible : le flottement fait monter l'antenne au-dessus du cadre
+      className={cn('shrink-0 overflow-visible', className)}
       {...(label ? { role: 'img', 'aria-label': label } : { 'aria-hidden': true })}
     >
       <g className={animated ? 'curso-float' : undefined}>
