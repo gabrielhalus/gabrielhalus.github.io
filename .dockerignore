@@ -1,0 +1,15 @@
+.git
+.next
+node_modules
+.env
+.env.*
+!.env.example
+*.db
+*.db-journal
+media
+tests
+test-results
+playwright-report
+*.tsbuildinfo
+Dockerfile
+docker-compose.yml

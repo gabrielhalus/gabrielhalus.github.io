@@ -1,0 +1,263 @@
+@import 'tailwindcss';
+
+/* ──────────────────────────────────────────────────────────────
+   Design system « Vellum, édition Halus »
+   Encre #101010 · papier #EFEFEF · citron #DBF54C
+   ────────────────────────────────────────────────────────────── */
+@theme {
+  --font-sans: var(--font-schibsted), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
+
+  /* Encre & textes */
+  --color-ink: #101010;
+  --color-ink-soft: #2b2b2b;
+  --color-body: #333333;
+  --color-muted: #5c5c5c;
+  --color-subtle: #a3a3a3;
+  --color-dim: #8a8a8a;
+  --color-on-dark: #d4d4d4;
+
+  /* Papier & surfaces */
+  --color-paper: #efefef;
+  --color-surface: #ffffff;
+  --color-surface-2: #f8f8f8;
+  --color-line: #e4e4e4;
+  --color-line-strong: #dddddd;
+  --color-line-dashed: #c9c9c9;
+  --color-glyph: #ececec;
+
+  /* Surfaces sombres */
+  --color-night: #1a1a1a;
+  --color-night-2: #1c1c1c;
+  --color-night-line: #2b2b2b;
+  --color-night-line-2: #3a3a3a;
+  --color-night-glyph: #1f1f1f;
+
+  /* Citron */
+  --color-accent: #dbf54c;
+  --color-accent-deep: #c3df2c;
+  --color-accent-soft: #f3fbcb;
+  --color-accent-ink: #3d4410;
+  --color-accent-glyph: #cfe83f;
+
+  /* Tons métier (un par page d'offre) */
+  --color-mint: #b3f3d4;
+  --color-mint-ink: #0c3d24;
+  --color-lilac: #c1b2fd;
+  --color-lilac-ink: #2c2052;
+  --color-blush: #ffddf6;
+  --color-blush-ink: #5a1140;
+  --color-slate: #dfe6ef;
+  --color-slate-ink: #26364a;
+
+  /* Statuts */
+  --color-success: #22d778;
+  --color-success-deep: #17a75c;
+  --color-danger: #d92d20;
+  --color-signal: #e8368f;
+
+  /* Rayons */
+  --radius-chip: 6px;
+  --radius-field: 10px;
+  --radius-card: 14px;
+  --radius-tile: 20px;
+  --radius-panel: 24px;
+  --radius-block: 28px;
+
+  /* Ombres (Vellum) */
+  --shadow-raised: 0 1px 2px #1010100a;
+  --shadow-pop: 0 12px 32px -8px #10101024, 0 2px 6px -2px #1010100f;
+}
+
+/* Eyebrow numéroté en mono : « // 01 — Projets » */
+@utility eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Rembourrage des blocs r28 */
+@utility pad-block {
+  padding: clamp(28px, 5vw, 64px);
+}
+
+@utility h-section {
+  margin: 0;
+  font-size: clamp(34px, 4vw, 56px);
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  text-wrap: balance;
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background: var(--color-accent);
+    color: var(--color-ink);
+  }
+
+  [id] {
+    scroll-margin-top: 24px;
+  }
+
+  details > summary {
+    cursor: pointer;
+  }
+}
+
+/* ──────────────────────────────────────────────────────────────
+   Contenu éditorial (guides, études de cas)
+   ────────────────────────────────────────────────────────────── */
+.prose-gh {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  font-size: 18px;
+  line-height: 1.7;
+  color: var(--color-body);
+
+  & > * {
+    margin: 0;
+  }
+  & h2 {
+    margin-top: 24px;
+    font-size: clamp(28px, 2.6vw, 38px);
+    line-height: 1.1;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--color-ink);
+  }
+  & h3 {
+    margin-top: 12px;
+    font-size: 23px;
+    line-height: 1.2;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--color-ink);
+  }
+  & strong {
+    color: var(--color-ink);
+  }
+  & a {
+    color: var(--color-ink);
+    text-underline-offset: 3px;
+  }
+  & a:hover {
+    color: var(--color-muted);
+  }
+  & ul,
+  & ol {
+    padding-left: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  & blockquote {
+    margin: 8px 0;
+    padding: 4px 0 4px 24px;
+    border-left: 3px solid var(--color-ink);
+    font-size: 24px;
+    line-height: 1.35;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--color-ink);
+  }
+  & code {
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+    background: var(--color-surface-2);
+    border: 1px solid var(--color-line);
+    border-radius: 6px;
+    padding: 1px 6px;
+  }
+  & hr {
+    border: 0;
+    border-top: 1px solid var(--color-line);
+  }
+
+  /* Tableaux Lexical */
+  & .lexical-table-container,
+  & > div:has(> table) {
+    overflow-x: auto;
+    border: 1px solid var(--color-line);
+    border-radius: 16px;
+  }
+  & table {
+    width: 100%;
+    min-width: 520px;
+    border-collapse: collapse;
+    font-size: 15px;
+    line-height: 1.5;
+  }
+  & th,
+  & td {
+    padding: 14px 16px;
+    text-align: left;
+    vertical-align: top;
+  }
+  & tr + tr {
+    border-top: 1px solid var(--color-line);
+  }
+  & thead tr,
+  & tr:first-child:has(th) {
+    background: var(--color-surface-2);
+  }
+  & th {
+    font-weight: 600;
+    color: var(--color-ink);
+  }
+  & th p,
+  & td p {
+    margin: 0;
+  }
+}
+
+/* Curso : flottement, clignement, et glitch bref (< 300 ms) au survol du logo */
+@keyframes curso-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+@keyframes curso-blink {
+  0%, 90%, 100% { transform: scaleY(1); }
+  94% { transform: scaleY(0.1); }
+}
+@keyframes curso-glitch-in {
+  0%, 99% { visibility: visible; }
+  100% { visibility: hidden; }
+}
+@keyframes curso-glitch-out {
+  0%, 99% { visibility: hidden; }
+  100% { visibility: visible; }
+}
+.curso-float { animation: curso-float 3.2s ease-in-out infinite; }
+.curso-eye { transform-box: fill-box; transform-origin: center; animation: curso-blink 4s ease-in-out infinite; }
+.curso-glitch { visibility: hidden; }
+.group:hover .curso-glitch, .group:focus-visible .curso-glitch { animation: curso-glitch-in 260ms steps(1) 1 forwards; }
+.group:hover .curso-normal, .group:focus-visible .curso-normal { animation: curso-glitch-out 260ms steps(1) 1 forwards; }
+@media (prefers-reduced-motion: reduce) {
+  .curso-float, .curso-eye, .curso-glitch, .curso-normal { animation: none !important; }
+}
+
+/* Bandeau clients : deux copies identiques, la piste glisse de la moitié de sa largeur */
+@keyframes marquee {
+  to { transform: translateX(-50%); }
+}
+.marquee-track { animation: marquee 40s linear infinite; }
+.marquee:hover .marquee-track { animation-play-state: paused; }
