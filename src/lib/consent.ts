@@ -1,5 +1,10 @@
 /** Consentement cookies, stocké dans le cookie `gh_consent` (6 mois). */
 export type Consent = { analytics: boolean; thirdParty: boolean }
+export type ConsentCategory = keyof Consent
+
+/** Catégories soumises au consentement pour lesquelles au moins un traceur est déclaré. */
+export const activeCategories = (trackers?: { category: string }[] | null): ConsentCategory[] =>
+  (['analytics', 'thirdParty'] as const).filter((c) => trackers?.some((t) => t.category === c))
 
 export const CONSENT_COOKIE = 'gh_consent'
 export const OPEN_BANNER_EVENT = 'gh:open-consent'

@@ -10,7 +10,7 @@ export const Cookies: GlobalConfig = {
   hooks: { afterChange: [revalidateGlobal] },
   fields: [
     { name: 'updatedOn', type: 'date', label: 'Dernière mise à jour', admin: { date: { pickerAppearance: 'dayOnly', displayFormat: 'dd/MM/yyyy' } } },
-    { name: 'title', type: 'text', label: 'Titre', defaultValue: 'Le strict minimum, et c’est vous qui choisissez.' },
+    { name: 'title', type: 'text', label: 'Titre', defaultValue: 'Pas de cookie, rien à accepter.' },
     { name: 'intro', type: 'textarea', label: 'Introduction' },
     {
       name: 'categories',
@@ -26,6 +26,7 @@ export const Cookies: GlobalConfig = {
       name: 'trackers',
       type: 'array',
       label: 'Liste des traceurs',
+      admin: { description: 'Un traceur « Audience » ou « Tiers » fait apparaître la bannière de consentement et les préférences de la page Cookies.' },
       fields: [
         {
           type: 'row',
@@ -60,7 +61,7 @@ export const Cookies: GlobalConfig = {
       label: 'Bannière',
       fields: [
         { name: 'title', type: 'text', label: 'Titre', defaultValue: 'Un petit réglage' },
-        { name: 'text', type: 'textarea', label: 'Texte', defaultValue: 'J’aimerais mesurer la fréquentation du site, sans publicité ni revente. D’accord ?' },
+        { name: 'text', type: 'textarea', label: 'Texte', defaultValue: 'Certains contenus de ce site déposent des cookies, sans publicité ni revente. D’accord ?' },
       ],
     },
   ],

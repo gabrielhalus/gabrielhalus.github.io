@@ -3,6 +3,7 @@ import Link from 'next/link'
 
 import { CookiePreferences } from '@/components/CookiePreferences'
 import { Badge, Block, Eyebrow } from '@/components/ui'
+import { activeCategories } from '@/lib/consent'
 import { getPayloadClient } from '@/lib/payload'
 import { formatShortDate } from '@/lib/utils'
 
@@ -20,6 +21,8 @@ const categories = {
 export default async function CookiesPage() {
   const payload = await getPayloadClient()
   const cookies = await payload.findGlobal({ slug: 'cookies' })
+  // Préférences affichées seulement si un traceur soumis au consentement est déclaré
+  const optional = activeCategories(cookies.trackers)
 
   return (
     <>
@@ -30,7 +33,14 @@ export default async function CookiesPage() {
           {cookies.intro && <p className="m-0 max-w-[520px] text-lg leading-[1.55] text-body">{cookies.intro}</p>}
           <span className="inline-flex self-start rounded-full bg-surface-2 px-3.5 py-2 text-[13px]">Dernière mise à jour : {formatShortDate(cookies.updatedOn)}</span>
         </div>
-        <CookiePreferences necessary={cookies.categories?.necessary} analytics={cookies.categories?.analytics} thirdParty={cookies.categories?.thirdParty} />
+        {optional.length > 0 && (
+          <CookiePreferences
+            categories={optional}
+            necessary={cookies.categories?.necessary}
+            analytics={cookies.categories?.analytics}
+            thirdParty={cookies.categories?.thirdParty}
+          />
+        )}
       </section>
 
       <Block className="pad-block flex flex-col gap-6">

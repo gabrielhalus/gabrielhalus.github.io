@@ -1274,6 +1274,9 @@ export interface Cooky {
     analytics?: string | null;
     thirdParty?: string | null;
   };
+  /**
+   * Un traceur « Audience » ou « Tiers » fait apparaître la bannière de consentement et les préférences de la page Cookies.
+   */
   trackers?:
     | {
         name: string;

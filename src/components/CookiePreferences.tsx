@@ -2,7 +2,7 @@
 
 import { useId, useState, useSyncExternalStore } from 'react'
 
-import { type Consent, OPEN_BANNER_EVENT, parseConsent, readConsentRaw, subscribeConsent, writeConsent } from '@/lib/consent'
+import { type Consent, type ConsentCategory, OPEN_BANNER_EVENT, parseConsent, readConsentRaw, subscribeConsent, writeConsent } from '@/lib/consent'
 import { cn } from '@/lib/utils'
 
 const Switch = ({ on, onToggle, labelledBy }: { on: boolean; onToggle: () => void; labelledBy: string }) => (
@@ -28,7 +28,17 @@ const Row = ({ title, text, children, id }: { title: string; text?: string | nul
   </div>
 )
 
-export const CookiePreferences = ({ necessary, analytics, thirdParty }: { necessary?: string | null; analytics?: string | null; thirdParty?: string | null }) => {
+export const CookiePreferences = ({
+  categories,
+  necessary,
+  analytics,
+  thirdParty,
+}: {
+  categories: ConsentCategory[]
+  necessary?: string | null
+  analytics?: string | null
+  thirdParty?: string | null
+}) => {
   const id = useId()
   const stored = parseConsent(useSyncExternalStore(subscribeConsent, readConsentRaw, () => null))
   // Brouillon local tant que l'utilisateur n'a pas enregistré
@@ -50,12 +60,16 @@ export const CookiePreferences = ({ necessary, analytics, thirdParty }: { necess
       <Row id={`${id}-n`} title="Nécessaires" text={necessary}>
         <span className="shrink-0 rounded-chip bg-night-line px-2.5 py-1.5 text-[13px] text-on-dark">Toujours actif</span>
       </Row>
-      <Row id={`${id}-a`} title="Mesure d’audience" text={analytics}>
-        <Switch on={consent.analytics} onToggle={() => toggle('analytics')} labelledBy={`${id}-a`} />
-      </Row>
-      <Row id={`${id}-t`} title="Contenus tiers" text={thirdParty}>
-        <Switch on={consent.thirdParty} onToggle={() => toggle('thirdParty')} labelledBy={`${id}-t`} />
-      </Row>
+      {categories.includes('analytics') && (
+        <Row id={`${id}-a`} title="Mesure d’audience" text={analytics}>
+          <Switch on={consent.analytics} onToggle={() => toggle('analytics')} labelledBy={`${id}-a`} />
+        </Row>
+      )}
+      {categories.includes('thirdParty') && (
+        <Row id={`${id}-t`} title="Contenus tiers" text={thirdParty}>
+          <Switch on={consent.thirdParty} onToggle={() => toggle('thirdParty')} labelledBy={`${id}-t`} />
+        </Row>
+      )}
 
       <div className="flex flex-wrap gap-2.5 pt-1">
         <button

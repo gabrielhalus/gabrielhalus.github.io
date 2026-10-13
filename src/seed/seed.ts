@@ -460,24 +460,20 @@ export async function seed(payload: Payload) {
   await payload.updateGlobal({
     slug: 'cookies',
     data: {
-      title: 'Le strict minimum, et c’est vous qui choisissez.',
+      title: 'Pas de cookie, rien à accepter.',
       intro:
-        'Ce site n’utilise aucun cookie publicitaire. Les seuls traceurs servent à faire fonctionner le site et, si vous l’acceptez, à mesurer sa fréquentation.',
+        'Ce site ne dépose aucun cookie. La fréquentation est mesurée avec Umami, hébergé sur nos propres serveurs, sans cookie ni donnée personnelle.',
       categories: {
         necessary: 'Mémorisent votre choix sur cette page. Toujours actifs.',
-        analytics: '[Outil d’analyse] — pages vues et provenance, sans profilage. Conservés [13 mois] maximum.',
-        thirdParty: 'Agenda de prise de rendez-vous [outil] intégré à la page Contact.',
+        analytics: 'Umami, hébergé sur nos propres serveurs — pages vues et provenance, sans cookie, sans donnée personnelle ni profilage.',
+        thirdParty: 'Contenus intégrés depuis d’autres services, qui déposent leurs propres cookies.',
       },
-      trackers: [
-        { name: 'gh_consent', category: 'necessary', purpose: 'Mémoriser vos choix de cookies', duration: '6 mois' },
-        { name: '[nom_cookie]', category: 'analytics', purpose: 'Statistiques de fréquentation anonymes', duration: '[13 mois]' },
-        { name: '[nom_cookie]', category: 'thirdParty', purpose: 'Affichage de l’agenda de prise de rendez-vous', duration: '[durée]' },
-      ],
+      trackers: [],
       footnote:
-        'Refuser n’empêche pas d’utiliser le site. Vous pouvez changer d’avis à tout moment depuis cette page ou le lien « Cookies » en pied de page.',
+        'La prise de rendez-vous s’ouvre sur cal.com, qui applique sa propre politique de cookies.',
       banner: {
         title: 'Un petit réglage',
-        text: 'J’aimerais mesurer la fréquentation du site, sans publicité ni revente. D’accord ?',
+        text: 'Certains contenus de ce site déposent des cookies, sans publicité ni revente. D’accord ?',
       },
     },
   })

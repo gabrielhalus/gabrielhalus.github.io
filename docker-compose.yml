@@ -11,6 +11,8 @@ services:
       DATABASE_URL: postgres://${POSTGRES_USER:-payload}:${POSTGRES_PASSWORD:?POSTGRES_PASSWORD manquant}@postgres:5432/${POSTGRES_DB:-portfolio}
       PAYLOAD_SECRET: ${PAYLOAD_SECRET:?PAYLOAD_SECRET manquant}
       CONTACT_NOTIFICATION_EMAIL: ${CONTACT_NOTIFICATION_EMAIL:-}
+      UMAMI_SCRIPT_URL: ${UMAMI_SCRIPT_URL:-}
+      UMAMI_WEBSITE_ID: ${UMAMI_WEBSITE_ID:-}
       SEED_ON_INIT: ${SEED_ON_INIT:-true}
     volumes:
       - media:/app/media

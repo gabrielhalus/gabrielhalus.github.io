@@ -1,10 +1,12 @@
 import type { Metadata } from 'next'
 import { JetBrains_Mono, Schibsted_Grotesk } from 'next/font/google'
+import Script from 'next/script'
 import React from 'react'
 
 import { CookieBanner } from '@/components/CookieBanner'
 import { Footer } from '@/components/Footer'
 import { Header } from '@/components/Header'
+import { activeCategories } from '@/lib/consent'
 import { getOffers, getPayloadClient, getSettings } from '@/lib/payload'
 import { ogImages } from '@/lib/og'
 import { offerPath } from '@/lib/utils'
@@ -33,6 +35,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const [offers, payload] = await Promise.all([getOffers(), getPayloadClient()])
   const cookies = await payload.findGlobal({ slug: 'cookies', depth: 0 })
   const live = offers.filter((o) => o.status === 'live')
+  // Mesure d'audience Umami (sans cookie) : lue à l'exécution, absente du build Docker
+  const umamiSrc = process.env.UMAMI_SCRIPT_URL
+  const umamiId = process.env.UMAMI_WEBSITE_ID
 
   return (
     <html lang="fr" className={`${schibsted.variable} ${jetbrains.variable}`}>
@@ -45,7 +50,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           {children}
         </main>
         <Footer />
-        <CookieBanner title={cookies.banner?.title ?? 'Un petit réglage'} text={cookies.banner?.text ?? ''} />
+        {activeCategories(cookies.trackers).length > 0 && <CookieBanner title={cookies.banner?.title ?? 'Un petit réglage'} text={cookies.banner?.text ?? ''} />}
+        {umamiSrc && umamiId && <Script src={umamiSrc} data-website-id={umamiId} strategy="afterInteractive" />}
       </body>
     </html>
   )
