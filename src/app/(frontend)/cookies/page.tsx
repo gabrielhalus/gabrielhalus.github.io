@@ -26,12 +26,12 @@ export default async function CookiesPage() {
 
   return (
     <>
-      <section className="grid grid-cols-[repeat(auto-fit,minmax(min(480px,100%),1fr))] gap-3">
-        <div className="flex flex-col gap-5 rounded-block bg-white p-[clamp(28px,5vw,64px)]">
+      <section className="grid grid-cols-1 gap-3 lg:grid-cols-2">
+        <div className="pad-block flex flex-col gap-3 rounded-block bg-white sm:gap-5">
           <Eyebrow>// Cookies</Eyebrow>
-          <h1 className="m-0 text-[clamp(42px,5.4vw,80px)] leading-[0.95] font-extrabold tracking-[-0.05em]">{cookies.title}</h1>
-          {cookies.intro && <p className="m-0 max-w-[520px] text-lg leading-[1.55] text-body">{cookies.intro}</p>}
-          <span className="inline-flex self-start rounded-full bg-surface-2 px-3.5 py-2 text-[13px]">Dernière mise à jour : {formatShortDate(cookies.updatedOn)}</span>
+          <h1 className="m-0 text-4xl leading-[0.98] font-extrabold tracking-[-0.05em] text-balance sm:text-[clamp(42px,5.4vw,80px)] sm:leading-[0.95]">{cookies.title}</h1>
+          {cookies.intro && <p className="m-0 max-w-[520px] text-base leading-normal text-body sm:text-lg sm:leading-[1.55]">{cookies.intro}</p>}
+          <span className="inline-flex self-start rounded-full bg-surface-2 px-3 py-[7px] text-[13px] sm:px-3.5 sm:py-2">Dernière mise à jour : {formatShortDate(cookies.updatedOn)}</span>
         </div>
         {optional.length > 0 && (
           <CookiePreferences
@@ -43,10 +43,25 @@ export default async function CookiesPage() {
         )}
       </section>
 
-      <Block className="pad-block flex flex-col gap-6">
-        <h2 className="m-0 text-[32px] leading-[1.05] font-bold tracking-[-0.035em]">Liste des traceurs</h2>
+      <Block className="pad-block flex flex-col gap-3 sm:gap-6">
+        <h2 className="m-0 text-[22px] leading-[1.05] font-bold tracking-[-0.02em] sm:text-[32px] sm:tracking-[-0.035em]">Liste des traceurs</h2>
         {cookies.trackers && cookies.trackers.length > 0 && (
-          <div className="overflow-x-auto rounded-card border border-line">
+          <ul className="m-0 flex list-none flex-col gap-3 p-0 sm:hidden">
+            {cookies.trackers.map((t) => (
+              <li key={t.id} className="flex flex-col gap-1.5 rounded-2xl border border-line px-4 py-3.5">
+                <span className="flex items-center justify-between gap-3">
+                  <span className="font-mono text-sm break-all text-ink">{t.name}</span>
+                  <Badge className={categories[t.category].className}>{categories[t.category].label}</Badge>
+                </span>
+                <span className="text-sm text-body">
+                  {t.purpose} · {t.duration}
+                </span>
+              </li>
+            ))}
+          </ul>
+        )}
+        {cookies.trackers && cookies.trackers.length > 0 && (
+          <div className="overflow-x-auto rounded-card border border-line max-sm:hidden">
             <table className="w-full min-w-[720px] border-collapse text-[15px] leading-normal text-body">
               <thead>
                 <tr className="bg-surface-2 text-left">
@@ -72,7 +87,7 @@ export default async function CookiesPage() {
             </table>
           </div>
         )}
-        <p className="m-0 max-w-[760px] text-[15px] leading-relaxed text-body">
+        <p className="m-0 max-w-[760px] text-sm leading-[1.55] text-body sm:text-[15px] sm:leading-relaxed">
           {cookies.footnote} Pour le reste, voir les <Link href="/mentions-legales#confidentialite" className="text-ink">données personnelles</Link>.
         </p>
       </Block>

@@ -72,23 +72,61 @@
 /* Eyebrow numéroté en mono : « // 01 — Projets » */
 @utility eyebrow {
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 11px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+  @media (width >= 40rem) {
+    font-size: 12px;
+  }
 }
 
-/* Rembourrage des blocs r28 */
+/* Rembourrage des blocs : mobile 24/20, tablette 36/32, bureau fluide */
 @utility pad-block {
-  padding: clamp(28px, 5vw, 64px);
+  padding: 24px 20px;
+  @media (width >= 40rem) {
+    padding: 36px 32px;
+  }
+  @media (width >= 64rem) {
+    padding: clamp(28px, 5vw, 64px);
+  }
 }
 
+/* Titre de section ; une page peut ajuster les tailles via --h-section-sm et --h-section-lg */
 @utility h-section {
   margin: 0;
-  font-size: clamp(34px, 4vw, 56px);
-  line-height: 1;
+  font-size: 30px;
+  line-height: 1.02;
   font-weight: 700;
   letter-spacing: -0.04em;
   text-wrap: balance;
+  @media (width >= 40rem) {
+    font-size: var(--h-section-sm, 44px);
+    line-height: 1;
+  }
+  @media (width >= 64rem) {
+    font-size: var(--h-section-lg, clamp(34px, 4vw, 56px));
+  }
+}
+
+/* Carrousel horizontal à défilement aimanté (mobile) */
+@utility snap-row {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  & > * {
+    scroll-snap-align: start;
+  }
+}
+
+/* Blocs un peu moins arrondis sur mobile */
+@media (width < 40rem) {
+  :root {
+    --radius-block: 24px;
+  }
 }
 
 @layer base {
@@ -117,6 +155,11 @@
     scroll-margin-top: 24px;
   }
 
+  /* Menu mobile ouvert : la page ne défile plus dessous */
+  html:has(#menu-mobile) {
+    overflow: hidden;
+  }
+
   details > summary {
     cursor: pointer;
   }
@@ -128,17 +171,27 @@
 .prose-gh {
   display: flex;
   flex-direction: column;
-  gap: 22px;
-  font-size: 18px;
-  line-height: 1.7;
+  gap: 18px;
+  font-size: 17px;
+  line-height: 1.65;
   color: var(--color-body);
+
+  @media (width >= 40rem) {
+    gap: 22px;
+    font-size: 18px;
+    line-height: 1.7;
+  }
 
   & > * {
     margin: 0;
   }
   & h2 {
-    margin-top: 24px;
-    font-size: clamp(28px, 2.6vw, 38px);
+    margin-top: 10px;
+    font-size: 26px;
+    @media (width >= 40rem) {
+      margin-top: 24px;
+      font-size: clamp(28px, 2.6vw, 38px);
+    }
     line-height: 1.1;
     font-weight: 700;
     letter-spacing: -0.03em;
@@ -170,10 +223,15 @@
     gap: 8px;
   }
   & blockquote {
-    margin: 8px 0;
-    padding: 4px 0 4px 24px;
+    margin: 4px 0;
+    padding: 0 0 0 16px;
     border-left: 3px solid var(--color-ink);
-    font-size: 24px;
+    font-size: 21px;
+    @media (width >= 40rem) {
+      margin: 8px 0;
+      padding: 4px 0 4px 24px;
+      font-size: 24px;
+    }
     line-height: 1.35;
     font-weight: 600;
     letter-spacing: -0.02em;
@@ -255,12 +313,69 @@
   .curso-float, .curso-eye, .curso-glitch, .curso-normal { animation: none !important; }
 }
 
-/* Bandeau clients : deux copies identiques séparées par 12 px, la piste glisse d'une copie */
+/* Bandeau clients : deux copies identiques séparées par l'écart, la piste glisse d'une copie */
+:root {
+  --marquee-gap: 8px;
+  @media (width >= 40rem) { --marquee-gap: 10px; }
+  @media (width >= 64rem) { --marquee-gap: 12px; }
+}
 @keyframes marquee {
-  to { transform: translateX(calc(-50% - 6px)); }
+  to { transform: translateX(calc(-50% - var(--marquee-gap) / 2)); }
 }
 .marquee-track { animation: marquee 32s linear infinite; }
 .marquee-track:hover { animation-play-state: paused; }
 @media (prefers-reduced-motion: reduce) {
   .marquee-track { animation: none; }
+}
+
+/* Scène Curso de l'accueil : une seule structure, trois agencements */
+.hero-scene {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-areas:
+    'profile profile'
+    'curso title'
+    'tasks tasks'
+    'offer offer';
+  align-items: end;
+  gap: 16px 12px;
+}
+.hero-scene > [data-area='profile'] { grid-area: profile; }
+.hero-scene > [data-area='curso'] { grid-area: curso; }
+.hero-scene > [data-area='title'] { grid-area: title; }
+.hero-scene > [data-area='tasks'] { grid-area: tasks; }
+.hero-scene > [data-area='offer'] { grid-area: offer; }
+@media (width >= 40rem) {
+  .hero-scene {
+    grid-template-columns: 280px minmax(0, 1fr);
+    grid-template-rows: auto auto 1fr;
+    grid-template-areas:
+      'profile title'
+      'curso tasks'
+      'curso offer';
+    align-items: center;
+    gap: 10px 24px;
+  }
+  .hero-scene > [data-area='profile'] { align-self: start; }
+  .hero-scene > [data-area='title'] { align-self: end; }
+  .hero-scene > [data-area='offer'] { align-self: start; margin-top: 4px; }
+}
+@media (width >= 80rem) {
+  .hero-scene {
+    grid-template-columns: 1fr auto minmax(0, 360px) 1fr;
+    grid-template-rows: auto 1fr auto auto 1fr auto;
+    grid-template-areas:
+      'profile profile profile profile'
+      '. . . .'
+      '. curso title .'
+      '. curso tasks .'
+      '. . . .'
+      'offer offer offer offer';
+    align-items: center;
+    gap: 0 28px;
+  }
+  .hero-scene > [data-area='profile'] { align-self: start; margin-bottom: 20px; }
+  .hero-scene > [data-area='title'] { align-self: end; margin-bottom: 14px; }
+  .hero-scene > [data-area='tasks'] { align-self: start; }
+  .hero-scene > [data-area='offer'] { margin-top: 20px; }
 }

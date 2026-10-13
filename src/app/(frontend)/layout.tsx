@@ -32,7 +32,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const [offers, payload] = await Promise.all([getOffers(), getPayloadClient()])
+  const [offers, payload, settings] = await Promise.all([getOffers(), getPayloadClient(), getSettings()])
   const cookies = await payload.findGlobal({ slug: 'cookies', depth: 0 })
   const live = offers.filter((o) => o.status === 'live')
   // Mesure d'audience Umami (sans cookie) : lue à l'exécution, absente du build Docker
@@ -45,7 +45,12 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <a href="#contenu" className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:rounded-full focus:bg-ink focus:px-4 focus:py-2 focus:text-white">
           Aller au contenu
         </a>
-        <Header offersHref={live[0] ? offerPath(live[0].slug) : '/#offres'} offerPaths={live.map((o) => offerPath(o.slug))} />
+        <Header
+          offersHref={live[0] ? offerPath(live[0].slug) : '/#offres'}
+          offerPaths={live.map((o) => offerPath(o.slug))}
+          featuredOffer={live[0] && { name: live[0].name, promise: live[0].promise, tone: live[0].tone, href: offerPath(live[0].slug) }}
+          socials={settings.socials}
+        />
         <main id="contenu" className="mx-auto box-content flex max-w-[1416px] flex-col gap-3 px-3">
           {children}
         </main>

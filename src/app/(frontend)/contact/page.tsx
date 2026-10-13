@@ -70,59 +70,59 @@ export default async function ContactPage({ searchParams }: Props) {
           offer: defaultOffer ?? offerOptions[0]?.value,
         }}
       >
-        <section className="grid grid-cols-[repeat(auto-fit,minmax(min(480px,100%),1fr))] items-stretch gap-3">
+        <section className="grid grid-cols-1 items-stretch gap-3 lg:grid-cols-2">
           <div className="flex flex-col gap-3">
-            <div className="flex flex-1 flex-col gap-5 rounded-block bg-accent p-[clamp(28px,4.5vw,56px)]">
-              <Eyebrow className="text-ink">// Contact</Eyebrow>
-              <h1 className="m-0 text-[clamp(44px,5.6vw,84px)] leading-[0.94] font-extrabold tracking-[-0.05em] text-balance">
+            <div className="flex flex-1 flex-col gap-3.5 rounded-block bg-accent px-5 py-6 sm:gap-5 sm:p-10 lg:p-[clamp(28px,4.5vw,56px)]">
+              <Eyebrow className="text-ink max-sm:hidden">// Contact</Eyebrow>
+              <h1 className="m-0 text-[42px] leading-[0.96] font-extrabold tracking-[-0.05em] text-balance sm:text-[64px] sm:leading-[0.94] lg:text-[clamp(44px,5.6vw,84px)]">
                 {page.title}
               </h1>
               {page.lead && (
-                <p className="m-0 max-w-[460px] text-lg leading-normal">
+                <p className="m-0 max-w-[460px] text-base leading-normal sm:text-lg">
                   {page.lead.replace('{delai}', delay)}
                 </p>
               )}
             </div>
-            <div className="grid grid-cols-[repeat(auto-fit,minmax(min(240px,100%),1fr))] gap-3">
+            <div className="grid grid-cols-2 gap-3">
               {hasBooking && (
                 <BookingLink
                   defaultHref={settings.bookingUrl}
                   byOffer={bookingByOffer}
-                  className="flex flex-col gap-7 rounded-panel bg-ink p-6 text-white no-underline hover:bg-ink-soft"
+                  className="box-border flex min-h-[120px] flex-col gap-[18px] rounded-tile bg-ink p-4 text-white no-underline hover:bg-ink-soft sm:gap-7 sm:rounded-panel sm:p-6"
                 >
                   <span className="flex items-center justify-between">
-                    <span className="flex size-11 items-center justify-center rounded-full bg-accent text-ink">
-                      <Calendar />
+                    <span className="flex size-10 items-center justify-center rounded-full bg-accent text-ink sm:size-11">
+                      <Calendar size={18} />
                     </span>
-                    <ArrowUpRight />
+                    <ArrowUpRight className="max-sm:hidden" />
                   </span>
-                  <span className="flex flex-col gap-1">
-                    <span className="text-[19px] font-semibold">{page.bookingTitle}</span>
-                    <span className="text-sm text-subtle">{page.bookingText}</span>
+                  <span className="flex flex-col sm:gap-1">
+                    <span className="text-base font-semibold sm:text-[19px]">{page.bookingTitle}</span>
+                    <span className="text-xs text-subtle sm:text-sm">{page.bookingText}</span>
                   </span>
                 </BookingLink>
               )}
               {settings.email && (
                 <a
                   href={`mailto:${settings.email}`}
-                  className="flex flex-col gap-7 rounded-panel bg-white p-6 text-ink no-underline hover:bg-surface-2"
+                  className="box-border flex min-h-[120px] min-w-0 flex-col gap-[18px] rounded-tile bg-white p-4 text-ink no-underline hover:bg-surface-2 sm:gap-7 sm:rounded-panel sm:p-6"
                 >
                   <span className="flex items-center justify-between">
-                    <span className="flex size-11 items-center justify-center rounded-full border border-line bg-surface-2">
-                      <Mail />
+                    <span className="flex size-10 items-center justify-center rounded-full border border-line bg-surface-2 sm:size-11">
+                      <Mail size={18} />
                     </span>
-                    <ArrowUpRight />
+                    <ArrowUpRight className="max-sm:hidden" />
                   </span>
-                  <span className="flex flex-col gap-1">
-                    <span className="text-[19px] font-semibold">{page.mailTitle}</span>
-                    <span className="text-sm text-muted">{settings.email}</span>
+                  <span className="flex min-w-0 flex-col sm:gap-1">
+                    <span className="text-base font-semibold sm:text-[19px]">{page.mailTitle}</span>
+                    <span className="truncate text-xs text-muted sm:text-sm">{settings.email}</span>
                   </span>
                 </a>
               )}
             </div>
           </div>
 
-          <div className="relative flex flex-col gap-6 rounded-block bg-white p-[clamp(24px,4vw,48px)]">
+          <div className="relative flex flex-col gap-6 rounded-block bg-white px-[18px] py-[22px] sm:p-10 lg:p-[clamp(24px,4vw,48px)]">
             <ContactForm
               offers={offerOptions}
               budgets={page.budgets ?? []}
@@ -140,27 +140,29 @@ export default async function ContactPage({ searchParams }: Props) {
       </ContactChoiceProvider>
 
       {page.steps && page.steps.length > 0 && (
-        <Block className="grid grid-cols-[repeat(auto-fit,minmax(min(260px,100%),1fr))] gap-8 p-[clamp(28px,4vw,48px)]">
+        <Block className="grid grid-cols-1 gap-3.5 px-5 py-[22px] sm:grid-cols-[repeat(auto-fit,minmax(min(260px,100%),1fr))] sm:gap-8 sm:p-10 lg:p-[clamp(28px,4vw,48px)]">
           <div className="flex flex-col gap-2.5">
-            <Eyebrow>// Ensuite</Eyebrow>
-            <h2 className="m-0 text-[28px] leading-[1.05] font-bold tracking-[-0.03em]">
+            <Eyebrow className="text-muted max-sm:hidden">// Ensuite</Eyebrow>
+            <h2 className="m-0 text-xl leading-[1.05] font-bold tracking-[-0.03em] sm:text-[28px]">
               {page.stepsTitle}
             </h2>
           </div>
           {page.steps.map((step, i) => {
             const last = i === page.steps!.length - 1
             return (
-              <div key={step.id} className="flex flex-col gap-2">
+              <div key={step.id} className="flex gap-3 sm:flex-col sm:gap-2">
                 <span
                   className={cn(
-                    'self-start font-mono text-sm font-medium',
+                    'shrink-0 self-start font-mono text-[13px] font-medium max-sm:pt-0.5 sm:text-sm',
                     last && 'rounded-chip bg-accent px-1.5',
                   )}
                 >
                   {String(i + 1).padStart(2, '0')}
                 </span>
-                <span className="text-[17px] font-semibold">{step.title}</span>
-                <span className="text-[15px] leading-normal text-body">{step.text}</span>
+                <span className="flex flex-col gap-0.5 sm:gap-2">
+                  <span className="text-[15px] font-semibold sm:text-[17px]">{step.title}</span>
+                  <span className="text-[15px] leading-[1.45] text-body sm:leading-normal">{step.text}</span>
+                </span>
               </div>
             )
           })}

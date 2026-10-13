@@ -38,15 +38,18 @@ type ButtonLinkProps = {
   variant?: ButtonVariant
   size?: ButtonSize
   arrow?: boolean
+  /** Pleine largeur, texte à gauche et pastille à droite. */
+  wide?: boolean
   className?: string
   children: ReactNode
 } & Omit<ComponentProps<typeof Link>, 'href' | 'className' | 'children'>
 
-export const ButtonLink = ({ href, variant = 'primary', size = 'lg', arrow = false, className, children, ...rest }: ButtonLinkProps) => (
+export const ButtonLink = ({ href, variant = 'primary', size = 'lg', arrow = false, wide = false, className, children, ...rest }: ButtonLinkProps) => (
   <Link
     href={href}
     className={cn(
-      'inline-flex shrink-0 items-center justify-center gap-2.5 rounded-full font-semibold no-underline transition-colors',
+      'inline-flex shrink-0 items-center gap-2.5 rounded-full font-semibold no-underline transition-colors',
+      wide ? 'w-full justify-between' : 'justify-center',
       buttonVariants[variant],
       sizes[size].button,
       arrow && sizes[size].withDot,
@@ -151,7 +154,7 @@ export const Badge = ({ children, className }: { children: ReactNode; className?
 )
 
 export const AvailabilityBadge = ({ text, className }: { text: string; className?: string }) => (
-  <span className={cn('inline-flex items-center gap-2 self-start rounded-full bg-surface-2 py-2 pr-3.5 pl-2.5 text-sm font-medium', className)}>
+  <span className={cn('inline-flex items-center gap-2 self-start justify-self-start rounded-full bg-surface-2 py-[7px] pr-3 pl-[9px] text-[13px] font-medium sm:py-2 sm:pr-3.5 sm:pl-2.5 sm:text-sm', className)}>
     <span className="size-2 rounded-full bg-success shadow-[0_0_0_4px_var(--color-mint)]" />
     {text}
   </span>

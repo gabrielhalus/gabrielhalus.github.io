@@ -48,9 +48,10 @@ export const Quote = ({ className }: IconProps) => (
   </svg>
 )
 
-export const Menu = ({ size = 20, className }: IconProps) => (
-  <svg width={size} height={size} viewBox="0 0 20 20" fill="none" aria-hidden="true" className={className}>
-    <path d="M3 6h14M3 10h14M3 14h14" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
+/** Deux traits inégaux : bouton de menu mobile. */
+export const Menu = ({ size = 18, className }: IconProps) => (
+  <svg width={size} height={size} viewBox="0 0 18 18" fill="none" aria-hidden="true" className={className}>
+    <path d="M3 6h12M3 12h8" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
   </svg>
 )
 

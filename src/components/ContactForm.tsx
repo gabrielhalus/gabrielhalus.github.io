@@ -16,9 +16,10 @@ const TYPES = [
   { id: 'other', label: 'Autre question' },
 ] as const
 
+// 16 px sur mobile : en dessous, iOS zoome sur le champ actif
 const fieldClass =
-  'box-border h-12 rounded-field border border-line bg-white px-3.5 text-[15px] text-ink outline-none focus:border-ink focus:shadow-[0_0_0_4px_var(--color-accent)]'
-const labelClass = 'text-[13px] font-medium'
+  'box-border h-[52px] rounded-[14px] border border-line-strong bg-white px-4 text-base text-ink outline-none focus:border-ink focus:shadow-[0_0_0_4px_var(--color-accent)] sm:h-12 sm:rounded-field sm:border-line sm:px-3.5 sm:text-[15px]'
+const labelClass = 'text-sm font-semibold sm:text-[13px] sm:font-medium'
 
 type Props = {
   offers: { label: string; value: string }[]
@@ -53,17 +54,17 @@ export const ContactForm = ({
   if (state.status === 'success' && state.at !== dismissedAt) {
     return (
       <div
-        className="flex min-h-[560px] flex-1 flex-col items-start justify-center gap-5"
+        className="flex flex-1 flex-col items-center justify-center gap-4 py-6 text-center sm:min-h-[560px] sm:items-start sm:gap-5 sm:py-0 sm:text-left"
         role="status"
       >
         <span className="flex size-[104px] items-center justify-center rounded-tile bg-accent">
           <Curso size={72} tone="citron" expression="content" />
         </span>
-        <h2 className="m-0 text-[40px] leading-none font-bold tracking-[-0.04em]">
+        <h2 className="m-0 text-[30px] leading-none font-bold tracking-[-0.04em] sm:text-[40px]">
           {success.title}
         </h2>
         {success.text && (
-          <p className="m-0 max-w-[420px] text-[17px] leading-normal text-body">{success.text}</p>
+          <p className="m-0 max-w-[420px] text-base leading-normal text-body sm:text-[17px]">{success.text}</p>
         )}
         <button
           type="button"
@@ -88,9 +89,9 @@ export const ContactForm = ({
       }}
     >
       <fieldset className="m-0 flex flex-col gap-2.5 border-0 p-0">
-        <legend className="mb-2.5 p-0 text-[13px] font-medium">Votre besoin</legend>
+        <legend className={cn('mb-2.5 p-0', labelClass)}>Votre besoin</legend>
         <input type="hidden" name="requestType" value={type} />
-        <div className="flex flex-wrap gap-1 self-start rounded-[28px] bg-surface-2 p-1">
+        <div className="flex flex-wrap gap-2 sm:gap-1 sm:self-start sm:rounded-[28px] sm:bg-surface-2 sm:p-1">
           {TYPES.map((t) => {
             const on = t.id === type
             return (
@@ -100,10 +101,10 @@ export const ContactForm = ({
                 aria-pressed={on}
                 onClick={() => setType(t.id)}
                 className={cn(
-                  'h-10 cursor-pointer rounded-full border-0 px-4 text-sm font-medium',
+                  'h-11 cursor-pointer rounded-full border px-4 text-[15px] font-medium sm:h-10 sm:border-0 sm:text-sm',
                   on
-                    ? 'bg-white text-ink shadow-raised'
-                    : 'bg-transparent text-muted hover:text-ink',
+                    ? 'border-ink bg-ink text-white sm:bg-white sm:text-ink sm:shadow-raised'
+                    : 'border-line-strong bg-white text-ink sm:bg-transparent sm:text-muted sm:hover:text-ink',
                 )}
               >
                 {t.label}
@@ -191,7 +192,7 @@ export const ContactForm = ({
           rows={6}
           required
           placeholder={placeholder ?? undefined}
-          className={cn(fieldClass, 'h-auto min-h-40 resize-y py-3 leading-normal')}
+          className={cn(fieldClass, 'h-auto min-h-[140px] resize-y py-3.5 leading-normal sm:min-h-40 sm:py-3')}
         />
       </div>
 
@@ -201,12 +202,12 @@ export const ContactForm = ({
         <input id="c-site" name="website" tabIndex={-1} autoComplete="off" />
       </div>
 
-      <label className="flex items-start gap-2.5 text-sm leading-[1.45] text-body">
+      <label className="flex items-start gap-3 text-sm leading-[1.45] text-body sm:gap-2.5">
         <input
           type="checkbox"
           name="consent"
           required
-          className="mt-px size-[18px] shrink-0 accent-ink"
+          className="m-0 size-[22px] shrink-0 accent-ink sm:mt-px sm:size-[18px]"
         />
         <span>
           J’accepte que ces informations soient utilisées pour me recontacter. Détails dans la{' '}
@@ -226,16 +227,16 @@ export const ContactForm = ({
         </p>
       )}
 
-      <div className="flex flex-wrap items-center justify-between gap-4">
+      <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between sm:gap-4">
         <button
           type="submit"
           disabled={pending}
-          className="inline-flex h-[52px] cursor-pointer items-center gap-2.5 rounded-full border-0 bg-ink pr-1.5 pl-[22px] text-base font-semibold text-white hover:bg-ink-soft disabled:cursor-wait disabled:opacity-60"
+          className="inline-flex h-14 cursor-pointer items-center justify-between gap-2.5 rounded-full border-0 bg-ink pr-2 pl-[22px] text-[17px] font-semibold text-white hover:bg-ink-soft disabled:cursor-wait disabled:opacity-60 sm:h-[52px] sm:pr-1.5 sm:text-base"
         >
           {pending ? 'Envoi…' : 'Envoyer le message'}
           <ArrowDot className="size-10 bg-accent text-ink" />
         </button>
-        {note && <span className="text-[13px] text-muted">{note}</span>}
+        {note && <span className="text-center text-[13px] text-muted">{note}</span>}
       </div>
     </form>
   )
