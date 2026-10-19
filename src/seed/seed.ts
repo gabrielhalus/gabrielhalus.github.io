@@ -249,10 +249,10 @@ export async function seed(payload: Payload) {
         title: 'Ils me font confiance',
         subtitle: 'Artisans, traiteurs, PME et indépendants',
         items: [
-          { name: '[Client 1]', featured: true },
-          { name: '[Client 2]', featured: true },
-          { name: '[Client 3]', featured: true },
-          { name: '[Client secondaire]', featured: false },
+          { name: '[Client 1]' },
+          { name: '[Client 2]' },
+          { name: '[Client 3]' },
+          { name: '[Client 4]' },
         ],
       },
       services: {

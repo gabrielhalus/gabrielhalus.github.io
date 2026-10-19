@@ -1153,10 +1153,6 @@ export interface Home {
            * SVG ou PNG transparent, monochrome de préférence. Sans logo, le nom s’affiche.
            */
           logo?: (number | null) | Media;
-          /**
-           * Décoché : affiché plus petit et en gris, une seule fois par tour de bandeau.
-           */
-          featured?: boolean | null;
           id?: string | null;
         }[]
       | null;
@@ -1373,7 +1369,6 @@ export interface HomeSelect<T extends boolean = true> {
           | {
               name?: T;
               logo?: T;
-              featured?: T;
               id?: T;
             };
       };

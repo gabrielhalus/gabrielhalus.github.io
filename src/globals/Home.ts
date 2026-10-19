@@ -114,13 +114,6 @@ export const Home: GlobalConfig = {
                   label: 'Logo (facultatif)',
                   admin: { description: 'SVG ou PNG transparent, monochrome de préférence. Sans logo, le nom s’affiche.' },
                 },
-                {
-                  name: 'featured',
-                  type: 'checkbox',
-                  label: 'Mettre en avant',
-                  defaultValue: true,
-                  admin: { description: 'Décoché : affiché plus petit et en gris, une seule fois par tour de bandeau.' },
-                },
               ],
             },
           ],
