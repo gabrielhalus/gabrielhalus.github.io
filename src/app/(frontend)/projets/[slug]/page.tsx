@@ -65,11 +65,13 @@ export default async function ProjectPage({ params }: Params) {
           </div>
         </div>
         <div className="flex flex-col gap-3">
-          <div className={cn('relative flex min-h-[320px] flex-1 items-center justify-center overflow-hidden rounded-block font-mono text-xs', t.bg, t.ink)}>
-            {project.cover ? <Media resource={project.cover} priority size="large" sizes="(min-width: 1024px) 50vw, 100vw" /> : `[Capture ${project.title}]`}
-          </div>
+          {project.cover && (
+            <div className={cn('relative flex min-h-[320px] flex-1 items-center justify-center overflow-hidden rounded-block', t.bg, t.ink)}>
+              <Media resource={project.cover} priority size="large" sizes="(min-width: 1024px) 50vw, 100vw" />
+            </div>
+          )}
           {project.result && (
-            <div className="flex flex-col gap-1 rounded-block bg-accent p-8">
+            <div className="flex flex-1 flex-col justify-end gap-1 rounded-block bg-accent p-8">
               <span className="text-[15px] font-medium">Résultat</span>
               <span className="text-[clamp(28px,3vw,40px)] leading-[1.05] font-extrabold tracking-[-0.04em]">{project.result}</span>
               {project.client && <span className="text-sm">{project.client}</span>}

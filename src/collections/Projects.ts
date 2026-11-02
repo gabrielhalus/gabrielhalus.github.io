@@ -46,8 +46,8 @@ export const Projects: CollectionConfig = {
       admin: { description: 'Ex. « −40 % de temps de saisie ». Affiché sur la carte du projet.' },
     },
     { name: 'summary', type: 'textarea', label: 'Résumé', admin: { description: 'Chapô de l’étude de cas et description SEO par défaut.' } },
-    { name: 'cover', type: 'upload', relationTo: 'media', label: 'Capture' },
-    toneField({ admin: { description: 'Couleur du visuel de substitution tant qu’il n’y a pas de capture.' } }),
+    { name: 'cover', type: 'upload', relationTo: 'media', label: 'Capture (facultative)' },
+    toneField({ admin: { description: 'Couleur de la carte du projet quand il n’y a pas de capture.' } }),
     {
       name: 'stack',
       type: 'text',
@@ -58,7 +58,7 @@ export const Projects: CollectionConfig = {
     {
       name: 'featured',
       type: 'checkbox',
-      label: 'Mis en avant (carte avec capture)',
+      label: 'Mis en avant sur l’accueil',
       defaultValue: false,
       admin: { position: 'sidebar' },
     },

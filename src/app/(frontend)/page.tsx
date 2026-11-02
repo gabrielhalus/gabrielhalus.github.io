@@ -388,7 +388,7 @@ const CompactProjectCard = ({ project, className }: { project: Project; classNam
       className={cn('flex-col gap-2.5 rounded-tile border border-line bg-surface-2 p-2 pb-3.5 text-ink no-underline', className ?? 'flex')}
     >
       <span className={cn('relative flex h-[170px] items-center justify-center overflow-hidden rounded-card font-mono text-xs sm:h-[190px]', t.bg, t.ink)}>
-        {project.cover ? <Media resource={project.cover} size="card" sizes="(min-width: 640px) 50vw, 100vw" /> : `[Capture ${project.title}]`}
+        {project.cover ? <Media resource={project.cover} size="card" sizes="(min-width: 640px) 50vw, 100vw" /> : <span className="px-6 text-center font-sans text-xl font-bold tracking-[-0.03em] text-balance">{project.title}</span>}
       </span>
       <span className="flex items-center justify-between gap-2.5 px-1.5">
         <span className="flex flex-col gap-0.5">
