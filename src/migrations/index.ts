@@ -5,6 +5,7 @@ import * as migration_20261012_131024_home_hero_photo from './20261012_131024_ho
 import * as migration_20261012_132330_home_hero_curso_tasks from './20261012_132330_home_hero_curso_tasks';
 import * as migration_20261013_065716_cookies_auto_banner from './20261013_065716_cookies_auto_banner';
 import * as migration_20261019_072505_remove_client_featured from './20261019_072505_remove_client_featured';
+import * as migration_20261102_144336_mcp_api_keys from './20261102_144336_mcp_api_keys';
 
 export const migrations = [
   {
@@ -40,6 +41,11 @@ export const migrations = [
   {
     up: migration_20261019_072505_remove_client_featured.up,
     down: migration_20261019_072505_remove_client_featured.down,
-    name: '20261019_072505_remove_client_featured'
+    name: '20261019_072505_remove_client_featured',
+  },
+  {
+    up: migration_20261102_144336_mcp_api_keys.up,
+    down: migration_20261102_144336_mcp_api_keys.down,
+    name: '20261102_144336_mcp_api_keys'
   },
 ];

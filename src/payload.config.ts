@@ -1,4 +1,5 @@
 import { postgresAdapter } from '@payloadcms/db-postgres'
+import { mcpPlugin } from '@payloadcms/plugin-mcp'
 import { seoPlugin } from '@payloadcms/plugin-seo'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import { fr } from '@payloadcms/translations/languages/fr'
@@ -62,6 +63,23 @@ export default buildConfig({
     await seed(payload)
   },
   plugins: [
+    mcpPlugin({
+      userCollection: 'users',
+      collections: {
+        projects: { enabled: true, description: 'Projets du portfolio' },
+        offers: { enabled: true, description: 'Offres de prestations' },
+        guides: { enabled: true, description: 'Guides' },
+        media: { enabled: true, description: 'Médiathèque' },
+        'qr-codes': { enabled: true, description: 'QR codes de redirection' },
+      },
+      globals: {
+        settings: { enabled: true, description: 'Réglages du site' },
+        home: { enabled: true, description: "Page d'accueil" },
+        'contact-page': { enabled: true, description: 'Page contact' },
+        legal: { enabled: true, description: 'Mentions légales' },
+        cookies: { enabled: true, description: 'Bandeau et politique de cookies' },
+      },
+    }),
     seoPlugin({
       collections: ['projects', 'offers', 'guides'],
       uploadsCollection: 'media',
