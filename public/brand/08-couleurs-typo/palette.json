@@ -1,0 +1,21 @@
+{
+  "encre": "#101010",
+  "encre-douce": "#2b2b2b",
+  "texte-secondaire": "#5c5c5c",
+  "papier": "#efefef",
+  "surface": "#ffffff",
+  "surface-2": "#f8f8f8",
+  "ligne": "#e4e4e4",
+  "citron": "#dbf54c",
+  "citron-profond": "#c3df2c",
+  "citron-pale": "#f3fbcb",
+  "menthe": "#b3f3d4",
+  "menthe-encre": "#0c3d24",
+  "lilas": "#c1b2fd",
+  "lilas-encre": "#2c2052",
+  "blush": "#ffddf6",
+  "blush-encre": "#5a1140",
+  "ardoise": "#dfe6ef",
+  "ardoise-encre": "#26364a",
+  "danger": "#d92d20"
+}
