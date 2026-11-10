@@ -32,7 +32,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const offer = await getOffer((await params).slug)
   if (!offer) return {}
   return {
-    title: offer.meta?.title ?? `Offre ${offer.name.toLowerCase()} — ${offer.promise ?? ''}`,
+    title: offer.meta?.title ?? `Logiciel de gestion pour ${offer.name.toLowerCase()}`,
     description: offer.meta?.description ?? offer.hero?.lead ?? undefined,
     openGraph: { images: ogImages(offer.meta?.image, `/og/offers/${offer.slug}`, offer.updatedAt) },
     alternates: { canonical: `/${offer.slug}` },
@@ -109,7 +109,7 @@ export default async function OfferPage({ params }: Params) {
         {/* Bureau : photo et cartes flottantes */}
         <div className="relative box-border min-h-[560px] py-10 pl-12 max-lg:hidden">
           <div className="absolute inset-y-0 right-0 left-12 flex items-center justify-center overflow-hidden rounded-panel bg-white p-6 text-center font-mono text-[13px] text-muted">
-            {hero.image ? <Media resource={hero.image} priority sizes="50vw" /> : `[${hero.imagePlaceholder ?? 'Photo'}]`}
+            {hero.image && <Media resource={hero.image} priority sizes="50vw" />}
           </div>
           {hero.floatingCards?.docTitle && (
             <div className="absolute top-14 left-0 flex w-[min(280px,80%)] flex-col gap-2.5 rounded-[18px] bg-white px-[18px] py-4 shadow-pop">
@@ -149,11 +149,11 @@ export default async function OfferPage({ params }: Params) {
 
       {/* Le constat */}
       {problem?.title && (
-        <Block className="pad-block grid grid-cols-1 items-start gap-4 [--h-section-lg:clamp(34px,4vw,54px)] [--h-section-sm:38px] sm:grid-cols-2 sm:gap-8 lg:grid-cols-[repeat(auto-fit,minmax(min(440px,100%),1fr))] lg:gap-12">
+        <Block className={cn('pad-block grid grid-cols-1 items-start gap-4 [--h-section-lg:clamp(34px,4vw,54px)] [--h-section-sm:38px]', problem.breakdown && problem.breakdown.length > 0 && 'sm:grid-cols-2 sm:gap-8 lg:grid-cols-[repeat(auto-fit,minmax(min(440px,100%),1fr))] lg:gap-12')}>
           <div className="flex flex-col gap-4 sm:gap-3.5 lg:gap-4">
-            <Eyebrow>// {nextNum()} — Le constat</Eyebrow>
+            <Eyebrow>// {nextNum()} · Le constat</Eyebrow>
             <h2 className="h-section">{problem.title}</h2>
-            {problem.text && <p className="m-0 max-w-[460px] text-base leading-normal text-body lg:text-[17px] lg:leading-[1.55]">{problem.text}</p>}
+            {problem.text && <p className={cn('m-0 text-base leading-normal text-body lg:text-[17px] lg:leading-[1.55]', problem.breakdown && problem.breakdown.length > 0 ? 'max-w-[460px]' : 'max-w-[720px]')}>{problem.text}</p>}
           </div>
           {problem.breakdown && problem.breakdown.length > 0 && (
             <div className="flex flex-col gap-3 sm:gap-3.5 lg:gap-[18px]">
@@ -181,8 +181,8 @@ export default async function OfferPage({ params }: Params) {
       {/* Modules : carrousel sur mobile, 2 × 2 sur tablette */}
       {modules?.items && modules.items.length > 0 && (
         <Block className="flex flex-col gap-4 py-6 [--h-section-lg:clamp(34px,4vw,56px)] [--h-section-sm:38px] sm:gap-6 sm:px-8 sm:py-9 lg:gap-10 lg:p-[clamp(28px,5vw,64px)]">
-          <SectionHeading className="px-5 sm:px-0" eyebrow={`// ${nextNum()} — Ce que vous obtenez`} title={modules.title} aside={modules.intro} />
-          <SnapCarousel className="sm:grid sm:grid-cols-2 sm:gap-3 sm:overflow-visible sm:px-0 lg:grid-cols-[repeat(auto-fit,minmax(min(280px,100%),1fr))]">
+          <SectionHeading className="px-5 sm:px-0" eyebrow={`// ${nextNum()} · Ce que vous obtenez`} title={modules.title} aside={modules.intro} />
+          <SnapCarousel className="sm:grid sm:grid-cols-2 sm:gap-3 sm:overflow-visible sm:px-0 lg:grid-cols-2 xl:grid-cols-4">
             {modules.items.map((m, i) => {
               const v = moduleVariants[m.variant ?? 'light']
               const dark = m.variant === 'dark'
@@ -246,7 +246,7 @@ export default async function OfferPage({ params }: Params) {
       {plans.length > 0 && (
         <Block className="pad-block flex flex-col gap-4 [--h-section-lg:clamp(34px,4vw,54px)] [--h-section-sm:38px] sm:gap-5 lg:gap-10">
           <div className="flex flex-col gap-3.5 lg:items-center lg:text-center">
-            <Eyebrow>// {nextNum()} — Formules</Eyebrow>
+            <Eyebrow>// {nextNum()} · Formules</Eyebrow>
             <h2 className="h-section max-w-[760px]">{pricing?.title}</h2>
             {pricing?.intro && <p className="m-0 max-w-[560px] text-base leading-[1.55] text-muted max-lg:hidden">{pricing.intro}</p>}
           </div>
@@ -282,7 +282,7 @@ export default async function OfferPage({ params }: Params) {
             weeksPerYear={roi.weeksPerYear ?? 46}
           >
             <div className="flex flex-col gap-2 max-sm:px-1 sm:gap-2.5 lg:gap-3.5">
-              <Eyebrow className="text-subtle">// {nextNum()} — Votre retour sur investissement</Eyebrow>
+              <Eyebrow className="text-subtle">// {nextNum()} · Votre retour sur investissement</Eyebrow>
               <h2 className="h-section">{roi.title}</h2>
               {roi.intro && <p className="m-0 max-w-[460px] text-base leading-[1.55] text-on-dark max-lg:hidden">{roi.intro}</p>}
             </div>
@@ -293,7 +293,7 @@ export default async function OfferPage({ params }: Params) {
       {/* Déroulé */}
       {process?.steps && process.steps.length > 0 && (
         <Block className="pad-block flex flex-col gap-[18px] [--h-section-sm:38px] sm:gap-5 lg:gap-10">
-          <SectionHeading eyebrow={`// ${nextNum()} — Comment ça se passe`} title={process.title} />
+          <SectionHeading eyebrow={`// ${nextNum()} · Comment ça se passe`} title={process.title} />
           <ol className="m-0 flex list-none flex-col gap-4 p-0 sm:grid sm:grid-cols-2 sm:gap-3 lg:grid-cols-[repeat(auto-fit,minmax(min(250px,100%),1fr))] lg:gap-0 lg:border-t-2 lg:border-ink">
             {process.steps.map((step, i) => {
               const last = i === process.steps!.length - 1
@@ -339,7 +339,7 @@ export default async function OfferPage({ params }: Params) {
           )}
           {faq && faq.length > 0 && (
             <div className="flex flex-col gap-2 rounded-block bg-white px-5 py-6 sm:gap-3 sm:px-7 lg:gap-5 lg:p-[clamp(28px,4vw,48px)]">
-              <Eyebrow>// {nextNum()} — Questions fréquentes</Eyebrow>
+              <Eyebrow>// {nextNum()} · Questions fréquentes</Eyebrow>
               <FaqList items={faq} />
             </div>
           )}
@@ -423,7 +423,7 @@ const PlanCard = ({ plan, href, tab = false }: { plan: PlanItem; href: string; t
       className={cn(
         'flex flex-col gap-4 rounded-tile p-[22px] lg:gap-6 lg:rounded-panel lg:p-7',
         hi ? 'bg-ink text-white' : 'border border-line bg-surface-2',
-        !tab && hi && 'sm:col-span-2 sm:order-first sm:grid sm:grid-cols-2 sm:items-end sm:gap-x-6 sm:p-[26px] lg:order-none lg:col-span-1 lg:flex',
+        !tab && hi && 'sm:col-span-2 sm:order-first sm:grid sm:grid-cols-2 sm:items-end sm:gap-x-6 sm:p-[26px] lg:order-none lg:col-span-1 lg:flex lg:items-stretch',
         !tab && !hi && 'sm:gap-3.5',
       )}
     >
@@ -435,10 +435,12 @@ const PlanCard = ({ plan, href, tab = false }: { plan: PlanItem; href: string; t
         {hi && plan.badge && <Badge className="shrink-0 bg-accent text-ink">{plan.badge}</Badge>}
       </div>
       {tab && !hi && plan.subtitle && <span className="text-[15px] text-muted">{plan.subtitle}</span>}
-      <div className="flex flex-wrap items-baseline gap-1.5">
-        <span className={cn('font-extrabold tracking-[-0.045em]', !tab && !hi ? 'text-[32px] lg:text-[44px]' : 'text-[40px] sm:text-[44px]')}>{plan.price ?? '[PRIX] €'}</span>
-        {plan.priceNote && <span className={cn('text-sm', hi ? 'text-subtle' : 'text-muted', !tab && !hi && 'sm:max-lg:hidden')}>{plan.priceNote}</span>}
-      </div>
+      {plan.price && (
+        <div className="flex flex-wrap items-baseline gap-1.5">
+          <span className={cn('font-extrabold tracking-[-0.045em]', !tab && !hi ? 'text-[32px] lg:text-[44px]' : 'text-[40px] sm:text-[44px]')}>{plan.price}</span>
+          {plan.priceNote && <span className={cn('text-sm', hi ? 'text-subtle' : 'text-muted', !tab && !hi && 'sm:max-lg:hidden')}>{plan.priceNote}</span>}
+        </div>
+      )}
       <ul
         className={cn(
           'm-0 flex flex-1 list-none flex-col gap-2.5 p-0 text-[15px]',

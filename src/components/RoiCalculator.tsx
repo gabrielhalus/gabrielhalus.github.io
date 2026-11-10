@@ -2,6 +2,8 @@
 
 import { type ReactNode, useState } from 'react'
 
+import { cn } from '@/lib/utils'
+
 import { ButtonLink } from './ui'
 
 type Props = {
@@ -93,7 +95,7 @@ export const RoiCalculator = ({ children, ctaHref, ctaLabel, offerPrice, minutes
   const perWeek = (s.quotes * Math.max(0, s.minQuote - minutesPerQuoteAfter)) / 60 + (s.orders * s.minOrder * (automationRate / 100)) / 60
   const perYear = perWeek * weeksPerYear
   const value = perYear * s.rate
-  let payback = '[X] mois'
+  let payback: string | null = null
   if (offerPrice && value > 0) {
     const months = offerPrice / (value / 12)
     payback = months < 1 ? '< 1 mois' : `${(Math.ceil(months * 10) / 10).toLocaleString('fr-FR')} mois`
@@ -131,20 +133,24 @@ export const RoiCalculator = ({ children, ctaHref, ctaLabel, offerPrice, minutes
             <span>
               <strong>{nf.format(Math.round(value))} €</strong> / an
             </span>
-            <span>
-              rentabilisé en <strong>{payback}</strong>
-            </span>
+            {payback && (
+              <span>
+                rentabilisé en <strong>{payback}</strong>
+              </span>
+            )}
           </span>
         </div>
-        <div className="grid grid-cols-2 gap-3 max-sm:hidden">
+        <div className={cn('grid gap-3 max-sm:hidden', payback ? 'grid-cols-2' : 'grid-cols-1')}>
           <div className="flex flex-col gap-1 rounded-[18px] border border-night-line bg-night p-4 lg:gap-1.5 lg:rounded-tile lg:p-6">
             <span className="text-xs text-subtle lg:text-[13px]">Valeur de ce temps / an</span>
             <span className="font-mono text-xl font-medium tracking-[-0.03em] lg:text-[30px]">{nf.format(Math.round(value))} €</span>
           </div>
-          <div className="flex flex-col gap-1 rounded-[18px] border border-night-line bg-night p-4 lg:gap-1.5 lg:rounded-tile lg:p-6">
-            <span className="text-xs text-subtle lg:text-[13px]">Offre rentabilisée en</span>
-            <span className="font-mono text-xl font-medium tracking-[-0.03em] lg:text-[30px]">{payback}</span>
-          </div>
+          {payback && (
+            <div className="flex flex-col gap-1 rounded-[18px] border border-night-line bg-night p-4 lg:gap-1.5 lg:rounded-tile lg:p-6">
+              <span className="text-xs text-subtle lg:text-[13px]">Offre rentabilisée en</span>
+              <span className="font-mono text-xl font-medium tracking-[-0.03em] lg:text-[30px]">{payback}</span>
+            </div>
+          )}
         </div>
         <span className="contents max-sm:hidden">
           <ButtonLink href={ctaHref} variant="white" size="xl" arrow wide className="h-auto min-h-14 py-2 text-base">

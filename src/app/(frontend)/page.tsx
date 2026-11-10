@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import { Fragment } from 'react'
 
@@ -25,6 +26,13 @@ const serviceVariants = {
 
 const TASK_ICONS = { document: Document, bell: Bell, calendar: Calendar }
 
+export const metadata: Metadata = {
+  title: { absolute: 'Développeur freelance à Grenoble, applications web et automatisation | Gabriel Halus' },
+  description:
+    'Développeur freelance à Grenoble, je crée des applications web sur mesure, automatise vos tâches répétitives et connecte vos logiciels. Parlons de votre projet.',
+  alternates: { canonical: '/' },
+}
+
 export default async function HomePage() {
   const payload = await getPayloadClient()
   const [home, settings, offers, projects] = await Promise.all([
@@ -34,7 +42,9 @@ export default async function HomePage() {
     payload.find({ collection: 'projects', where: { _status: { equals: 'published' } }, sort: 'order', limit: 12, depth: 1 }),
   ])
 
-  const { hero, clients, services, method } = home
+  const { hero, clients, services, method, about, finalCta } = home
+  const aboutParagraphs = about?.text?.split(/\n{2,}/).filter(Boolean) ?? []
+  const booking = settings.bookingUrl ? { href: settings.bookingUrl, target: '_blank', rel: 'noopener' } : { href: '/contact' }
   const featuredOffer = (typeof hero?.featuredOffer === 'object' ? hero.featuredOffer : null) as Offer | null
   const featuredProjects = projects.docs.filter((p) => p.featured).slice(0, 3)
 
@@ -48,7 +58,7 @@ export default async function HomePage() {
           ) : (
             <span className="hidden xl:block" />
           )}
-          <h1 className="m-0 text-[42px] leading-[0.96] font-extrabold tracking-[-0.05em] text-balance sm:col-span-2 sm:max-w-[680px] sm:text-[68px] sm:leading-[0.94] xl:mt-auto xl:max-w-none xl:text-[clamp(44px,6.4vw,92px)]">
+          <h1 className="m-0 text-[42px] leading-[0.96] font-extrabold tracking-[-0.05em] text-balance sm:col-span-2 sm:max-w-[680px] sm:text-[68px] sm:leading-[0.94] xl:mt-auto xl:max-w-none xl:text-[clamp(44px,4.2vw,60px)]">
             {hero?.title}{' '}
             {hero?.highlight && (
               <span className="rounded-[10px] bg-accent px-[0.1em] [box-decoration-break:clone] sm:rounded-[14px] xl:rounded-2xl xl:px-[0.12em]">{hero.highlight}</span>
@@ -82,6 +92,10 @@ export default async function HomePage() {
           <div data-area="curso" className="flex flex-col items-center gap-1 sm:self-center">
             <Curso size={220} effect="transparence" animated className="h-auto w-[110px] sm:w-[200px] xl:w-[220px]" />
             <span aria-hidden="true" className="hidden h-[9px] w-[110px] rounded-full bg-ink/15 sm:block xl:h-2.5 xl:w-[120px]" />
+            <span className="mt-1 inline-flex items-center gap-1.5 rounded-full bg-ink py-1 pr-3 pl-2 font-mono text-[11px] whitespace-nowrap text-white xl:text-xs">
+              <ArrowRight size={12} className="-rotate-90 text-accent" />
+              Curso<span className="max-sm:hidden">, ma mascotte</span>
+            </span>
           </div>
 
           {hero?.tasksTitle && <p data-area="title" className="m-0 mb-3 text-base leading-[1.3] font-semibold sm:mb-0 sm:ml-1 xl:mb-3.5 xl:text-[15px]">{hero.tasksTitle}</p>}
@@ -136,7 +150,7 @@ export default async function HomePage() {
         <Block className="flex flex-col gap-[18px] py-6 sm:gap-6 sm:px-8 sm:py-9 lg:gap-10 lg:p-[clamp(28px,5vw,64px)]">
           <SectionHeading
             className="px-5 sm:px-0"
-            eyebrow="// 01 — Ce que je fais"
+            eyebrow="// 01 · Ce que je fais"
             title={
               <>
                 {services.title} {services.titleMuted && <span className="text-muted">{services.titleMuted}</span>}
@@ -144,7 +158,7 @@ export default async function HomePage() {
             }
             aside={services.intro}
           />
-          <SnapCarousel className="sm:grid sm:grid-cols-2 sm:gap-3 sm:overflow-visible sm:px-0 lg:grid-cols-[repeat(auto-fit,minmax(min(280px,100%),1fr))]">
+          <SnapCarousel className="sm:grid sm:grid-cols-2 sm:gap-3 sm:overflow-visible sm:px-0 lg:grid-cols-2 xl:grid-cols-4">
             {services.items.map((item, i) => {
               const v = serviceVariants[item.variant ?? 'light']
               return (
@@ -171,7 +185,7 @@ export default async function HomePage() {
 
       {/* Projets */}
       <Block id="projets" className="pad-block flex flex-col gap-4 sm:gap-5 lg:gap-8">
-        <SectionHeading eyebrow="// 02 — Projets" title={home.projects?.title} aside={home.projects?.intro} />
+        <SectionHeading eyebrow="// 02 · Projets" title={home.projects?.title} aside={home.projects?.intro} />
         {projects.docs.length > 0 ? (
           <>
             {/* Mobile : une carte puis une liste ; tablette : cartes 2 × 2 */}
@@ -242,7 +256,7 @@ export default async function HomePage() {
         <Block id="methode" variant="dark" className="pad-block flex flex-col gap-5 sm:gap-6 lg:gap-10">
           <SectionHeading
             dark
-            eyebrow="// 03 — Méthode"
+            eyebrow="// 03 · Méthode"
             title={
               <>
                 {method.title} {method.highlight && <span className="text-accent">{method.highlight}</span>}
@@ -282,7 +296,7 @@ export default async function HomePage() {
         <section id="offres" className="grid grid-cols-1 gap-3 lg:grid-cols-[repeat(auto-fit,minmax(min(480px,100%),1fr))]">
           <div className="hidden flex-col justify-between gap-8 rounded-block bg-white p-[clamp(28px,5vw,56px)] lg:flex">
             <div className="flex flex-col gap-3.5">
-              <Eyebrow>// 04 — Offres métier</Eyebrow>
+              <Eyebrow>// 04 · Offres métier</Eyebrow>
               <h2 className="m-0 text-[clamp(30px,3.4vw,46px)] leading-[1.02] font-bold tracking-[-0.035em] text-balance">{home.offers?.title}</h2>
               {home.offers?.intro && <p className="m-0 max-w-[460px] text-base leading-[1.55] text-muted">{home.offers.intro}</p>}
             </div>
@@ -311,7 +325,7 @@ export default async function HomePage() {
                 >
                   <span className="flex flex-col gap-2.5 sm:flex-1 sm:justify-between lg:flex-none lg:justify-start">
                     <span className="eyebrow">
-                      <span className="lg:hidden">// 04 — Offre métier</span>
+                      <span className="lg:hidden">// 04 · Offre métier</span>
                       <span className="hidden lg:inline">/{offer.slug}</span>
                     </span>
                     <span className="flex flex-col gap-2.5">
@@ -338,7 +352,7 @@ export default async function HomePage() {
                     <span className="eyebrow hidden text-muted sm:inline">/{offer.slug}</span>
                     <span className="text-[17px] font-semibold tracking-[-0.02em] sm:text-xl lg:text-[22px]">
                       {offer.name}
-                      <span className="hidden sm:inline"> — bientôt</span>
+                      <span className="hidden sm:inline">, bientôt</span>
                     </span>
                   </span>
                   <span className="text-[13px] text-muted sm:hidden">Bientôt</span>
@@ -348,6 +362,26 @@ export default async function HomePage() {
             })}
           </div>
         </section>
+      )}
+
+      {/* À propos */}
+      {about?.title && (
+        <Block className="pad-block grid grid-cols-1 items-center gap-6 sm:grid-cols-[auto_1fr] sm:gap-10">
+          {settings.portrait && (
+            <span className="relative block size-28 overflow-hidden rounded-full bg-slate sm:size-40 lg:size-52">
+              <Media resource={settings.portrait} sizes="208px" />
+            </span>
+          )}
+          <div className="flex flex-col gap-4 sm:col-start-2 sm:max-w-[680px]">
+            <Eyebrow>// 05 · À propos</Eyebrow>
+            <h2 className="h-section">{about.title}</h2>
+            {aboutParagraphs.map((paragraph) => (
+              <p key={paragraph} className="m-0 text-base leading-[1.55] text-body">
+                {paragraph}
+              </p>
+            ))}
+          </div>
+        </Block>
       )}
 
       {/* Outils */}
@@ -361,6 +395,18 @@ export default async function HomePage() {
               </Tag>
             ))}
           </div>
+        </Block>
+      )}
+
+      {/* CTA final */}
+      {finalCta?.title && (
+        <Block variant="accent" className="flex flex-col items-center gap-[18px] px-6 py-10 text-center lg:gap-6 lg:p-[clamp(32px,6vw,80px)]">
+          <h2 className="m-0 max-w-[900px] text-[34px] leading-[0.98] font-extrabold tracking-[-0.05em] text-balance sm:text-[44px] lg:text-[clamp(36px,5vw,72px)]">{finalCta.title}</h2>
+          {finalCta.text && <p className="m-0 max-w-[560px] text-[17px] leading-normal lg:text-lg">{finalCta.text}</p>}
+          <ButtonLink {...booking} size="xl" arrow>
+            {finalCta.label}
+          </ButtonLink>
+          {finalCta.note && <p className="m-0 text-sm">{finalCta.note}</p>}
         </Block>
       )}
 
