@@ -8,9 +8,9 @@ import { getOffers, getPayloadClient, getSettings } from '@/lib/payload'
 import { cn } from '@/lib/utils'
 
 export const metadata: Metadata = {
-  title: 'Contact',
+  title: 'Contact et devis pour votre projet web',
   description:
-    'Décrivez votre besoin en quelques lignes : réponse personnelle, avec une première idée de la solution et du budget.',
+    'Expliquez votre besoin en quelques lignes : je vous réponds personnellement pour discuter des possibilités et des prochaines étapes.',
   alternates: { canonical: '/contact' },
 }
 
@@ -26,7 +26,7 @@ export default async function ContactPage({ searchParams }: Props) {
   ])
 
   const live = offers.filter((o) => o.status === 'live')
-  // Une option par couple offre / formule, ex. « Traiteurs — Complet »
+  // Une option par couple offre / formule, ex. « Traiteurs · Complet »
   const offerFull = await Promise.all(
     live.map((o) =>
       payload.findByID({
@@ -40,13 +40,13 @@ export default async function ContactPage({ searchParams }: Props) {
   const offerOptions = offerFull.flatMap((o) => {
     const plans = o.pricing?.plans ?? []
     return plans.length
-      ? plans.map((p) => ({ label: `${o.name} — ${p.name}`, value: `${o.name} — ${p.name}` }))
+      ? plans.map((p) => ({ label: `${o.name} · ${p.name}`, value: `${o.name} · ${p.name}` }))
       : [{ label: o.name, value: o.name }]
   })
   const selected = live.find((o) => o.slug === offre)
   const defaultOffer = selected
     ? formule
-      ? `${selected.name} — ${formule}`
+      ? `${selected.name} · ${formule}`
       : offerOptions.find((o) => o.value.startsWith(selected.name))?.value
     : undefined
   const delay = settings.responseTime ?? ''
@@ -129,7 +129,7 @@ export default async function ContactPage({ searchParams }: Props) {
               defaultType={selected ? 'offer' : 'custom'}
               defaultOffer={defaultOffer}
               placeholder={page.messagePlaceholder}
-              note={page.formNote}
+              note={page.formNote?.replace('{delai}', delay)}
               success={{
                 title: page.success?.title,
                 text: page.success?.text?.replace('{delai}', delay),

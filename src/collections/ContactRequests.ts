@@ -8,7 +8,7 @@ const notify: CollectionAfterChangeHook = async ({ doc, operation, req }) => {
       await req.payload.sendEmail({
         to,
         replyTo: doc.email,
-        subject: `Nouveau message — ${doc.name}`,
+        subject: `Nouveau message de ${doc.name}`,
         text: [
           `Type : ${doc.requestType}`,
           `Nom : ${doc.name}`,

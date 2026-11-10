@@ -89,7 +89,7 @@ export const ContactForm = ({
       }}
     >
       <fieldset className="m-0 flex flex-col gap-2.5 border-0 p-0">
-        <legend className={cn('mb-2.5 p-0', labelClass)}>Votre besoin</legend>
+        <legend className={cn('mb-2.5 p-0', labelClass)}>Quel est votre besoin&nbsp;?</legend>
         <input type="hidden" name="requestType" value={type} />
         <div className="flex flex-wrap gap-2 sm:gap-1 sm:self-start sm:rounded-[28px] sm:bg-surface-2 sm:p-1">
           {TYPES.map((t) => {
@@ -117,13 +117,13 @@ export const ContactForm = ({
       <div className="grid grid-cols-[repeat(auto-fit,minmax(min(220px,100%),1fr))] gap-4">
         <div className="flex flex-col gap-2">
           <label htmlFor="c-nom" className={labelClass}>
-            Nom et prénom
+            Votre nom
           </label>
           <input id="c-nom" name="name" autoComplete="name" required className={fieldClass} />
         </div>
         <div className="flex flex-col gap-2">
           <label htmlFor="c-mail" className={labelClass}>
-            E-mail
+            Votre adresse e-mail
           </label>
           <input
             id="c-mail"
@@ -172,7 +172,7 @@ export const ContactForm = ({
       {type === 'custom' && budgets.length > 0 && (
         <div className="flex flex-col gap-2">
           <label htmlFor="c-budget" className={labelClass}>
-            Budget envisagé
+            Budget approximatif <span className="font-normal text-muted">(facultatif)</span>
           </label>
           <select id="c-budget" name="budget" className={fieldClass}>
             {budgets.map((b) => (
@@ -184,7 +184,7 @@ export const ContactForm = ({
 
       <div className="flex flex-col gap-2">
         <label htmlFor="c-msg" className={labelClass}>
-          Votre message
+          Parlez-moi de votre projet
         </label>
         <textarea
           id="c-msg"
@@ -233,7 +233,7 @@ export const ContactForm = ({
           disabled={pending}
           className="inline-flex h-14 cursor-pointer items-center justify-between gap-2.5 rounded-full border-0 bg-ink pr-2 pl-[22px] text-[17px] font-semibold text-white hover:bg-ink-soft disabled:cursor-wait disabled:opacity-60 sm:h-[52px] sm:pr-1.5 sm:text-base"
         >
-          {pending ? 'Envoi…' : 'Envoyer le message'}
+          {pending ? 'Envoi…' : 'Envoyer ma demande'}
           <ArrowDot className="size-10 bg-accent text-ink" />
         </button>
         {note && <span className="text-center text-[13px] text-muted">{note}</span>}

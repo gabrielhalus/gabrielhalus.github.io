@@ -35,7 +35,7 @@ export const useContactChoice = () => useContext(ChoiceContext)
 type BookingLinkProps = {
   /** Lien des Réglages du site. */
   defaultHref?: string | null
-  /** Valeur d'option d'offre (« Traiteurs — Complet ») → agenda dédié. */
+  /** Valeur d'option d'offre (« Traiteurs · Complet ») → agenda dédié. */
   byOffer: Record<string, string>
   className?: string
   children: ReactNode
