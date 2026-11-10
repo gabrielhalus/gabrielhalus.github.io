@@ -47,7 +47,7 @@ export default async function ProjectPage({ params }: Params) {
       <section className="grid grid-cols-[repeat(auto-fit,minmax(min(480px,100%),1fr))] gap-3">
         <div className="pad-block flex flex-col justify-between gap-10 rounded-block bg-white">
           <nav aria-label="Fil d’Ariane" className="text-sm">
-            <Link href="/#projets" className="text-muted no-underline hover:text-ink">← Tous les projets</Link>
+            <Link href="/projets" className="text-muted no-underline hover:text-ink">← Tous les projets</Link>
           </nav>
           <div className="flex flex-col gap-5">
             <Eyebrow>// Étude de cas · {project.year}</Eyebrow>

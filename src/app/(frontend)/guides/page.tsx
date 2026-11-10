@@ -6,8 +6,8 @@ import { Block, Eyebrow } from '@/components/ui'
 import { getPayloadClient } from '@/lib/payload'
 
 export const metadata: Metadata = {
-  title: 'Guides',
-  description: 'Guides pratiques pour gagner du temps sur la gestion quotidienne de votre activité.',
+  title: 'Guides pratiques sur l’automatisation et les outils web',
+  description: 'Automatisation, gestion quotidienne, développement web : des exemples et des méthodes pour identifier ce qui peut être simplifié dans votre activité.',
   alternates: { canonical: '/guides' },
 }
 
@@ -19,8 +19,8 @@ export default async function GuidesPage() {
     <>
       <Block className="pad-block flex flex-col gap-3.5">
         <Eyebrow>// Guides</Eyebrow>
-        <h1 className="m-0 text-[clamp(42px,5.4vw,80px)] leading-[0.95] font-extrabold tracking-[-0.05em]">Guides pratiques</h1>
-        <p className="m-0 max-w-[560px] text-lg leading-normal text-body">Des méthodes concrètes pour retirer le travail répétitif de votre semaine.</p>
+        <h1 className="m-0 text-[clamp(42px,5.4vw,80px)] leading-[0.95] font-extrabold tracking-[-0.05em]">Des conseils pour gagner du temps avec vos outils.</h1>
+        <p className="m-0 max-w-[560px] text-lg leading-normal text-body">Automatisation, gestion quotidienne, développement web : je partage des exemples et des méthodes pour vous aider à identifier ce qui peut être simplifié dans votre activité.</p>
       </Block>
       <Block className="p-[clamp(20px,3vw,40px)]">
         {docs.length > 0 ? (
