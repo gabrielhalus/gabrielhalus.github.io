@@ -6,6 +6,8 @@ import * as migration_20261012_132330_home_hero_curso_tasks from './20261012_132
 import * as migration_20261013_065716_cookies_auto_banner from './20261013_065716_cookies_auto_banner';
 import * as migration_20261019_072505_remove_client_featured from './20261019_072505_remove_client_featured';
 import * as migration_20261102_144336_mcp_api_keys from './20261102_144336_mcp_api_keys';
+import * as migration_20261110_103000_contact_copy from './20261110_103000_contact_copy';
+import * as migration_20261110_110000_home_about_final_cta from './20261110_110000_home_about_final_cta';
 
 export const migrations = [
   {
@@ -47,5 +49,15 @@ export const migrations = [
     up: migration_20261102_144336_mcp_api_keys.up,
     down: migration_20261102_144336_mcp_api_keys.down,
     name: '20261102_144336_mcp_api_keys'
+  },
+  {
+    up: migration_20261110_103000_contact_copy.up,
+    down: migration_20261110_103000_contact_copy.down,
+    name: '20261110_103000_contact_copy',
+  },
+  {
+    up: migration_20261110_110000_home_about_final_cta.up,
+    down: migration_20261110_110000_home_about_final_cta.down,
+    name: '20261110_110000_home_about_final_cta',
   },
 ];

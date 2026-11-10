@@ -14,11 +14,11 @@ export const ContactPage: GlobalConfig = {
     {
       type: 'row',
       fields: [
-        { name: 'bookingTitle', type: 'text', label: 'Carte agenda — titre', defaultValue: 'Réserver un appel' },
-        { name: 'bookingText', type: 'text', label: 'Carte agenda — texte', defaultValue: '30 min en visio, gratuit' },
+        { name: 'bookingTitle', type: 'text', label: 'Carte agenda : titre', defaultValue: 'Réserver un appel' },
+        { name: 'bookingText', type: 'text', label: 'Carte agenda : texte', defaultValue: '30 min en visio, gratuit' },
       ],
     },
-    { name: 'mailTitle', type: 'text', label: 'Carte e-mail — titre', defaultValue: 'Écrire directement' },
+    { name: 'mailTitle', type: 'text', label: 'Carte e-mail : titre', defaultValue: 'Écrire directement' },
     { name: 'messagePlaceholder', type: 'text', label: 'Aide du champ message', defaultValue: 'Le contexte, ce qui vous fait perdre du temps, l’échéance éventuelle…' },
     { name: 'budgets', type: 'text', hasMany: true, label: 'Fourchettes de budget' },
     { name: 'formNote', type: 'text', label: 'Mention sous le bouton', defaultValue: 'Pas de newsletter, pas de revente.' },

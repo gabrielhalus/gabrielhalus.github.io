@@ -192,7 +192,7 @@ export interface Project {
   summary?: string | null;
   cover?: (number | null) | Media;
   /**
-   * Couleur du visuel de substitution tant qu’il n’y a pas de capture.
+   * Couleur de la carte du projet quand il n’y a pas de capture.
    */
   tone?: ('blush' | 'mint' | 'lilac' | 'slate') | null;
   stack?: string[] | null;
@@ -1479,6 +1479,19 @@ export interface Home {
     intro?: string | null;
     tags?: string[] | null;
   };
+  about?: {
+    title?: string | null;
+    /**
+     * Une ligne vide sépare deux paragraphes. Le portrait vient des réglages du site.
+     */
+    text?: string | null;
+  };
+  finalCta?: {
+    title?: string | null;
+    text?: string | null;
+    label?: string | null;
+    note?: string | null;
+  };
   tools?: {
     title?: string | null;
     items?: string[] | null;
@@ -1701,6 +1714,20 @@ export interface HomeSelect<T extends boolean = true> {
         title?: T;
         intro?: T;
         tags?: T;
+      };
+  about?:
+    | T
+    | {
+        title?: T;
+        text?: T;
+      };
+  finalCta?:
+    | T
+    | {
+        title?: T;
+        text?: T;
+        label?: T;
+        note?: T;
       };
   tools?:
     | T

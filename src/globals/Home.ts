@@ -189,6 +189,24 @@ export const Home: GlobalConfig = {
           ],
         },
         {
+          label: 'À propos',
+          name: 'about',
+          fields: [
+            { name: 'title', type: 'text', label: 'Titre' },
+            { name: 'text', type: 'textarea', label: 'Texte', admin: { description: 'Une ligne vide sépare deux paragraphes. Le portrait vient des réglages du site.' } },
+          ],
+        },
+        {
+          label: 'CTA final',
+          name: 'finalCta',
+          fields: [
+            { name: 'title', type: 'text', label: 'Titre' },
+            { name: 'text', type: 'textarea', label: 'Texte' },
+            { name: 'label', type: 'text', label: 'Bouton' },
+            { name: 'note', type: 'text', label: 'Réassurance sous le bouton' },
+          ],
+        },
+        {
           label: 'Outils',
           name: 'tools',
           fields: [
