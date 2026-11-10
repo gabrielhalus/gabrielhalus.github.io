@@ -33,7 +33,7 @@ export default buildConfig({
     importMap: {
       baseDir: path.resolve(dirname),
     },
-    meta: { titleSuffix: ' — gabrielhalus.com' },
+    meta: { titleSuffix: ' | gabrielhalus.com' },
   },
   i18n: {
     supportedLanguages: { fr },
@@ -84,7 +84,7 @@ export default buildConfig({
       collections: ['projects', 'offers', 'guides'],
       uploadsCollection: 'media',
       tabbedUI: false,
-      generateTitle: ({ doc }) => `${doc?.title ?? doc?.name ?? ''} — Gabriel Halus`,
+      generateTitle: ({ doc }) => `${doc?.title ?? doc?.name ?? ''} | Gabriel Halus`,
       generateDescription: ({ doc }) => doc?.lead ?? doc?.summary ?? doc?.hero?.lead ?? '',
     }),
   ],

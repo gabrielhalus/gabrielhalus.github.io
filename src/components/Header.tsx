@@ -44,7 +44,7 @@ export const Header = ({ offersHref, offerPaths, featuredOffer, socials }: Props
   return (
     <header className="p-3 lg:py-4">
       <div className="mx-auto flex max-w-[1416px] items-center justify-between gap-2.5 rounded-full border border-line bg-white py-1.5 pr-1.5 pl-3 lg:gap-3 lg:py-2 lg:pr-2 lg:pl-[18px]">
-        <Link href="/" aria-label="Gabriel Halus — accueil" className="group flex items-center gap-2 text-ink no-underline lg:gap-2.5">
+        <Link href="/" aria-label="Gabriel Halus, accueil" className="group flex items-center gap-2 text-ink no-underline lg:gap-2.5">
           <span className="lg:hidden">
             <Logo size={32} glitchOnHover />
           </span>

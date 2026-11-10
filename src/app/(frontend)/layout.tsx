@@ -24,7 +24,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const settings = await getSettings()
   return {
     metadataBase: new URL(settings.siteUrl || 'http://localhost:3000'),
-    title: { default: `${settings.siteName} — ${settings.role} freelance`, template: `%s — ${settings.siteName}` },
+    title: { default: `${settings.siteName} | ${settings.role} freelance`, template: `%s | ${settings.siteName}` },
     description: settings.defaultDescription ?? undefined,
     openGraph: { locale: 'fr_FR', type: 'website', siteName: settings.siteName ?? undefined, images: ogImages(settings.ogImage, '/og', settings.updatedAt) },
     twitter: { card: 'summary_large_image' },

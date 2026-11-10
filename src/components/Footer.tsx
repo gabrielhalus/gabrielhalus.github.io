@@ -25,8 +25,8 @@ export const Footer = async () => {
             <nav aria-label="Site" className="flex flex-col gap-3">
               <p className={titleClass}>Site</p>
               <Link href="/" className={linkClass}>Accueil</Link>
-              <Link href="/#projets" className={linkClass}>Projets</Link>
-              <Link href="/#methode" className={linkClass}>Méthode</Link>
+              <Link href="/projets" className={linkClass}>Projets</Link>
+              <Link href="/methode" className={linkClass}>Méthode</Link>
               <Link href="/guides" className={linkClass}>Guides</Link>
               <Link href="/contact" className={linkClass}>Contact</Link>
             </nav>
@@ -39,7 +39,7 @@ export const Footer = async () => {
                   </Link>
                 ) : (
                   <span key={offer.id} className="text-subtle">
-                    {offer.name} — bientôt
+                    {offer.name}, bientôt
                   </span>
                 ),
               )}
@@ -55,7 +55,7 @@ export const Footer = async () => {
 
         <div className="flex flex-wrap items-center justify-between gap-4 border-t border-night-line pt-6 text-[13px] text-subtle">
           <span>
-            © {new Date().getFullYear()} {settings.siteName} — Entrepreneur individuel · SIRET {settings.siret}
+            © {new Date().getFullYear()} {settings.siteName}, entrepreneur individuel · SIRET {settings.siret}
           </span>
           {settings.socials && settings.socials.length > 0 && (
             <div className="flex flex-wrap gap-2">
