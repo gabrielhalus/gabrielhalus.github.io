@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "portfolio": {
+      "type": "http",
+      "url": "${PORTFOLIO_MCP_URL:-https://gabrielhalus.com/api/mcp}",
+      "headers": {
+        "Authorization": "Bearer ${PORTFOLIO_MCP_KEY}"
+      }
+    }
+  }
+}

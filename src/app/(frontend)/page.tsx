@@ -47,9 +47,24 @@ export default async function HomePage() {
   const booking = settings.bookingUrl ? { href: settings.bookingUrl, target: '_blank', rel: 'noopener' } : { href: '/contact' }
   const featuredOffer = (typeof hero?.featuredOffer === 'object' ? hero.featuredOffer : null) as Offer | null
   const featuredProjects = projects.docs.filter((p) => p.featured).slice(0, 3)
+  const base = settings.siteUrl ?? ''
+  const jsonLd = [
+    { '@context': 'https://schema.org', '@type': 'WebSite', '@id': `${base}/#website`, url: `${base}/`, name: settings.siteName, inLanguage: 'fr-FR', alternateName: 'Gabriel Halus développeur freelance' },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Person',
+      '@id': `${base}/#person`,
+      name: settings.siteName,
+      jobTitle: `${settings.role} freelance`,
+      url: `${base}/`,
+      address: { '@type': 'PostalAddress', addressLocality: 'Grenoble', addressCountry: 'FR' },
+      sameAs: settings.socials?.map((s) => s.url) ?? [],
+    },
+  ]
 
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }} />
       {/* Héros */}
       <section className="grid grid-cols-1 gap-3 xl:grid-cols-2">
         <div className="box-border grid gap-5 rounded-block bg-white px-5 py-6 sm:grid-cols-[1.2fr_1fr] sm:gap-6 sm:p-10 xl:flex xl:min-h-[620px] xl:flex-col xl:gap-0 xl:p-[clamp(28px,5vw,64px)]">
