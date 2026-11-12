@@ -11,7 +11,7 @@ import { Curso } from './Curso'
 import { ArrowUpRight, Close, Menu } from './icons'
 import { ButtonLink, Logo } from './ui'
 
-type Section = 'home' | 'offers' | 'contact'
+type Section = 'home' | 'projects' | 'offers' | 'method' | 'guides' | 'contact'
 type NavItem = { label: string; href: string; section: Section | null; desktop: boolean }
 
 type FeaturedOffer = { name: string; promise?: string | null; tone?: string | null; href: string }
@@ -33,13 +33,16 @@ export const Header = ({ offersHref, offerPaths, featuredOffer, socials }: Props
 
   const nav: NavItem[] = [
     { label: 'Accueil', href: '/', section: 'home', desktop: false },
-    { label: 'Projets', href: '/#projets', section: 'home', desktop: true },
+    { label: 'Projets', href: '/projets', section: 'projects', desktop: true },
     { label: 'Offres métier', href: offersHref, section: 'offers', desktop: true },
-    { label: 'Méthode', href: '/#methode', section: null, desktop: true },
+    { label: 'Méthode', href: '/methode', section: 'method', desktop: true },
+    { label: 'Guides', href: '/guides', section: 'guides', desktop: true },
     { label: 'Contact', href: '/contact', section: 'contact', desktop: true },
   ]
 
-  const current: Section | null = pathname === '/' ? 'home' : pathname.startsWith('/contact') ? 'contact' : offerPaths.includes(pathname) ? 'offers' : null
+  const sectionPrefixes: [string, Section][] = [['/projets', 'projects'], ['/methode', 'method'], ['/guides', 'guides'], ['/contact', 'contact']]
+  const current: Section | null =
+    pathname === '/' ? 'home' : (sectionPrefixes.find(([prefix]) => pathname.startsWith(prefix))?.[1] ?? (offerPaths.includes(pathname) ? 'offers' : null))
 
   return (
     <header className="p-3 lg:py-4">
@@ -139,8 +142,7 @@ const MobileMenu = ({
   }, [onClose])
 
   const t = tone(featuredOffer?.tone)
-  // Pastille sur l'entrée de la page courante (« Projets » et « Méthode » sont des ancres de l'accueil)
-  const isActive = (item: NavItem) => item.section !== null && item.section === current && (item.section !== 'home' || item.href === '/')
+  const isActive = (item: NavItem) => item.section !== null && item.section === current
 
   return (
     <div

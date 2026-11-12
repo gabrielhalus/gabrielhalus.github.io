@@ -264,6 +264,9 @@ export default async function HomePage() {
             ))}
           </div>
         )}
+        <ButtonLink href="/projets" variant="outline" size="lg" className="self-start font-medium">
+          Voir tous les projets
+        </ButtonLink>
       </Block>
 
       {/* Méthode : frise sur mobile, cartes au-delà */}
@@ -303,6 +306,9 @@ export default async function HomePage() {
               )
             })}
           </ol>
+          <ButtonLink href="/methode" variant="accent" size="lg" className="self-start">
+            Voir le déroulement d’un projet
+          </ButtonLink>
         </Block>
       )}
 

@@ -6,7 +6,7 @@ import { PROJECT_TYPES } from '@/collections/Projects'
 import { Media } from '@/components/Media'
 import { RichText } from '@/components/RichText'
 import { Block, ButtonLink, Eyebrow, Tag } from '@/components/ui'
-import { getPayloadClient } from '@/lib/payload'
+import { getPayloadClient, getSettings } from '@/lib/payload'
 import { tone } from '@/lib/tones'
 import { ogImages } from '@/lib/og'
 import { cn } from '@/lib/utils'
@@ -41,9 +41,20 @@ export default async function ProjectPage({ params }: Params) {
   if (!project) notFound()
   const t = tone(project.tone)
   const type = PROJECT_TYPES.find((p) => p.value === project.projectType)?.label
+  const base = (await getSettings()).siteUrl ?? ''
+  const breadcrumb = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Accueil', item: `${base}/` },
+      { '@type': 'ListItem', position: 2, name: 'Projets', item: `${base}/projets` },
+      { '@type': 'ListItem', position: 3, name: project.title },
+    ],
+  }
 
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb).replace(/</g, '\\u003c') }} />
       <section className="grid grid-cols-[repeat(auto-fit,minmax(min(480px,100%),1fr))] gap-3">
         <div className="pad-block flex flex-col justify-between gap-10 rounded-block bg-white">
           <nav aria-label="Fil d’Ariane" className="text-sm">
