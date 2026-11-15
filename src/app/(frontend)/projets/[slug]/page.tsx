@@ -5,7 +5,7 @@ import { notFound } from 'next/navigation'
 import { PROJECT_TYPES } from '@/collections/Projects'
 import { Media } from '@/components/Media'
 import { RichText } from '@/components/RichText'
-import { Block, ButtonLink, Eyebrow, Tag } from '@/components/ui'
+import { Block, ButtonLink, Tag } from '@/components/ui'
 import { getPayloadClient, getSettings } from '@/lib/payload'
 import { tone } from '@/lib/tones'
 import { ogImages } from '@/lib/og'
@@ -61,7 +61,6 @@ export default async function ProjectPage({ params }: Params) {
             <Link href="/projets" className="text-muted no-underline hover:text-ink">← Tous les projets</Link>
           </nav>
           <div className="flex flex-col gap-5">
-            <Eyebrow>// Étude de cas · {project.year}</Eyebrow>
             <h1 className="m-0 text-[clamp(42px,5.4vw,80px)] leading-[0.95] font-extrabold tracking-[-0.05em] text-balance">{project.title}</h1>
             {project.summary && <p className="m-0 max-w-[560px] text-[19px] leading-normal text-body">{project.summary}</p>}
           </div>

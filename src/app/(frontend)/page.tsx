@@ -165,7 +165,7 @@ export default async function HomePage() {
         <Block className="flex flex-col gap-[18px] py-6 sm:gap-6 sm:px-8 sm:py-9 lg:gap-10 lg:p-[clamp(28px,5vw,64px)]">
           <SectionHeading
             className="px-5 sm:px-0"
-            eyebrow="// Ce que je fais"
+           
             title={
               <>
                 {services.title} {services.titleMuted && <span className="text-muted">{services.titleMuted}</span>}
@@ -200,7 +200,7 @@ export default async function HomePage() {
 
       {/* Projets */}
       <Block id="projets" className="pad-block flex flex-col gap-4 sm:gap-5 lg:gap-8">
-        <SectionHeading eyebrow="// Projets" title={home.projects?.title} aside={home.projects?.intro} />
+        <SectionHeading title={home.projects?.title} aside={home.projects?.intro} />
         {projects.docs.length > 0 ? (
           <>
             {/* Mobile : une carte puis une liste ; tablette : cartes 2 × 2 */}
@@ -274,7 +274,7 @@ export default async function HomePage() {
         <Block id="methode" variant="dark" className="pad-block flex flex-col gap-5 sm:gap-6 lg:gap-10">
           <SectionHeading
             dark
-            eyebrow="// Méthode"
+           
             title={
               <>
                 {method.title} {method.highlight && <span className="text-accent">{method.highlight}</span>}
@@ -317,7 +317,6 @@ export default async function HomePage() {
         <section id="offres" className="grid grid-cols-1 gap-3 lg:grid-cols-[repeat(auto-fit,minmax(min(480px,100%),1fr))]">
           <div className="hidden flex-col justify-between gap-8 rounded-block bg-white p-[clamp(28px,5vw,56px)] lg:flex">
             <div className="flex flex-col gap-3.5">
-              <Eyebrow>// Offres métier</Eyebrow>
               <h2 className="m-0 text-[clamp(30px,3.4vw,46px)] leading-[1.02] font-bold tracking-[-0.035em] text-balance">{home.offers?.title}</h2>
               {home.offers?.intro && <p className="m-0 max-w-[460px] text-base leading-[1.55] text-muted">{home.offers.intro}</p>}
             </div>
@@ -345,10 +344,7 @@ export default async function HomePage() {
                   )}
                 >
                   <span className="flex flex-col gap-2.5 sm:flex-1 sm:justify-between lg:flex-none lg:justify-start">
-                    <span className="eyebrow">
-                      <span className="lg:hidden">// Offre métier</span>
-                      <span className="hidden lg:inline">/{offer.slug}</span>
-                    </span>
+                    <span className="eyebrow max-lg:hidden">/{offer.slug}</span>
                     <span className="flex flex-col gap-2.5">
                       <span className="text-[30px] leading-none font-bold tracking-[-0.04em] sm:text-4xl lg:text-[clamp(28px,3vw,40px)] lg:leading-[1.02] lg:tracking-[-0.035em]">{offer.name}</span>
                       {offer.cardText && <span className="max-w-[360px] text-base leading-[1.45]">{offer.cardText}</span>}
@@ -394,7 +390,6 @@ export default async function HomePage() {
             </span>
           )}
           <div className="flex flex-col gap-4 sm:col-start-2 sm:max-w-[680px]">
-            <Eyebrow>// À propos</Eyebrow>
             <h2 className="h-section">{about.title}</h2>
             {aboutParagraphs.map((paragraph) => (
               <p key={paragraph} className="m-0 text-base leading-[1.55] text-body">
@@ -408,7 +403,7 @@ export default async function HomePage() {
       {/* Outils */}
       {home.tools?.items && home.tools.items.length > 0 && (
         <Block className="flex flex-wrap items-center justify-between gap-6 px-5 py-6 sm:p-8 lg:p-[clamp(28px,4vw,48px)]">
-          <Eyebrow>// {home.tools.title}</Eyebrow>
+          <Eyebrow>{home.tools.title}</Eyebrow>
           <div className="flex flex-wrap gap-2">
             {home.tools.items.map((tool) => (
               <Tag key={tool} mono className="px-4 py-[9px]">

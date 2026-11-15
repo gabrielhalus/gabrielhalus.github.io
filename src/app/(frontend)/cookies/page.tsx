@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 import { CookiePreferences } from '@/components/CookiePreferences'
-import { Badge, Block, Eyebrow } from '@/components/ui'
+import { Badge, Block } from '@/components/ui'
 import { activeCategories } from '@/lib/consent'
 import { getPayloadClient } from '@/lib/payload'
 import { formatShortDate } from '@/lib/utils'
@@ -28,7 +28,6 @@ export default async function CookiesPage() {
     <>
       <section className="grid grid-cols-1 gap-3 lg:grid-cols-2">
         <div className="pad-block flex flex-col gap-3 rounded-block bg-white sm:gap-5">
-          <Eyebrow>// Cookies</Eyebrow>
           <h1 className="m-0 text-4xl leading-[0.98] font-extrabold tracking-[-0.05em] text-balance sm:text-[clamp(42px,5.4vw,80px)] sm:leading-[0.95]">{cookies.title}</h1>
           {cookies.intro && <p className="m-0 max-w-[520px] text-base leading-normal text-body sm:text-lg sm:leading-[1.55]">{cookies.intro}</p>}
           <span className="inline-flex self-start rounded-full bg-surface-2 px-3 py-[7px] text-[13px] sm:px-3.5 sm:py-2">Dernière mise à jour : {formatShortDate(cookies.updatedOn)}</span>

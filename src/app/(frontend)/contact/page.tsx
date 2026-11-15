@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 import { BookingLink, ContactChoiceProvider } from '@/components/ContactChoice'
 import { ContactForm } from '@/components/ContactForm'
 import { ArrowUpRight, Calendar, Mail } from '@/components/icons'
-import { Block, Eyebrow } from '@/components/ui'
+import { Block } from '@/components/ui'
 import { getOffers, getPayloadClient, getSettings } from '@/lib/payload'
 import { cn } from '@/lib/utils'
 
@@ -73,7 +73,6 @@ export default async function ContactPage({ searchParams }: Props) {
         <section className="grid grid-cols-1 items-stretch gap-3 lg:grid-cols-2">
           <div className="flex flex-col gap-3">
             <div className="flex flex-1 flex-col gap-3.5 rounded-block bg-accent px-5 py-6 sm:gap-5 sm:p-10 lg:p-[clamp(28px,4.5vw,56px)]">
-              <Eyebrow className="text-ink max-sm:hidden">// Contact</Eyebrow>
               <h1 className="m-0 text-[42px] leading-[0.96] font-extrabold tracking-[-0.05em] text-balance sm:text-[64px] sm:leading-[0.94] lg:text-[clamp(44px,5.6vw,84px)]">
                 {page.title}
               </h1>
@@ -142,7 +141,6 @@ export default async function ContactPage({ searchParams }: Props) {
       {page.steps && page.steps.length > 0 && (
         <Block className="grid grid-cols-1 gap-3.5 px-5 py-[22px] sm:grid-cols-[repeat(auto-fit,minmax(min(260px,100%),1fr))] sm:gap-8 sm:p-10 lg:p-[clamp(28px,4vw,48px)]">
           <div className="flex flex-col gap-2.5">
-            <Eyebrow className="text-muted max-sm:hidden">// Ensuite</Eyebrow>
             <h2 className="m-0 text-xl leading-[1.05] font-bold tracking-[-0.03em] sm:text-[28px]">
               {page.stepsTitle}
             </h2>

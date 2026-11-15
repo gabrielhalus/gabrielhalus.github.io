@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 
 import { ProjectCard } from '@/components/ProjectCard'
-import { Block, ButtonLink, Eyebrow } from '@/components/ui'
+import { Block, ButtonLink } from '@/components/ui'
 import { getPayloadClient } from '@/lib/payload'
 
 export const metadata: Metadata = {
@@ -18,7 +18,6 @@ export default async function ProjectsPage() {
   return (
     <>
       <Block className="pad-block flex flex-col gap-3.5">
-        <Eyebrow>// Projets</Eyebrow>
         <h1 className="m-0 max-w-[900px] text-[clamp(42px,5.4vw,80px)] leading-[0.95] font-extrabold tracking-[-0.05em] text-balance">Des projets concrets, des besoins différents.</h1>
         <p className="m-0 max-w-[620px] text-lg leading-normal text-body">
           Chaque projet commence par un problème à résoudre : une gestion trop manuelle, un outil difficile à maintenir ou une fonctionnalité manquante. Découvrez quelques réalisations, les solutions mises en place et les résultats obtenus.

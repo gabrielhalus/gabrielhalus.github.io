@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 
 import { Curso } from '@/components/Curso'
 import { GuideCard } from '@/components/GuideCard'
-import { Block, Eyebrow } from '@/components/ui'
+import { Block } from '@/components/ui'
 import { getPayloadClient } from '@/lib/payload'
 
 export const metadata: Metadata = {
@@ -18,7 +18,6 @@ export default async function GuidesPage() {
   return (
     <>
       <Block className="pad-block flex flex-col gap-3.5">
-        <Eyebrow>// Guides</Eyebrow>
         <h1 className="m-0 text-[clamp(42px,5.4vw,80px)] leading-[0.95] font-extrabold tracking-[-0.05em]">Des conseils pour gagner du temps avec vos outils.</h1>
         <p className="m-0 max-w-[560px] text-lg leading-normal text-body">Automatisation, gestion quotidienne, développement web : je partage des exemples et des méthodes pour vous aider à identifier ce qui peut être simplifié dans votre activité.</p>
       </Block>

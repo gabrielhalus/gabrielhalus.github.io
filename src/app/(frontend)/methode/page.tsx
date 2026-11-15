@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 
-import { Block, ButtonLink, Eyebrow } from '@/components/ui'
+import { Block, ButtonLink } from '@/components/ui'
 import { getPayloadClient } from '@/lib/payload'
 
 export const metadata: Metadata = {
@@ -18,7 +18,6 @@ export default async function MethodPage() {
   return (
     <>
       <Block className="pad-block flex flex-col gap-3.5">
-        <Eyebrow>// Méthode</Eyebrow>
         <h1 className="m-0 max-w-[900px] text-[clamp(42px,5.4vw,80px)] leading-[0.95] font-extrabold tracking-[-0.05em] text-balance">Un projet cadré dès le départ, avec un suivi régulier.</h1>
         <p className="m-0 max-w-[620px] text-lg leading-normal text-body">
           Vous savez ce qui sera développé, combien cela coûtera et comment le projet avancera. Je vous accompagne personnellement à chaque étape, du premier échange à la mise en service.

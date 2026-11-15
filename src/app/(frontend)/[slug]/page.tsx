@@ -8,7 +8,7 @@ import { Media } from '@/components/Media'
 import { PlanTabs } from '@/components/PlanTabs'
 import { RoiCalculator } from '@/components/RoiCalculator'
 import { SnapCarousel } from '@/components/SnapCarousel'
-import { Badge, Block, ButtonLink, Eyebrow, FaqList, SectionHeading } from '@/components/ui'
+import { Badge, Block, ButtonLink, FaqList, SectionHeading } from '@/components/ui'
 import { getPayloadClient } from '@/lib/payload'
 import { tone } from '@/lib/tones'
 import { ogImages } from '@/lib/og'
@@ -149,7 +149,6 @@ export default async function OfferPage({ params }: Params) {
       {problem?.title && (
         <Block className={cn('pad-block grid grid-cols-1 items-start gap-4 [--h-section-lg:clamp(34px,4vw,54px)] [--h-section-sm:38px]', problem.breakdown && problem.breakdown.length > 0 && 'sm:grid-cols-2 sm:gap-8 lg:grid-cols-[repeat(auto-fit,minmax(min(440px,100%),1fr))] lg:gap-12')}>
           <div className="flex flex-col gap-4 sm:gap-3.5 lg:gap-4">
-            <Eyebrow>// Le constat</Eyebrow>
             <h2 className="h-section">{problem.title}</h2>
             {problem.text && <p className={cn('m-0 text-base leading-normal text-body lg:text-[17px] lg:leading-[1.55]', problem.breakdown && problem.breakdown.length > 0 ? 'max-w-[460px]' : 'max-w-[720px]')}>{problem.text}</p>}
           </div>
@@ -179,7 +178,7 @@ export default async function OfferPage({ params }: Params) {
       {/* Modules : carrousel sur mobile, 2 × 2 sur tablette */}
       {modules?.items && modules.items.length > 0 && (
         <Block className="flex flex-col gap-4 py-6 [--h-section-lg:clamp(34px,4vw,56px)] [--h-section-sm:38px] sm:gap-6 sm:px-8 sm:py-9 lg:gap-10 lg:p-[clamp(28px,5vw,64px)]">
-          <SectionHeading className="px-5 sm:px-0" eyebrow={`// $Ce que vous obtenez`} title={modules.title} aside={modules.intro} />
+          <SectionHeading className="px-5 sm:px-0" title={modules.title} aside={modules.intro} />
           <SnapCarousel className="sm:grid sm:grid-cols-2 sm:gap-3 sm:overflow-visible sm:px-0 lg:grid-cols-2 xl:grid-cols-4">
             {modules.items.map((m, i) => {
               const v = moduleVariants[m.variant ?? 'light']
@@ -244,7 +243,6 @@ export default async function OfferPage({ params }: Params) {
       {plans.length > 0 && (
         <Block className="pad-block flex flex-col gap-4 [--h-section-lg:clamp(34px,4vw,54px)] [--h-section-sm:38px] sm:gap-5 lg:gap-10">
           <div className="flex flex-col gap-3.5 lg:items-center lg:text-center">
-            <Eyebrow>// Formules</Eyebrow>
             <h2 className="h-section max-w-[760px]">{pricing?.title}</h2>
             {pricing?.intro && <p className="m-0 max-w-[560px] text-base leading-[1.55] text-muted max-lg:hidden">{pricing.intro}</p>}
           </div>
@@ -280,7 +278,6 @@ export default async function OfferPage({ params }: Params) {
             weeksPerYear={roi.weeksPerYear ?? 46}
           >
             <div className="flex flex-col gap-2 max-sm:px-1 sm:gap-2.5 lg:gap-3.5">
-              <Eyebrow className="text-subtle">// Votre retour sur investissement</Eyebrow>
               <h2 className="h-section">{roi.title}</h2>
               {roi.intro && <p className="m-0 max-w-[460px] text-base leading-[1.55] text-on-dark max-lg:hidden">{roi.intro}</p>}
             </div>
@@ -291,7 +288,7 @@ export default async function OfferPage({ params }: Params) {
       {/* Déroulé */}
       {process?.steps && process.steps.length > 0 && (
         <Block className="pad-block flex flex-col gap-[18px] [--h-section-sm:38px] sm:gap-5 lg:gap-10">
-          <SectionHeading eyebrow={`// $Comment ça se passe`} title={process.title} />
+          <SectionHeading title={process.title} />
           <ol className="m-0 flex list-none flex-col gap-4 p-0 sm:grid sm:grid-cols-2 sm:gap-3 lg:grid-cols-[repeat(auto-fit,minmax(min(250px,100%),1fr))] lg:gap-0 lg:border-t-2 lg:border-ink">
             {process.steps.map((step, i) => {
               const last = i === process.steps!.length - 1
@@ -337,7 +334,6 @@ export default async function OfferPage({ params }: Params) {
           )}
           {faq && faq.length > 0 && (
             <div className="flex flex-col gap-2 rounded-block bg-white px-5 py-6 sm:gap-3 sm:px-7 lg:gap-5 lg:p-[clamp(28px,4vw,48px)]">
-              <Eyebrow>// Questions fréquentes</Eyebrow>
               <FaqList items={faq} />
             </div>
           )}

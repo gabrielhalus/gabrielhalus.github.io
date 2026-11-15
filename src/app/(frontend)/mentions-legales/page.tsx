@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 import { LegalNav } from '@/components/LegalNav'
-import { ArrowDot, Block, Eyebrow } from '@/components/ui'
+import { ArrowDot, Block } from '@/components/ui'
 import { getPayloadClient, getSettings } from '@/lib/payload'
 import { cn, formatShortDate } from '@/lib/utils'
 
@@ -39,7 +39,6 @@ export default async function LegalPage() {
     <>
       <Block className="pad-block flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-end sm:justify-between sm:gap-6">
         <div className="flex flex-col gap-3 sm:gap-3.5">
-          <Eyebrow>// Informations légales</Eyebrow>
           <h1 className="m-0 text-4xl leading-[0.98] font-extrabold tracking-[-0.05em] sm:text-[clamp(42px,5.4vw,80px)] sm:leading-[0.95]">Mentions légales &amp; confidentialité</h1>
         </div>
         <span className="inline-flex items-center gap-2 self-start rounded-full bg-surface-2 px-3 py-[7px] text-[13px] sm:self-auto sm:px-3.5 sm:py-2">Dernière mise à jour : {formatShortDate(legal.updatedOn)}</span>
